@@ -14,3 +14,33 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
+//= require jquery-3.2.1.min
+//= require bootstrap4/popper
+//= require bootstrap4/bootstrap.min
+//= require greensock/TweenMax.min
+//= require greensock/TimelineMax.min
+//= require scrollmagic/ScrollMagic.min
+//= require greensock/animation.gsap.min
+//= require greensock/ScrollToPlugin.min
+//= require OwlCarousel2-2.2.1/owl.carousel
+//= require Isotope/isotope.pkgd.min
+//= require easing/easing
+//= require parallax-js-master/parallax.min
+//= require custom
+//= require cart
+//= require categories
+//= require checkout
+//= require contact
+//= require product
+
+
+
+
+
+
+
+
+
+
+
+
