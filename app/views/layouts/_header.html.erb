@@ -6,7 +6,7 @@
                 <div class="row">
                     <div class="col">
                         <div class="header_content d-flex flex-row align-items-center justify-content-start">
-                            <div class="logo"><a href="#">Sublime.</a></div>
+                            <div class="logo"><a href="/">Screen Shop</a></div>
                             <nav class="main_nav">
                                 <ul>
                                     <li class="hassubs active">
@@ -35,6 +35,29 @@
                                 </ul>
                             </nav>
                             <div class="header_extra ml-auto">
+                                <div class="row">
+                                    <div class="coucou">
+                                    <% if user_signed_in? == false %>
+                                        <div class="profil_links">
+                                            <%= link_to "Inscription", new_user_registration_path, { :class=>"" } %>
+                                        </div>
+                                        <div class="profil_links">
+                                            <%= link_to "Connexion", new_user_session_path, { :class=>"" } %>        
+                                        </div>
+                                    <% else %>
+                                    <div>
+                                        <p>
+                                            <%=current_user.nickname%>
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <p>
+                                            <%= link_to "Déconnexion", destroy_user_session_path, { :class=>"", method: :delete } %>
+                                            <p>
+                                    </div>
+                                    <% end %>
+                                </div>
+                                </div>
                                 <div class="shopping_cart">
                                     <a href="cart.html">
                                         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
