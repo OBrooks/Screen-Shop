@@ -35,6 +35,9 @@
                                 </ul>
                             </nav>
                             <div class="header_extra ml-auto">
+                                
+                            </div>
+                            <div class="header_extra ml-auto">
                                 <div class="row">
                                     <div class="coucou">
                                     <% if user_signed_in? == false %>
@@ -47,7 +50,7 @@
                                     <% else %>
                                     <div>
                                         <p>
-                                            <%=current_user.nickname%>
+                                            <%=current_user.first_name%>
                                         </p>
                                     </div>
                                     <div>
