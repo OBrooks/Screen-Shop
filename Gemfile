@@ -67,4 +67,5 @@ gem 'devise'
 #Style
 gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.2'
 gem 'bootstrap', '~> 4.2.1'
-gem 'jquery-ui-rails'
+gem 'jquery-rails', '~> 4.3', '>= 4.3.3'
+gem 'rails-ujs', '~> 0.1.0'
