@@ -348,7 +348,7 @@ section
 }
 .main_nav
 {
-	margin-left: 156px;
+	margin-left: auto;
 }
 .main_nav > ul > li
 {
@@ -446,6 +446,7 @@ section
 .shopping_cart
 {
 	display: inline-block;
+	margin-top: 6px;
 }
 .shopping_cart a svg
 {
@@ -484,23 +485,6 @@ section
 	margin-left: 4px;
 }
 
-.profil_links {
-		display: inline-block;
-}
-
-.profil_links a {
-		display: inline-block;
-		vertical-align: middle;
-		font-size: 14px;
-		font-weight: 500;
-		color: #1b1b1b;
-		margin-left: 13px;
-		-webkit-transition: all 200ms ease;
-		-moz-transition: all 200ms ease;
-		-ms-transition: all 200ms ease;
-		-o-transition: all 200ms ease;
-		transition: all 200ms ease;
-}
 
 .search
 {
@@ -513,6 +497,7 @@ section
 	-ms-transform: translateY(-1px);
 	-o-transform: translateY(-1px);
 	transform: translateY(-1px);
+	margin-top: 9px;
 }
 .search_icon
 {
@@ -825,12 +810,14 @@ section
 .home
 {
 	width: 100%;
-	height: 950px;
+	height: 655px;
 	background: #FFFFFF;
 	z-index: 2;
+	margin-top: 120px;
 }
 .home_slider_container
 {
+	padding-top: 10px;
 	width: 100%;
 	height: 100%;
 	padding-bottom: 10px;
@@ -850,12 +837,14 @@ section
 {
 	position: absolute;
 	left: 0;
-	top: 10%;
+	top: 8%;
 	width: 100%;
 }
+
 .home_slider_content
 {
 	max-width: 580px;
+	max-height: 40px;
 }
 .home_slider_title
 {
@@ -874,14 +863,14 @@ section
 }
 .home_button
 {
-	margin-top: 40px;
+	margin-top: 150px;
 }
 .home_slider_dots_container
 {
 	display: inline-block;
 	position: absolute;
 	left: 0;
-	bottom: 0;
+	bottom: 10px;
 	z-index: 10;
 	width: 100%;
 	padding-left: 60px;
@@ -891,7 +880,7 @@ section
 {
 	position: absolute;
 	left: 15px;
-	bottom: 56px;
+	bottom: 25px;
 }
 .home_slider_custom_dots
 {

@@ -131,11 +131,7 @@
 	{
 		display: inline-block;
 	}
-	.home
-	{
-		padding-left: 30px;
-		padding-right: 30px;
-	}
+
 	.home_title
 	{
 		font-size: 48px;
@@ -267,7 +263,7 @@
 	{
 		font-size: 18px;
 	}
-	.home
+	.home_product
 	{
 		height: 350px;
 		padding-top: 80px;

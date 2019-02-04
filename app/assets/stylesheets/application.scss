@@ -13,10 +13,11 @@
  *= require_tree .
  *= require_self
  *= require bootstrap4/bootstrap.min
-                *=require font-awesome
+ *= require font-awesome
  *= require OwlCarousel2-2.2.1/owl.carousel.css
  *= require OwlCarousel2-2.2.1/owl.theme.default.css
  *= require OwlCarousel2-2.2.1/animate.css
+ *= require main_styles
  *= require cart_responsive
  *= require cart
  *= require categories_responsive
@@ -25,7 +26,6 @@
  *= require checkout
  *= require contact_responsive
  *= require contact
- *= require main_styles
  *= require product_responsive
  *= require product
  *= require responsive

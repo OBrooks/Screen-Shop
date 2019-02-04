@@ -27,11 +27,7 @@
 //= require easing/easing
 //= require parallax-js-master/parallax.min
 //= require custom
-//= require cart
-//= require categories
-//= require checkout
-//= require contact
-//= require product
+
 
 
 

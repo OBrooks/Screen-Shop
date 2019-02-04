@@ -1,5 +1,13 @@
 fr:
   devise:
+    shared:
+      sign_in: "Se connecter"
+      sign_up: "S'inscrire"
+      forgot_password: "Vous avez oublié votre mot de passe?"
+      forgot_password?: "Vous avez oublié votre mot de passe?"
+      didnt_receive_confirmation_instructions: "Vous n'avez pas reçu de courriel de confirmation?"
+      didnt_receive_unlock_instructions: "Vous n'avez pas reçu de courriel de déverrouillage de votre compte?"
+      sign_in_with_omniauth: "Se connecter avec %{provider}"
     confirmations:
       confirmed: "Votre compte a été validé."
       send_instructions: "Vous allez recevoir les instructions nécessaires à la confirmation de votre compte dans quelques minutes."
