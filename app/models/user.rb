@@ -5,5 +5,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   
-  validates_presence_of :email, uniqueness: true, on: :create
+  validates_presence_of :first_name, on: :create
 end

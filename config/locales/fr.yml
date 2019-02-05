@@ -1,6 +1,19 @@
 ---
 fr:
   activerecord:
+    attributes:
+      user:
+        password: "Le mot de passe"
+        password_confirmation: "La confirmation du mot de passe"
+        email: "L'email"
+        first_name: "Le prénom"
+        name: "Le nom"
+        email: "L'adresse mail"
+        birthdate: "La date de naissance"
+        street_number: "Le numéro de rue"
+        street_name: "La rue"
+        zip_code: "Le code postal"
+        city: "La ville"
     errors:
       messages:
         record_invalid: 'La validation a échoué : %{errors}'
@@ -156,6 +169,17 @@ fr:
     label:
       user:
         remember_me: "Se rappeler de moi"
+        password_confirmation: "Confirmation du mot de passe"
+        password: "Mot de passe"
+        current_password: "Mot de passe actuel"
+        first_name: "Prénom"
+        name: "Nom"
+        email: "Adresse Mail"
+        birthdate: "Date de naissance"
+        street_number: "Numéro de rue"
+        street_name: "Rue"
+        zip_code: "Code postal"
+        city: "Ville"
         
   number:
     currency:

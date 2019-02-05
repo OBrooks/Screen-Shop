@@ -51,14 +51,14 @@
                   <!-- Password -->
                 <label for="contact_name">Mot de passe*</label>
                   <% if @minimum_password_length %>
-                    <em>(<%= @minimum_password_length %> characters minimum)</em>
+                    <em>(<%= @minimum_password_length %> caractères minimum)</em>
                   <% end %>
                   <br/>
                   <%= f.password_field :password, autocomplete: "new-password", id: "contact_name", class: "contact_input" %>
               </div>
               <div class="col-xl-6 last_name_col">
                   <!-- Password confirmation -->
-                  <%= f.label :password_confirmation %><br />
+                  <%= f.label :password_confirmation %>*<br />
                   <%= f.password_field :password_confirmation, autocomplete: "new-password", id: "contact_name", class: "contact_input" %>
               </div>
             </div>

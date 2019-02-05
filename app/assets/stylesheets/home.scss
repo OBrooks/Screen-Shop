@@ -34,7 +34,7 @@ button span:hover {
 }
 
 .flash_messages {
-	z-index: 999;
+	z-index: 99;
 	top: 120px;
 	margin-left: 60px;
 	margin-right: 60px;
@@ -59,6 +59,7 @@ button span:hover {
 
 .user_profile-dropdown-content {
   visibility: hidden;
+  	z-index: 100;
   /* hides sub-menu */
   	position: absolute;
   	background-color: #ffffff;
