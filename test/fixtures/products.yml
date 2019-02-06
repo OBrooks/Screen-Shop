@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  product_name: MyString
+  description: MyString
+  price: 1
+  phone_brand: one
+  phone_model: one
+  category: one
+
+two:
+  product_name: MyString
+  description: MyString
+  price: 1
+  phone_brand: two
+  phone_model: two
+  category: two

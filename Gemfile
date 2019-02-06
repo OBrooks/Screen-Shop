@@ -66,3 +66,7 @@ gem 'devise'
 
 #Style
 gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.2'
+gem 'jquery-rails'
+gem 'jquery-ui-rails'
+#database seed
+gem 'faker'

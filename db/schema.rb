@@ -10,10 +10,45 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_29_152148) do
+ActiveRecord::Schema.define(version: 2019_02_05_145650) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "categories", force: :cascade do |t|
+    t.string "category_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "phone_brands", force: :cascade do |t|
+    t.string "brand"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "phone_models", force: :cascade do |t|
+    t.string "model"
+    t.bigint "phone_brand_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["phone_brand_id"], name: "index_phone_models_on_phone_brand_id"
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string "product_name"
+    t.string "description"
+    t.decimal "price", precision: 8, scale: 2
+    t.bigint "phone_brand_id"
+    t.bigint "phone_model_id"
+    t.bigint "category_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "quantity"
+    t.index ["category_id"], name: "index_products_on_category_id"
+    t.index ["phone_brand_id"], name: "index_products_on_phone_brand_id"
+    t.index ["phone_model_id"], name: "index_products_on_phone_model_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
