@@ -40,38 +40,52 @@
                             <div class="col-xl-12 last_name_col">
                                 <!-- Email -->
                                 <label for="contact_last_name">Description</label>
-                                <%= f.text_field :description, class: "contact_input" %>
+                                    <%= f.text_field :description, class: "contact_input contact_textarea" %>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-xl-12">
-                                <!-- Category selection-->
-                                <%= f.label :category_id, "Catégorie" %><br />
-                                <%= f.collection_select :category_id, Category.order(:category_name), :id, :category_name, include_blank: true %>
+                            <span><%= f.label "Image du produit" %><br /></span>
+                                <%= f.file_field :product_picture %>
                             </div>
-                        </div>
                         </div>
                         <div class="row">
-                            <div class="col-xl-6">
+                            <div class="col-xl-12 select_category">
+                                <!-- Category selection-->
+                                <%= f.label :category_id, "Catégorie" %><br />
+                                <div class="select_category_container">
+                                    <%= f.collection_select :category_id, Category.order(:category_name), :id, :category_name, include_blank: true %>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-6 select_category">
                                 <!-- Brand selection -->
                                 <%= f.label :phone_brand_id, "Marque" %><br />
-                                <%= f.collection_select :phone_brand_id, PhoneBrand.order(:brand), :id, :brand, include_blank: true %>
+                                <div class="select_category_container">
+                                    <%= f.collection_select :phone_brand_id, PhoneBrand.order(:brand), :id, :brand, include_blank: true %>
+                                </div>
                             </div>
-                            <div class="col-xl-6 last_name_col">
+                            <div class="col-xl-6 last_name_col select_category">
                                 <!-- Model selection-->
                                 <%= f.label :phone_model_id, "Modèle" %><br />
-                                <%= f.grouped_collection_select :phone_model_id, PhoneBrand.order(:brand), :phone_models, :brand, :id, :model, include_blank: true %>
-                            </div>
+                                    <div class="select_category_container">
+                                        <%= f.grouped_collection_select :phone_model_id, PhoneBrand.order(:brand), :phone_models, :brand, :id, :model, include_blank: true %>
+                                    </div>
                             </div>
                         </div>
                         <div clas ="row">
-                            <div class="col-xl-6">
+                            <div class="col-xl-6 select_quantity"></div>
                                 <%= f.label :price, "Prix" %>
-                                <%= f.number_field(:price, min: 0.01..99999999.0, step: 0.01) %>
+                                <div class="select_quantity_container">
+                                    <%= f.number_field(:price, min: 0.01..99999999.0, step: 0.01) %>
+                                </div>
                             </div>
-                            <div class="col-xl-6 last_name_col">
+                            <div class="col-xl-6 last_name_col select_quantity"></div>
                                 <%= f.label :quantity, "Quantité" %>
-                                <%= f.number_field(:quantity, in: 1.0..20.0, step: 1) %>
+                                <div class="select_quantity_container">
+                                    <%= f.number_field(:quantity, in: 1.0..20.0, step: 1) %>
+                                </div>
                             </div>
                         </div>
                         <button class="newsletter_button trans_200">

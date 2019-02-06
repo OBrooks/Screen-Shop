@@ -11,7 +11,13 @@ class ProductsController < ApplicationController
                                 price: params[:product][:price], 
                                 phone_brand_id: params[:product][:phone_brand_id], 
                                 phone_model_id: params[:product][:phone_model_id], 
-                                category_id: params[:product][:category_id])
+                                category_id: params[:product][:category_id],
+                                product_picture: params[:product][:product_picture])
         redirect_to root_path
     end
+
+    def show
+        @products=Product.all
+    end
+
 end
