@@ -68,7 +68,9 @@ gem 'devise'
 gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.2'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
-gem 'mini_magick'
 
 #database seed
 gem 'faker'
+
+#aws
+gem "aws-sdk-s3", require: false
