@@ -29,17 +29,21 @@
 
                 <!-- Product Sorting -->
                 <div class="sorting_bar d-flex flex-md-row flex-column align-items-md-center justify-content-md-start">
-                    <div class="results">Showing <span>12</span> results</div>
+                    <% if @products.length > 1 %>
+                        <div class="results"><span><%= @products.length %></span> résultats</div>
+                    <% else %>
+                        <div class="results"><span><%= @products.length %></span> résultat</div>
+                    <% end %>
                     <div class="sorting_container ml-md-auto">
                         <div class="sorting">
                             <ul class="item_sorting">
                                 <li>
-                                    <span class="sorting_text">Sort by</span>
+                                    <span class="sorting_text">Filtrer par</span>
                                     <i class="fa fa-chevron-down" aria-hidden="true"></i>
                                     <ul>
-                                        <li class="product_sorting_btn" data-isotope-option='{ "sortBy": "original-order" }'><span>Default</span></li>
-                                        <li class="product_sorting_btn" data-isotope-option='{ "sortBy": "price" }'><span>Price</span></li>
-                                        <li class="product_sorting_btn" data-isotope-option='{ "sortBy": "stars" }'><span>Name</span></li>
+                                        <li class="product_sorting_btn" data-isotope-option='{ "sortBy": "original-order" }'><span>Défault</span></li>
+                                        <li class="product_sorting_btn" data-isotope-option='{ "sortBy": "price" }'><span>Prix</span></li>
+                                        <li class="product_sorting_btn" data-isotope-option='{ "sortBy": "stars" }'><span>Nom</span></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -56,14 +60,14 @@
                     <!-- Product -->
                     <div class="product products_show">
                         <% if product.product_picture.attachment != nil %>
-                            <div class="resize_it">
+                            <div class="product_image">
                             <%= image_tag product.product_picture %>
                             </div>
                         <% end %>
-                        <!-- <div class="product_extra product_new"><a href="categories.html">New</a></div> -->
+                        <div class="product_extra product_new"><a href="categories.html">New</a></div>
                         <div class="product_content">
-                            <div class="product_title"><a href="product.html">Smart Phone</a></div>
-                            <div class="product_price">$670</div>
+                            <div class="product_title"><a href="product.html"><%= product.product_name %></a></div>
+                            <div class="product_price"><%= number_to_currency(product.price, locale: :fr) %></div>
                         </div>
                     </div>
                     <% end %>
@@ -75,7 +79,6 @@
                         <li><a href="#">03.</a></li>
                     </ul>
                 </div>
-
             </div>
         </div>
     </div>

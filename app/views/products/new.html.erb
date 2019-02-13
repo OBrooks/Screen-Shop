@@ -28,7 +28,7 @@
             <!-- Inscription -->
             <div class="col-lg-8 contact_col">
                 <div class="get_in_touch">
-                    <div class="section_title">S'inscrire</div>
+                    <div class="section_title">Ajouter un produit</div>
                     <div class="contact_form_container">
                         <%= form_for @product, url: {action: "create"} do |f| %>
                         <div class="row">
@@ -40,7 +40,7 @@
                             <div class="col-xl-12 last_name_col">
                                 <!-- Email -->
                                 <label for="contact_last_name">Description</label>
-                                    <%= f.text_field :description, class: "contact_input contact_textarea" %>
+                                    <%= f.text_area :description, class: "contact_input contact_textarea" %>
                             </div>
                         </div>
                         <div class="row">
@@ -84,7 +84,7 @@
                             <div class="col-xl-6 last_name_col select_quantity"></div>
                                 <%= f.label :quantity, "Quantité" %>
                                 <div class="select_quantity_container">
-                                    <%= f.number_field(:quantity, in: 1.0..20.0, step: 1) %>
+                                    <%= f.number_field(:quantity, step: 1) %>
                                 </div>
                             </div>
                         </div>

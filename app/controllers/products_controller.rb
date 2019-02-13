@@ -20,4 +20,7 @@ class ProductsController < ApplicationController
         @products=Product.all
     end
 
+    def try
+        @products=Product.all
+    end
 end
