@@ -6,4 +6,8 @@ class User < ApplicationRecord
 
   
   validates_presence_of :first_name, on: :create
+
+  #Status
+  enum status: { customer: 0, admin: 1, webmaster: 2}
+
 end
