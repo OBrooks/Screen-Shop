@@ -6,4 +6,6 @@ module ProductsHelper
     def models_for_select
         PhoneModel.all.collect {|m| [m.model, m.id]}
     end
+
+
 end

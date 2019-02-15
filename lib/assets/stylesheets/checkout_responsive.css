@@ -295,27 +295,6 @@
 	{
 		font-size: 18px;
 	}
-	.home
-	{
-		height: 180px;
-		padding-top: 80px;
-		padding-left: 0;
-		padding-right: 0;
-	}
-	.breadcrumbs ul li a
-	{
-		font-size: 13px;
-	}
-	.button
-	{
-		width: 148px;
-		height: 41px;
-	}
-	.button a
-	{
-		font-size: 13px;
-		line-height: 37px;
-	}
 
 	.coupon_input
 	{

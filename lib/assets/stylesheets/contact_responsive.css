@@ -222,62 +222,7 @@
 
 @media only screen and (max-width: 575px)
 {
-	p{font-size: 13px;}
-	.menu
-	{
-		width: 100vw;
-		right: -100vw;
-	}
-	.menu_container
-	{
-		padding-top: 80px;
-	}
-	.page_menu_item > a,
-	.page_menu_selection li a
-	{
-		font-size: 13px;
-		height: 40px;
-		line-height: 40px;
-	}
-	.header_container
-	{
-		padding-left: 0px;
-		padding-right: 0px;
-	}
-	.header_content
-	{
-		height: 70px;
-	}
-	.logo a,
-	.header.scrolled .logo a
-	{
-		font-size: 18px;
-	}
-	.home
-	{
-		height: 180px;
-		padding-top: 80px;
-		padding-left: 0;
-		padding-right: 0;
-	}
-	.breadcrumbs ul li a
-	{
-		font-size: 13px;
-	}
-	.button
-	{
-		width: 148px;
-		height: 41px;
-	}
-	.button a
-	{
-		font-size: 13px;
-		line-height: 37px;
-	}
-	.home_button
-	{
-		margin-top: 32px;
-	}
+
 	.contact_form label
 	{
 		font-size: 13px;

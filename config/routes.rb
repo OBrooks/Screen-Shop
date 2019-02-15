@@ -5,8 +5,11 @@ Rails.application.routes.draw do
   devise_for :users
   
   
-  resource :products
-  get 'products/all',           to: "products#show"
-  get 'products/:id',           to: "products#product"
+  resources :products
+    get 'products/all',           to: "products#show"
+    get 'product/:id',            to: "products#product"
+    patch 'product/:id',            to: "products#quantity_update"
+
+ 
 
 end

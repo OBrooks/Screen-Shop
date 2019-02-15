@@ -1,9 +1,9 @@
 <!-- Home -->
 
-<div class="home">
+<div class="home_new">
     <div class="home_container">
 <div class="home_background" style="background-image:url(<%= asset_path 'images/categories.jpg' %>)"></div>
-        <div class="home_content_container">
+        <div class="home_content_container_product">
             <div class="container">
                 <div class="row">
                     <div class="col">
@@ -30,7 +30,7 @@
             <!-- Product Image -->
             <div class="col-lg-6">
                 <div class="details_image">
-                    <div class="details_image_large">
+                <div class="details_image_large" id="focusme" tabindex="-1">
                         <% if @product.product_picture.attachment != nil %>
                             <%= image_tag @product.product_picture %>
                         <% end %>
@@ -88,6 +88,44 @@
 
                     <!-- Share -->
                     <div class="details_share">
+                    <!-- Admin part - Edit & Delete -->
+                    <% if admin_or_webmaster == true %>
+                    <button class="newsletter_button trans_200">
+                        <span>
+                            <%= link_to "Éditer", edit_product_path(@product.id) %>
+                        </span>
+                    </button>
+                    <button class="newsletter_button trans_200">
+                        <span>
+                            <%= link_to 'Supprimer', product_path(@product.id), method: :delete %>
+                        </span>
+                    </button>
+                    <!-- Edit quantity -->
+                    <div class="contact">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-8 contact_col">
+                                    <div class="get_in_touch">
+                                        <div class="section_title">Nouvelle livraison ?</br>Mettre à jour la quantité totale</div>
+                                        <div class="contact_form_container">
+                                            <%= form_for @product, url: {action: "quantity_update"} do |f| %>
+                                            <div class="col-xl-6 last_name_col select_quantity"></div>
+                                            <%= f.label :quantity, "Quantité totale" %>
+                                            <div class="select_quantity_container">
+                                                <%= f.number_field(:quantity, step: 1) %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="newsletter_button trans_200">
+                                        <span>
+                                            <%= f.submit "Mettre à jour" %></span>
+                                    </button>
+                                    <% end %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <% end %>
                         <!-- <span>Share:</span>
                         <ul>
                             <li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>

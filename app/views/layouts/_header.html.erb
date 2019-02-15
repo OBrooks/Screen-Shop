@@ -10,10 +10,10 @@
                             <nav class="main_nav">
                                 <ul>
                                     <li class="hassubs active">
-                                        <a href="index.html">Home</a>
+                                        <a href="/">Home</a>
                                         <ul>
                                             <li><a href="categories.html">Categories</a></li>
-                                            <li><a href="product.html">Product</a></li>
+                                            <li><a href="/products/all">Produits</a></li>
                                             <li><a href="cart.html">Cart</a></li>
                                             <li><a href="checkout.html">Check out</a></li>
                                             <li><a href="contact.html">Contact</a></li>
@@ -22,11 +22,9 @@
                                     <li class="hassubs">
                                         <a href="categories.html">Categories</a>
                                         <ul>
-                                            <li><a href="categories.html">Category</a></li>
-                                            <li><a href="categories.html">Category</a></li>
-                                            <li><a href="categories.html">Category</a></li>
-                                            <li><a href="categories.html">Category</a></li>
-                                            <li><a href="categories.html">Category</a></li>
+                                            <% @categories.each do |category| %>
+                                                <li><a href="categories.html"><%= category.category_name %></a></li>
+                                            <% end %>
                                         </ul>
                                     </li>
                                     <li><a href="#">Accessories</a></li>
