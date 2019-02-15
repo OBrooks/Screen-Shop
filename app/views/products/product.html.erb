@@ -1,0 +1,106 @@
+<!-- Home -->
+
+<div class="home">
+    <div class="home_container">
+<div class="home_background" style="background-image:url(<%= asset_path 'images/categories.jpg' %>)"></div>
+        <div class="home_content_container">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="home_content">
+                            <div class="home_title"><%= @product.category.category_name %><span>.</span></div>
+                            <div class="home_text">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam a ultricies metus.
+                                    Sed nec molestie eros. Sed viverra velit venenatis fermentum luctus.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Product Details -->
+
+<div class="product_details">
+    <div class="container">
+        <div class="row details_row">
+
+            <!-- Product Image -->
+            <div class="col-lg-6">
+                <div class="details_image">
+                    <div class="details_image_large">
+                        <% if @product.product_picture.attachment != nil %>
+                            <%= image_tag @product.product_picture %>
+                        <% end %>
+                        <div class="product_extra product_new"><a href="categories.html">New</a></div>
+                    </div>
+
+                    <!-- if many products, add under here-->
+                </div>
+            </div>
+
+            <!-- Product Content -->
+            <div class="col-lg-6">
+                <div class="details_content">
+                    <div class="details_name">
+                        <%= @product.phone_brand.brand %> <%= @product.phone_model.model %>
+                    </div>
+                    <div class="details_name">
+                        <%= @product.product_name %>
+                    </div>
+                    <!-- <div class="details_discount">$890</div> -->
+                    <div class="details_price">
+                        <%=number_to_currency(@product.price, locale: :fr) %>
+                    </div>
+
+                    <!-- Stock status-->
+                    <% if @product.quantity <1 %>
+                        <div class="out_of_stock_container">
+                            <div class="availability">Disponibilité :</div>
+                            <span>En rupture de stock</span>
+                        </div>
+                    <% else %>
+                        <div class="in_stock_container">
+                            <div class="availability">Disponibilité :</div>
+                            <span>En Stock</span>
+                        </div>
+                    <% end %>
+                    <div class="details_text">
+                        <p><%= @product.description %></p>
+                    </div>
+
+                    <!-- Product Quantity -->
+                    <div class="product_quantity_container">
+                        <div class="product_quantity clearfix">
+                            <span>Qté</span>
+                            <input id="quantity_input" type="text" pattern="[0-9]*" value="1">
+                            <div class="quantity_buttons">
+                                <div id="quantity_inc_button" class="quantity_inc quantity_control"><i class="fa fa-chevron-up"
+                                        aria-hidden="true"></i></div>
+                                <div id="quantity_dec_button" class="quantity_dec quantity_control"><i class="fa fa-chevron-down"
+                                        aria-hidden="true"></i></div>
+                            </div>
+                        </div>
+                        <div class="button cart_button"><a href="#">Ajouter au panier</a></div>
+                    </div>
+
+                    <!-- Share -->
+                    <div class="details_share">
+                        <!-- <span>Share:</span>
+                        <ul>
+                            <li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                        </ul> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--More description to insert under-->
+    </div>
+</div>
+

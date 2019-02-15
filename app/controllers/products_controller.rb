@@ -20,7 +20,7 @@ class ProductsController < ApplicationController
         @products=Product.all
     end
 
-    def try
-        @products=Product.all
+    def product
+        @product=Product.find(params[:id])
     end
 end

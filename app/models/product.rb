@@ -5,4 +5,7 @@ class Product < ApplicationRecord
 
   #ActiveStorage AWS
   has_one_attached :product_picture
+
+  #Status
+  enum status: { default: 0, new_product: 1, sale: 2, hot: 3}
 end

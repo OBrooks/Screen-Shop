@@ -7,5 +7,6 @@ Rails.application.routes.draw do
   
   resource :products
   get 'products/all',           to: "products#show"
+  get 'products/:id',           to: "products#product"
 
 end
