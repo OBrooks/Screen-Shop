@@ -11,13 +11,12 @@
 // about supported directives.
 //
 //= require jquery
-
 //= require rails-ujs
 //= require activestorage
 //= require_tree .
+//= require turbolinks
 //= require bootstrap4/popper
 //= require bootstrap4/bootstrap.min
-//= require turbolinks
 //= require greensock/TweenMax.min
 //= require greensock/TimelineMax.min
 //= require scrollmagic/ScrollMagic.min
