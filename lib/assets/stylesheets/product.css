@@ -453,10 +453,10 @@
 	margin-top: 13px;
 }
 
-.product_extra {
+.product_extra, .product_extra_right {
 	position: absolute;
+	z-index: 99;
 	top: 0;
-	left: 54px;
 	width: 66px;
 	height: 36px;
 	text-align: center;
@@ -468,12 +468,27 @@
 	transform: rotate(90deg);
 }
 
-.product_extra a {
+.product_extra {
+	left: 54px;
+}
+
+.product_extra_right {
+	right : -34px;
+}
+
+.product_extra a, .product_extra_right a {
 	display: block;
-	font-size: 16px;
 	font-weight: 500;
 	color: #FFFFFF;
 	line-height: 36px;
+}
+
+.product_extra a {
+	font-size: 16px;
+}
+
+.product_extra_right a {
+	font-size: 12px;
 }
 
 .product_new {

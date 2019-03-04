@@ -1,0 +1,76 @@
+<!-- Home -->
+
+<div class="home_cart">
+    <div class="home_container">
+        <div class="home_background" style="background-image:url(<%= asset_path 'images/cart.jpg' %>)"></div>
+        <div class="home_content_container">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="home_content">
+                            <div class="breadcrumbs">
+                                <ul>
+                                    <li><a href="/">Home</a></li>
+                                    <li>Admin Board</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Cart Info -->
+
+<div class="cart_info">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <!-- Column Titles -->
+                <div class="cart_info_columns clearfix">
+
+                </div>
+            </div>
+        </div>
+        <div class="row cart_items_row">
+            <div class="col">
+                <h2>Ajouter</h2>
+                <div class="cart_item d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-start">
+                    <div class="button cart_button"><a href="/products/new">Nouveau produit</a></div>
+                    <div class="button cart_button"><a href="/models/new">Nouveau modèle</a></div>
+                    <div class="button cart_button"><a href="/brands/new">Nouvelle marque</a></div>
+                    <div class="button cart_button"><a href="/category/new">Nouvelle catégorie</a></div>
+                </div>
+                <div class="row">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <%@products.each do |product|%>
+                            <tr>
+                                <td>
+                                   <a href='/product/<%=product.id%>'><%= product.product_name %></a>
+                                </td>
+                                <td>
+                                    <%=number_to_currency(product.price, locale: :fr) %>
+                                </td>
+                                <td>
+                                    <%= product.quantity %>
+                                </td>
+                                <% end %>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

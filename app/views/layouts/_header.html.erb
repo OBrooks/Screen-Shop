@@ -54,6 +54,11 @@
                                                     <div class="profile_links">
                                                         <%= link_to "Éditer mes infos", edit_user_registration_path, { :class=>""} %>
                                                     </div>
+                                                    <% if admin_or_webmaster == true %>
+                                                        <div class="profile_links">
+                                                            <%= link_to "Admin Board", admin_path, { :class=>""} %>
+                                                        </div>
+                                                    <% end %>
                                                 <% end %>
                                             </div>
                                     </div>   

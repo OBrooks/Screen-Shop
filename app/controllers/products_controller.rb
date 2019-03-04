@@ -33,7 +33,6 @@ class ProductsController < ApplicationController
     end
 
     def edit
-        puts params
         @product=Product.find(params[:id])
     end
 

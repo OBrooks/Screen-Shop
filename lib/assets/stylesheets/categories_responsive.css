@@ -307,7 +307,8 @@
 		width: 128px;
 		height: 41px;
 	}
-	.newsletter_button span
+	.newsletter_button span,
+	.newsletter_button input
 	{
 		font-size: 13px;
 	}

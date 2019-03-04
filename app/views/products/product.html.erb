@@ -90,16 +90,16 @@
                     <div class="details_share">
                     <!-- Admin part - Edit & Delete -->
                     <% if admin_or_webmaster == true %>
-                    <button class="newsletter_button trans_200">
+                    <div class="button cart_button mt-3">
                         <span>
                             <%= link_to "Éditer", edit_product_path(@product.id) %>
                         </span>
-                    </button>
-                    <button class="newsletter_button trans_200">
+                    </div>
+                    <div class="button cart_button mt-3">
                         <span>
                             <%= link_to 'Supprimer', product_path(@product.id), method: :delete %>
                         </span>
-                    </button>
+                    </div>
                     <!-- Edit quantity -->
                     <div class="contact">
                         <div class="container">
@@ -117,8 +117,7 @@
                                         </div>
                                     </div>
                                     <button class="newsletter_button trans_200">
-                                        <span>
-                                            <%= f.submit "Mettre à jour" %></span>
+                                            <%= f.submit "Mettre à jour" %>
                                     </button>
                                     <% end %>
                                 </div>
