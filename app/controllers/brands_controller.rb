@@ -7,7 +7,7 @@ class BrandsController < ApplicationController
 
     def create
         @brand=PhoneBrand.create!(brand: params[:phone_brand][:brand], brand_picture: params[:phone_brand][:brand_picture])
-        redirect_to root_path
+        redirect_to admin_path
     end
 
     def show
@@ -19,7 +19,6 @@ class BrandsController < ApplicationController
     end
 
     def update
-        puts params
         @brand=PhoneBrand.find(params[:id])
         @brand.update(brand: params[:phone_brand][:brand])
             if params[:phone_brand][:brand_picture] != nil 

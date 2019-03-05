@@ -9,7 +9,7 @@
                             <div class="breadcrumbs_contact">
                                 <ul>
                                     <li><a href="/">Home</a></li>
-                                    <li>Ajouter une marque</li>
+                                    <li>Marques</li>
                                 </ul>
                             </div>
                         </div>
@@ -44,35 +44,14 @@
                                 <%= f.file_field :brand_picture %>
                             </div>
                         </div>
+                        <button class="newsletter_button trans_200">
+                            <%= f.submit "Ajouter"%>
+                        </button>
+                        <% end %>
                     </div>
                 </div>
-                <button class="newsletter_button trans_200">
-                    <span>
-                        <%= f.submit "Ajouter" %></span>
-                </button>
-                <% end %>
             </div>
         </div>
     </div>
-
     <!-- Infos -->
-    <div class="col-lg-3 offset-xl-1 contact_col">
-        <div class="contact_info">
-            <div class="contact_info_section">
-                <div class="contact_info_title">Livraison rapide !</div>
-                <div>
-                    <img src="<%= asset_path 'fast-delivery.png' %>">
-                </div>
-            </div>
-            <div class="contact_info_section">
-                <div class="contact_info_title">Un problème ? Contactez-nous !</div>
-                <ul>
-                    <li>Phone: <span>+53 345 7953 3245</span></li>
-                    <li>Email: <span>yourmail@gmail.com</span></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-</div>
 </div>

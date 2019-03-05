@@ -7,8 +7,9 @@ Rails.application.routes.draw do
   
   resources :brands
     get 'brands/all',           to: "brands#show"
-
+    
   resources :models
+    get 'models/all',           to: "models#show"
 
   resources :products
     get 'products/all',           to: "products#show"

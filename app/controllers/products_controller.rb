@@ -15,7 +15,7 @@ class ProductsController < ApplicationController
                                 phone_model_id: params[:product][:phone_model_id], 
                                 category_id: params[:product][:category_id],
                                 product_picture: params[:product][:product_picture])
-        redirect_to root_path
+        redirect_to admin_path
     end
 
     def show

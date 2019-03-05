@@ -9,7 +9,7 @@
                             <div class="breadcrumbs_contact">
                                 <ul>
                                     <li><a href="/">Home</a></li>
-                                    <li>Marques</li>
+                                    <li>Modèles</li>
                                 </ul>
                             </div>
                         </div>
@@ -28,20 +28,29 @@
             <!-- Inscription -->
             <div class="col-lg-8 contact_col">
                 <div class="get_in_touch">
-                    <div class="section_title">Modifier une marque</div>
+                    <div class="section_title">Modifier un modèle</div>
                     <div class="contact_form_container">
-                        <%= form_for @brand, url: {action: "update"} do |f| %>
+                        <%= form_for @model, url: {action: "update"} do |f| %>
+                        <div class="row">
+                            <div class="col-xl-6 select_category">
+                                <!-- Brand selection -->
+                                <%= f.label :phone_brand_id, "Marque" %><br />
+                                <div class="select_category_container">
+                                    <%= f.collection_select :phone_brand_id, PhoneBrand.order(:brand), :id, :brand, include_blank: true %>
+                                </div>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-xl-12">
                                 <!-- Name -->
-                                <label for="contact_name">Nom de la marque</label>
-                                <%= f.text_field :brand, class: "contact_input" %>
+                                <label for="contact_name">Nom du modèle</label>
+                                <%= f.text_field :model, class: "contact_input" %>
                             </div>
                             <div class="col-xl-12 last_name_col">
                                 <span>
                                     <%= f.label "Image de la marque" %><br />
                                 </span>
-                                <%= f.file_field :brand_picture %>
+                                <%= f.file_field :model_picture %>
                             </div>
                         </div>
                         <button class="newsletter_button trans_200">

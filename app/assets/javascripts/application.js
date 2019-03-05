@@ -15,6 +15,7 @@
 //= require activestorage
 //= require_tree .
 //= require turbolinks
+
 //= require bootstrap4/popper
 //= require bootstrap4/bootstrap.min
 //= require greensock/TweenMax.min
@@ -27,6 +28,7 @@
 //= require easing/easing
 //= require parallax-js-master/parallax.min
 //= require custom
+
 
 
 
