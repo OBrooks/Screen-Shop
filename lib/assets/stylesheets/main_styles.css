@@ -17,6 +17,7 @@
 10. Newsletter
 11. Footer
 12. Sorting List
+13. Admin Board
 
 
 ******************************/
@@ -1504,4 +1505,23 @@ section
 
 .item_sorting li span:nth-child(2) {
 	margin-left: 63px;
+}
+
+
+/*********************************
+13. Admin Board
+*********************************/
+
+.admin_options h2{
+	width: 100%;
+	border-top: solid 2px #e3e3e3;
+	padding-bottom: 7px;
+	padding-top: 15px;
+	margin-top: 70px;
+}
+
+.admin_info {
+	width: 100%;
+	background: #FFFFFF;
+	z-index: 2;
 }

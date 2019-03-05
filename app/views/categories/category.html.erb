@@ -10,7 +10,7 @@
                             <div class="breadcrumbs_contact">
                                 <ul>
                                     <li><a href="/">Home</a></li>
-                                    <li>Liste des catégories</li>
+                                    <li><%= @category.category_name %></li>
                                 </ul>
                             </div>
                         </div>
@@ -29,12 +29,12 @@
 
                 <!-- Product Sorting -->
                 <div class="sorting_bar d-flex flex-md-row flex-column align-items-md-center justify-content-md-start">
-                    <% if @categories.length > 1 %>
+                    <% if @products_by_category.length > 1 %>
                     <div class="results"><span>
-                            <%= @categories.length %></span> résultats</div>
+                        <%= @products_by_category.length %></span> résultats</div>
                     <% else %>
                     <div class="results"><span>
-                            <%= @categories.length %></span> résultat</div>
+                        <%= @products_by_category.length %></span> résultat</div>
                     <% end %>
                     <div class="sorting_container ml-md-auto">
                         <div class="sorting">
@@ -58,23 +58,21 @@
             <div class="col">
 
                 <div class="product_grid">
-                    <% @categories.each do |category| %>
+                    <% @products_by_category.each do |product| %>
                     <!-- Product -->
                     <div class="product products_show">
-                    <% if admin_or_webmaster == true %>
-                        <div class="product_extra product_new"><a href="/categories/<%=category.id%>/edit">Éditer</a></div>
-                        <div class="product_extra_right product_sale"><%= link_to "Supprimer", category_path(category.id), method: :delete %></div>
-                    <% end %>
-                        <% if category.category_picture.attachment != nil %>
+                        <% if product.product_picture.attachment != nil %>
                         <div class="product_image">
-                            <%= image_tag category.category_picture %>
+                            <%= image_tag product.product_picture %>
                         </div>
                         <% end %>
-
+                        <div class="product_extra product_new"><a href="categories.html">New</a></div>
                         <div class="product_content">
-                            <div class="product_title"><a href="/categories/all">
-                                    <%= category.category_name %></a></div>
-
+                            <div class="product_title"><a href="/product/<%=product.id%>">
+                                    <%= product.product_name %></a></div>
+                            <div class="product_price">
+                                <%= number_to_currency(product.price, locale: :fr) %>
+                            </div>
                         </div>
                     </div>
                     <% end %>
