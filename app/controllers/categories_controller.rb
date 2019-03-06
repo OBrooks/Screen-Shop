@@ -8,7 +8,7 @@ class CategoriesController < ApplicationController
 
     def create
         @category=Category.create!(category_name: params[:category][:category_name], category_picture: params[:category][:category_picture])
-        redirect_to admin_path
+        redirect_to categories_all_path
     end
 
     def edit

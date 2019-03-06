@@ -8,7 +8,7 @@ class ModelsController < ApplicationController
 
     def create
         @model=PhoneModel.create!(phone_brand_id: params[:phone_model][:phone_brand_id],model: params[:phone_model][:model], model_picture: params[:phone_model][:model_picture])
-        redirect_to admin_path
+        redirect_to models_all_path
     end
 
     def show

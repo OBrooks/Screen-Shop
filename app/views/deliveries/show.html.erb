@@ -10,7 +10,7 @@
                             <div class="breadcrumbs_contact">
                                 <ul>
                                     <li><a href="/">Home</a></li>
-                                    <li>Liste des marques</li>
+                                    <li>Liste des livraisons</li>
                                 </ul>
                             </div>
                         </div>
@@ -26,7 +26,7 @@
     <div class="container">
         <% if admin_or_webmaster == true %>
             <div class="row">
-                <div class="button cart_button"><a href="/brands/new">Ajouter une marque</a></div>
+                <div class="button cart_button"><a href="/deliveries/new">Ajouter une livraison</a></div>
             </div>
         <% end %>
         <div class="row">
@@ -34,12 +34,12 @@
 
                 <!-- Product Sorting -->
                 <div class="sorting_bar d-flex flex-md-row flex-column align-items-md-center justify-content-md-start">
-                    <% if @brands.length > 1 %>
+                    <% if @deliveries.length > 1 %>
                     <div class="results"><span>
-                            <%= @brands.length %></span> résultats</div>
+                            <%= @deliveries.length %></span> résultats</div>
                     <% else %>
                     <div class="results"><span>
-                            <%= @brands.length %></span> résultat</div>
+                            <%= @deliveries.length %></span> résultat</div>
                     <% end %>
                     <div class="sorting_container ml-md-auto">
                         <div class="sorting">
@@ -63,23 +63,22 @@
             <div class="col">
 
                 <div class="product_grid">
-                    <% @brands.each do |brand| %>
+                    <% @deliveries.each do |delivery| %>
                     <!-- Product -->
                     <div class="product products_show">
                     <% if admin_or_webmaster ==true %>
-                        <div class="product_extra product_new"><a href="/brands/<%=brand.id%>/edit">Éditer</a></div>
-                        <div class="product_extra_right product_sale"><%= link_to "Supprimer", brand_path(brand.id), method: :delete %></div>
+                        <div class="product_extra product_new"><a href="/deliveries/<%=delivery.id%>/edit">Éditer</a></div>
+                        <div class="product_extra_right product_sale"><%= link_to "Supprimer", delivery_path(delivery.id), method: :delete %></div>
                     <% end %>
-                        <% if brand.brand_picture.attachment != nil %>
+                        <% if delivery.delivery_picture.attachment != nil %>
                         <div class="product_image">
-                            <%= image_tag brand.brand_picture %>
+                            <%= image_tag delivery.delivery_picture %>
                         </div>
                         <% end %>
 
                         <div class="product_content">
-                            <div class="product_title"><a href="/brands/all">
-                                    <%= brand.brand %></a></div>
-
+                            <div class="product_title"><a href="/deliveries/all">
+                                <%= delivery.name %> - <%= number_to_currency(delivery.price, locale: :fr) %></a></div>
                         </div>
                     </div>
                     <% end %>

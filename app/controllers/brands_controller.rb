@@ -7,7 +7,7 @@ class BrandsController < ApplicationController
 
     def create
         @brand=PhoneBrand.create!(brand: params[:phone_brand][:brand], brand_picture: params[:phone_brand][:brand_picture])
-        redirect_to admin_path
+        redirect_to brands_all_path
     end
 
     def show

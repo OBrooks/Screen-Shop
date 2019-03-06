@@ -24,6 +24,11 @@
 
 <div class="products">
     <div class="container">
+        <% if admin_or_webmaster == true %>
+            <div class="row">
+                <div class="button cart_button"><a href="/models/new">Ajouter un modèle</a></div>
+            </div>
+        <% end %>
         <div class="row">
             <div class="col">
 

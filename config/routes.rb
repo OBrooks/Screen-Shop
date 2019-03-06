@@ -11,6 +11,9 @@ Rails.application.routes.draw do
   resources :models
     get 'models/all',             to: "models#show"
 
+  resources :deliveries
+    get 'deliveries/all',         to: "deliveries#show"
+
   resources :categories
     get 'categories/all',         to: "categories#show"
     get 'category/:id',           to: "categories#category"
