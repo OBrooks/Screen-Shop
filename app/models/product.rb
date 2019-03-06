@@ -7,5 +7,6 @@ class Product < ApplicationRecord
   has_one_attached :product_picture
 
   #Status
-  enum status: { default: 0, new_product: 1, sale: 2, hot: 3}
+  enum status: { default: 0, sales: 1, hot: 2}
+  STATUSES = Product.statuses.map { |r,| [I18n.t("status.#{r}"), r] }.sort_by { |r| I18n.t("status.#{r}") }
 end

@@ -76,16 +76,30 @@
                             </div>
                         </div>
                         <div clas="row">
-                            <div class="col-xl-6 select_quantity"></div>
                             <%= f.label :price, "Prix" %>
                             <div class="select_quantity_container">
                                 <%= f.number_field(:price, min: 0.01..99999999.0, step: 0.01) %>
                             </div>
+                            <%= f.label :quantity, "Quantité" %>
+                            <div class="select_quantity_container">
+                                <%= f.number_field(:quantity, step: 1) %>
+                            </div>
                         </div>
-                        <div class="col-xl-6 last_name_col select_quantity"></div>
-                        <%= f.label :quantity, "Quantité" %>
-                        <div class="select_quantity_container">
-                            <%= f.number_field(:quantity, step: 1) %>
+                        <div class="row">
+                            <div class="col-xl-6 select_category">
+                                <!-- Status selection -->
+                                <%= f.label :status, "Statut" %><br />
+                                <div class="select_category_container">
+                                    <%= f.select :status, Product::STATUSES, { prompt: t("products.statuses.prompt"), selected: @product.status } %>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 last_name_col select_category">
+                                <!-- Discount selection-->
+                                <%= f.label :discount, "Réduction (en %)" %>
+                                <div class="select_quantity_container" id="discount">
+                                    <%= f.number_field(:discount, step: 1, max: 100) %>
+                                </div>
+                            </div>
                         </div>
                         <button class="newsletter_button trans_200">
                             <%= f.submit "Éditer" %>

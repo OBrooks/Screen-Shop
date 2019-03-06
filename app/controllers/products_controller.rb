@@ -44,9 +44,13 @@ class ProductsController < ApplicationController
                                 price: params[:product][:price], 
                                 phone_brand_id: params[:product][:phone_brand_id], 
                                 phone_model_id: params[:product][:phone_model_id], 
-                                category_id: params[:product][:category_id])
+                                category_id: params[:product][:category_id],
+                                status: params[:product][:status])
             if params[:product][:product_picture] != nil 
                 @product.update(product_picture: params[:product][:product_picture])
+            end
+            if params[:product][:discount] != nil 
+                @product.update(discount: params[:product][:discount])
             end
         redirect_to products_all_path
     end

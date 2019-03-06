@@ -1,5 +1,9 @@
 ---
 fr:
+  status:
+    default: "Défaut"
+    sales: "Soldes"
+    hot: "Tendances"
   activerecord:
     attributes:
       user:

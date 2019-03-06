@@ -9,10 +9,6 @@
                     <div class="col">
                         <div class="home_content">
                             <div class="home_title"><%= @product.category.category_name %><span>.</span></div>
-                            <div class="home_text">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam a ultricies metus.
-                                    Sed nec molestie eros. Sed viverra velit venenatis fermentum luctus.</p>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -34,7 +30,12 @@
                         <% if @product.product_picture.attachment != nil %>
                             <%= image_tag @product.product_picture %>
                         <% end %>
-                        <div class="product_extra product_new"><a href="categories.html">New</a></div>
+                        <% if @product.status == "sales" %>
+                        <div class="product_extra product_sale"><a href="categories.html">-
+                                <%= @product.discount %>%</a></div>
+                        <% elsif @product.status == "hot" %>
+                        <div class="product_extra product_hot"><a href="categories.html">Tendance</a></div>
+                        <% end %>
                     </div>
 
                     <!-- if many products, add under here-->
@@ -45,7 +46,11 @@
             <div class="col-lg-6">
                 <div class="details_content">
                     <div class="details_name">
-                        <%= @product.phone_brand.brand %> <%= @product.phone_model.model %>
+                        <% if @product.phone_brand != nil %>
+                            <%= @product.phone_brand.brand %>
+                        <% elsif @product.phone_model != nil %>
+                             <%= @product.phone_model.model %>
+                        <% end %>
                     </div>
                     <div class="details_name">
                         <%= @product.product_name %>
