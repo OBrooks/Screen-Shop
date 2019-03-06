@@ -23,7 +23,8 @@ Rails.application.routes.draw do
     get 'product/:id',            to: "products#product"
     patch 'product/:id',          to: "products#quantity_update"
 
-  get 'admin',                    to: "admin#show"
+    get 'admin',                  to: "admin#show"
+    patch 'admin/:id',            to: "admin#quantity_product_update"
 
   
 

@@ -56,9 +56,9 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Price</th>
-                                <th>Quantity</th>
+                                <th>Nom</th>
+                                <th>Prix</th>
+                                <th>Quantité</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -71,7 +71,16 @@
                                     <%=number_to_currency(product.price, locale: :fr) %>
                                 </td>
                                 <td>
-                                    <%= product.quantity %>
+                                    <div class="row">
+                                        <%= form_for product, url: {action: "quantity_product_update", controller: "admin", id: product.id.to_s} do |f| %>
+                                            <div class="select_quantity_container_admin">
+                                                <%= f.number_field(:quantity, step: 1) %>
+                                            </div>
+                                            <button class="newsletter_button trans_200">
+                                                <%= f.submit "Mettre à jour" %>
+                                            </button>
+                                        <% end %>
+</div>
                                 </td>
                                 <% end %>
                             </tr>

@@ -35,9 +35,9 @@ option {
     font-weight: 600;
 }
 
-.select_quantity_container input {
+.select_quantity_container input,
+.select_quantity_container_admin input {
     display: block;
-    width: 147px;
     height: 41px;
     border: solid 2px #d0d0d0;
     overflow: hidden;
@@ -46,6 +46,12 @@ option {
     font-size: 14px;
     font-weight: 600;
     text-align: right;
+}
+.select_quantity_container input {
+    width: 147px;
+}
+.select_quantity_container_admin input {
+    width: 80px;
 }
 
 // All products

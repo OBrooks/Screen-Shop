@@ -52,7 +52,6 @@ class ProductsController < ApplicationController
             if params[:product][:discount] != nil 
                 @product.update(discount: params[:product][:discount])
             end
-        redirect_to products_all_path
     end
 
     def destroy
