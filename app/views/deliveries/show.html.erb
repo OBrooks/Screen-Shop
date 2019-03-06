@@ -78,7 +78,7 @@
 
                         <div class="product_content">
                             <div class="product_title"><a href="/deliveries/all">
-                                <%= delivery.name %> - <%= number_to_currency(delivery.price, locale: :fr) %></a></div>
+                                <%= delivery.name %> <%= delivery_time_expressed(delivery.delivery_time) %> - <%= number_to_currency(delivery.price, locale: :fr) %></a></div>
                         </div>
                     </div>
                     <% end %>

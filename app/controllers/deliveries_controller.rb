@@ -7,7 +7,7 @@ class DeliveriesController < ApplicationController
     end
 
     def create
-        @delivery=Delivery.create!(name: params[:delivery][:name], price: params[:delivery][:price], delivery_picture: params[:delivery][:delivery_picture])
+        @delivery=Delivery.create!(name: params[:delivery][:name], delivery_time: params[:delivery][:delivery_time], price: params[:delivery][:price], delivery_picture: params[:delivery][:delivery_picture])
         redirect_to deliveries_all_path
     end
 
@@ -21,7 +21,7 @@ class DeliveriesController < ApplicationController
 
     def update
         @delivery=Delivery.find(params[:id])
-        @delivery.update(name: params[:delivery][:name], price: params[:delivery][:price])
+        @delivery.update(name: params[:delivery][:name], delivery_time: params[:delivery][:delivery_time], price: params[:delivery][:price])
             if params[:delivery][:delivery_picture] != nil 
                 @delivery.update(delivery_picture: params[:delivery][:delivery_picture])
             end
