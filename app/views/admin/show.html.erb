@@ -49,43 +49,12 @@
                     <div class="button cart_button"><a href="/categories/all">Catégories</a></div>
                     <div class="button cart_button"><a href="/deliveries/all">Livraisons</a></div>
                 </div>
-                <div class="row">
-                    <div class="admin_options">
-                        <h2>Liste des produits</h2>
-                    </div>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Nom</th>
-                                <th>Prix</th>
-                                <th>Quantité</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <%@products.each do |product|%>
-                            <tr>
-                                <td>
-                                   <a href='/product/<%=product.id%>'><%= product.product_name %></a>
-                                </td>
-                                <td>
-                                    <%=number_to_currency(product.price, locale: :fr) %>
-                                </td>
-                                <td>
-                                    <div class="row">
-                                        <%= form_for product, url: {action: "quantity_product_update", controller: "admin", id: product.id.to_s} do |f| %>
-                                            <div class="select_quantity_container_admin">
-                                                <%= f.number_field(:quantity, step: 1) %>
-                                            </div>
-                                            <button class="newsletter_button trans_200">
-                                                <%= f.submit "Mettre à jour" %>
-                                            </button>
-                                        <% end %>
-</div>
-                                </td>
-                                <% end %>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div class="admin_options">
+                    <h2>Listes</h2>
+                </div>
+                <div class="cart_item d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-start">
+                    <div class="button cart_button"><a href="/admin/products_list">Liste des produits</a></div>
+                    <div class="button cart_button"><a href="/admin/users_list">Liste des utilisateurs</a></div>
                 </div>
             </div>
         </div>

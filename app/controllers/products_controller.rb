@@ -49,7 +49,9 @@ class ProductsController < ApplicationController
             if params[:product][:product_picture] != nil 
                 @product.update(product_picture: params[:product][:product_picture])
             end
-            if params[:product][:discount] != nil 
+            if params[:product][:status] != "sales"
+                @product.update(discount: "0")
+            else
                 @product.update(discount: params[:product][:discount])
             end
     end
