@@ -1,0 +1,93 @@
+<!-- Home -->
+
+<div class="home_cart">
+    <div class="home_container">
+        <div class="home_background" style="background-image:url(<%= asset_path 'images/cart.jpg' %>)"></div>
+        <div class="home_content_container">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="home_content">
+                            <div class="breadcrumbs">
+                                <ul>
+                                    <li><a href="/">Home</a></li>
+                                    <li><a href="/admin">Admin Board</a></li>
+                                    <li>Liste des produits</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Cart Info -->
+
+<div class="admin_info">
+    <div class="container">
+        <div class="row cart_items_row">
+            <div class="col">
+                <div class="row">
+                    <div class="admin_options">
+                        <h2>Liste des produits</h2>
+                    </div>
+                    <%= form_tag({controller: "admin", action: "multiple_update"}, {method: "patch"}) do %>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Nom</th>
+                                <th>Modèle</th>
+                                <th>Prix</th>
+                                <th>Quantité</th>
+                                <th>Statut</th>
+                                <th>Réduction</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <% for product in @products %>
+                            <tr>
+                                <td>
+                                    <a href='/product/<%=product.id%>'>
+                                        <%= product.product_name %>
+                                        <%= product.id %></a>
+                                </td>
+                                <td>
+                                    <%= product.phone_model.model %>
+                                    <%= hidden_field_tag "id", product.id %>
+                                </td>
+                                <td>
+                                    <div class="select_quantity_container_admin">
+                                        <%= fields_for("product_ids[]", product) do |f| %>
+                                        <%= f.number_field(:price, step: 0.01) %>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="select_quantity_container_admin">
+                                        <%= f.number_field(:quantity, step: 1) %>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="select_category_container">
+                                        <%= f.select :status, Product::STATUSES, { prompt: t("products.statuses.prompt"), selected: product.status } %>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="select_quantity_container_admin">
+                                        <%= f.number_field(:discount, step: 1, max: 100) %>
+                                    </div>
+                                </td>
+                                <% end %>
+                            </tr>
+                            <% end %>
+                        </tbody>
+                    </table>
+                    <%= submit_tag "Soumettre" %>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

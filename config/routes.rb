@@ -27,8 +27,12 @@ Rails.application.routes.draw do
     get   'admin',                to: "admin#show"
     get 'admin/products_list',    to: "admin#products_list"
     patch 'admin/products_list',  to: "admin#product_multi_update"
-    get 'admin/users_list',       to: "admin#products_list"
-
+    get 'admin/users_list',       to: "admin#users_list"
   
+  resources :admin do
+    collection do
+      patch 'multiple_update'
+    end
+  end
 
 end

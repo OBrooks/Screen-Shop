@@ -30,3 +30,4 @@ $(document).on 'ready turbolinks:load', ->
         else
             $("#discount").parent().hide()
 
+
