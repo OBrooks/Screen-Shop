@@ -42,12 +42,19 @@
                                     <i class="fa fa-chevron-down" aria-hidden="true"></i>
                                     <ul>
                                         <li class="product_sorting_btn">
-                                            <%=link_to sort_by_price_path, remote: true do %>
-                                                <span>Défault</span>
-                                            <% end %>
+                                            <span><%=link_to "Date de sortie", recent_products_path %></span>
                                         </li>
-                                        <li class="product_sorting_btn" data-isotope-option='{ "sortBy": "price" }'><span>Prix</span></li>
-                                        <li class="product_sorting_btn" data-isotope-option='{ "sortBy": "stars" }'><span>Nom</span></li>
+                                        <li class="product_sorting_btn">
+                                            <span><%=link_to "Prix croissant", asc_price_products_path %></span>
+                                        </li>
+                                        <li class="product_sorting_btn">
+                                            <span><%=link_to "Prix décroissant", desc_price_products_path %></span>
+                                        </li>
+                                        <li class="product_sorting_btn">
+                                            <span>
+                                                <%=link_to "Nom", products_all_path %>
+                                            </span>
+                                        </li>
                                     </ul>
                                 </li>
                             </ul>

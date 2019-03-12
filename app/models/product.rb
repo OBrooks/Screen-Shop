@@ -3,6 +3,12 @@ class Product < ApplicationRecord
   belongs_to :phone_model
   belongs_to :category
 
+  #Filtering
+  scope :recent,      ->{order("created_at DESC")}
+  scope :asc_price,   ->{order(:price)}
+  scope :desc_price,  ->{order(price: :desc)}
+  
+
   #ActiveStorage AWS
   has_one_attached :product_picture
 

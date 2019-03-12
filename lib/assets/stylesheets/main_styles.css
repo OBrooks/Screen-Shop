@@ -1480,7 +1480,8 @@ section
 	padding-right: 15px;
 }
 
-.item_sorting li ul li span {
+.item_sorting li ul li span,
+.item_sorting li ul li span a {
 	display: block;
 	height: 36px;
 	line-height: 36px;
@@ -1495,7 +1496,8 @@ section
 	transition: all 0.3s ease;
 }
 
-.item_sorting li ul li span:hover {
+.item_sorting li ul li span:hover,
+.item_sorting li ul li span a:hover {
 	color: #b5aec4;
 }
 
