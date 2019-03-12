@@ -403,12 +403,6 @@
 /*********************************
 3. Products
 *********************************/
-.products {
-	width: 100%;
-	background: #FFFFFF;
-	padding-top: 19px;
-	z-index: 2;
-}
 
 .product {
 	width: calc((100% - 90px) / 4);

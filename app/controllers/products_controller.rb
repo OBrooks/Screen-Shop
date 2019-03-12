@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
 
     before_action :admin_or_webmaster_access, :only => [:new, :create, :quantity_update, :edit, :update, :destroy]
-
+    before_action :brandsall
     def new
         @product=Product.new
     end
@@ -77,4 +77,12 @@ class ProductsController < ApplicationController
         render action: :show
     end
 
+    def sort_by_brand
+        @products=Product.where(phone_brand_id: params[:brand])
+        render action: :show
+    end
+
+    def brandsall
+        @brands=PhoneBrand.all
+    end
 end

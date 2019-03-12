@@ -23,6 +23,7 @@ Rails.application.routes.draw do
       get :recent
       get :desc_price
       get :asc_price
+      get :sort_by_brand
     end
   end
 

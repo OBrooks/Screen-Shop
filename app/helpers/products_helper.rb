@@ -7,5 +7,4 @@ module ProductsHelper
         PhoneModel.all.collect {|m| [m.model, m.id]}
     end
 
-
 end

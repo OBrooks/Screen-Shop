@@ -27,7 +27,7 @@
         <div class="row">
             <div class="col">
 
-                <!-- Product Sorting -->
+                <!-- Product Basic Sorting -->
                 <div class="sorting_bar d-flex flex-md-row flex-column align-items-md-center justify-content-md-start" id="coucouici">
                     <% if @products.length > 1 %>
                         <div class="results"><span><%= @products.length %></span> résultats</div>
@@ -63,6 +63,29 @@
                 </div>
             </div>
         </div>
+            <!-- Product filters-->
+
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="order checkout_section">
+                    <div class="section_title">Your order</div>
+                    <div class="payment">
+
+                        <div class="payment_options">
+                        <% @brands.each do |brand| %>
+<label class="payment_option clearfix">
+    <%= link_to brand.brand, sort_by_brand_products_path(:brand => brand.id) %>
+                                <input type="radio" name="radio">
+                                <span class="checkmark"></span>
+                            </label>
+                        <% end %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
         <div class="row">
             <div class="col">
 
