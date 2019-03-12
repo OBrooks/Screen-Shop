@@ -62,4 +62,12 @@ class ProductsController < ApplicationController
         redirect_to products_all_path
     end
 
+    def sort_by_price
+        @products = Product.all.reorder(:price)
+        respond_to do |format|
+            format.html
+            format.js
+        end
+    end
+
 end

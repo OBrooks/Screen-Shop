@@ -28,7 +28,7 @@
             <div class="col">
 
                 <!-- Product Sorting -->
-                <div class="sorting_bar d-flex flex-md-row flex-column align-items-md-center justify-content-md-start">
+                <div class="sorting_bar d-flex flex-md-row flex-column align-items-md-center justify-content-md-start" id="coucouici">
                     <% if @products.length > 1 %>
                         <div class="results"><span><%= @products.length %></span> résultats</div>
                     <% else %>
@@ -41,7 +41,11 @@
                                     <span class="sorting_text">Filtrer par</span>
                                     <i class="fa fa-chevron-down" aria-hidden="true"></i>
                                     <ul>
-                                        <li class="product_sorting_btn" data-isotope-option='{ "sortBy": "original-order" }'><span>Défault</span></li>
+                                        <li class="product_sorting_btn">
+                                            <%=link_to sort_by_price_path, remote: true do %>
+                                                <span>Défault</span>
+                                            <% end %>
+                                        </li>
                                         <li class="product_sorting_btn" data-isotope-option='{ "sortBy": "price" }'><span>Prix</span></li>
                                         <li class="product_sorting_btn" data-isotope-option='{ "sortBy": "stars" }'><span>Nom</span></li>
                                     </ul>

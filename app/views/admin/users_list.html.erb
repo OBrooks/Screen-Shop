@@ -31,61 +31,37 @@
             <div class="col">
                 <div class="row">
                     <div class="admin_options">
-                        <h2>Liste des produits</h2>
+                        <h2>Liste des utilisateurs</h2>
                     </div>
-                    <%= form_tag({controller: "admin", action: "multiple_update"}, {method: "patch"}) do %>
                     <table class="table">
                         <thead>
                             <tr>
                                 <th>Nom</th>
-                                <th>Modèle</th>
-                                <th>Prix</th>
-                                <th>Quantité</th>
+                                <th>Prénom</th>
+                                <th>Ville</th>
                                 <th>Statut</th>
-                                <th>Réduction</th>
                             </tr>
                         </thead>
                         <tbody>
-
-                            <% for product in @products %>
+                            <% @users.each do |user| %>
                             <tr>
                                 <td>
-                                    <a href='/product/<%=product.id%>'>
-                                        <%= product.product_name %>
-                                        <%= product.id %></a>
+                                    <a href='mailto:<%=user.email%>'>
+                                        <%= user.first_name %></a>
                                 </td>
                                 <td>
-                                    <%= product.phone_model.model %>
-                                    <%= hidden_field_tag "id", product.id %>
+                                    <%= user.last_name %>
                                 </td>
                                 <td>
-                                    <div class="select_quantity_container_admin">
-                                        <%= fields_for("product_ids[]", product) do |f| %>
-                                        <%= f.number_field(:price, step: 0.01) %>
-                                    </div>
+                                    <%= user.city %>
                                 </td>
                                 <td>
-                                    <div class="select_quantity_container_admin">
-                                        <%= f.number_field(:quantity, step: 1) %>
-                                    </div>
+                                    <%= user.status %>
                                 </td>
-                                <td>
-                                    <div class="select_category_container">
-                                        <%= f.select :status, Product::STATUSES, { prompt: t("products.statuses.prompt"), selected: product.status } %>
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="select_quantity_container_admin">
-                                        <%= f.number_field(:discount, step: 1, max: 100) %>
-                                    </div>
-                                </td>
-                                <% end %>
                             </tr>
                             <% end %>
                         </tbody>
                     </table>
-                    <%= submit_tag "Soumettre" %>
-                    <% end %>
                 </div>
             </div>
         </div>

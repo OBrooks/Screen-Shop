@@ -7,7 +7,7 @@ class AdminController < ApplicationController
     end
 
     def users_list
-        @products = Product.all
+        @users = User.all.customer
     end
 
     def multiple_update
