@@ -18,16 +18,8 @@ Rails.application.routes.draw do
     get   'categories/all',         to: "categories#show"
     get   'category/:id',           to: "categories#category"
 
-  resources :products do
-    collection do
-      get :recent
-      get :desc_price
-      get :asc_price
-      get :sort_by_brand
-    end
-  end
 
-    get   'products/all',           to: "products#show"
+    get   'products',               to: "products#show",              as: :filtered_products
     get   'product/:id',            to: "products#product"
     patch 'product/:id',            to: "products#quantity_update"
 

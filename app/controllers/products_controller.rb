@@ -2,6 +2,7 @@ class ProductsController < ApplicationController
 
     before_action :admin_or_webmaster_access, :only => [:new, :create, :quantity_update, :edit, :update, :destroy]
     before_action :brandsall
+    
     def new
         @product=Product.new
     end
@@ -20,6 +21,27 @@ class ProductsController < ApplicationController
 
     def show
         @products=Product.all
+
+        if params[:scope] == "recent"
+            @products = @products.recent
+        elsif params[:scope] == "asc_price"
+            @products = @products.asc_price
+        elsif params[:scope] == "desc_price"
+            @products = @products.desc_price
+        # elsif params[:scope– == "name"]
+        #     @products=@products.order(product_name: :asc)
+        else
+            @products=Product.all
+        end
+
+        if params[:filter_by_brand].present?
+            if params[:filter_by_brand] == "all"
+                @products=Product.all
+            else
+                @products = @products.where(phone_brand_id: params[:filter_by_brand])
+            end
+        end      
+        #@products = @products.paginate(page: params[:page], per_page: 5)
     end
 
     def product
@@ -62,27 +84,8 @@ class ProductsController < ApplicationController
         redirect_to products_all_path
     end
 
-    def recent
-        @products=Product.recent
-        render action: :show
-    end
-
-    def asc_price
-        @products=Product.asc_price
-        render action: :show
-    end
-
-    def desc_price
-        @products=Product.desc_price
-        render action: :show
-    end
-
-    def sort_by_brand
-        @products=Product.where(phone_brand_id: params[:brand])
-        render action: :show
-    end
-
     def brandsall
         @brands=PhoneBrand.all
     end
+
 end

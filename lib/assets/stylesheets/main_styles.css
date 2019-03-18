@@ -1403,6 +1403,20 @@ section
 	width: 100%;
 	padding-top: 12px;
 	padding-bottom: 12px;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: baseline;
+	flex-wrap: wrap;
+
+}
+
+.all_filters {
+	width: 93%;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+	flex-wrap: wrap;
 }
 
 .results {
@@ -1509,7 +1523,17 @@ section
 	margin-left: 63px;
 }
 
-
+.first_filter {
+margin-right: 5px;
+}
+.sorting_container.first_filter>div>ul>li>ul>li.product_sorting_btn.current_filter>span>a,
+.sorting_container.first_filter>div>ul>li>ul>li.product_sorting_btn.current_filter>span,
+#coucouici>div.all_filters>div:nth-child(2)>div>ul>li>ul>li.product_sorting_btn.current_filter>span>a,
+#coucouici>div.all_filters>div:nth-child(2)>div>ul>li>ul>li.product_sorting_btn.current_filter>span {
+	border-bottom: solid 3px #e95a5a;
+	border-bottom-left-radius: 10%;
+	border-bottom-right-radius: 10%;
+}
 /*********************************
 13. Admin Board
 *********************************/

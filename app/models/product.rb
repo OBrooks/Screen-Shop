@@ -7,6 +7,7 @@ class Product < ApplicationRecord
   scope :recent,      ->{order("created_at DESC")}
   scope :asc_price,   ->{order(:price)}
   scope :desc_price,  ->{order(price: :desc)}
+
   
 
   #ActiveStorage AWS
