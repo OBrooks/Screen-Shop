@@ -35,73 +35,153 @@
                         <div class="results"><span><%= @products.length %></span> résultat</div>
                     <% end %>
                     <div class="all_filters">
-                    <div class="sorting_container first_filter">
-                        <div class="sorting">
-                            <ul class="item_sorting">
-                                <li>
-                                    <span class="sorting_text">
-                                            <%= phone_brand_name(params[:filter_by_brand]) %>
-                                    </span>
-                                    <i class="fa fa-chevron-down" aria-hidden="true"></i>
-                                    <ul>
-                                        <% @brands.each do |brand| %>
-                                            <% if (params[:filter_by_brand]).to_i == brand.id %>
+                        <div class="sorting_container">
+                            <div class="sorting">
+                                <ul class="item_sorting">
+                                    <li>
+                                        <span class="sorting_text">
+                                            <%= category_name(params[:filter_by_category]) %>
+                                        </span>
+                                        <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                                        <ul>
+                                            <% @categories.each do |category| %>
+                                                <% if (params[:filter_by_category]).to_i == category.id %>
+                                                    <li class="product_sorting_btn current_filter">
+                                                <% else %>
+                                                    <li class="product_sorting_btn">
+                                                <% end %>
+                                                <span><%= link_to category.category_name, filtered_products_path(filter_by_category: category.id, filter_by_brand: params[:filter_by_brand], filter_by_model: params[:filter_by_model], filter_by_status: params[:filter_by_status], scope: params[:scope]) %></span>
+                                            </li>
+                                            <% end %>
+                                            <li class="product_sorting_btn">
+                                                <span><%= link_to "Toutes catégories", filtered_products_path(filter_by_category: "all", filter_by_brand: params[:filter_by_brand], filter_by_model: params[:filter_by_model], filter_by_status: params[:filter_by_status], scope: params[:scope]) %></span>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="sorting_container">
+                            <div class="sorting">
+                                <ul class="item_sorting">
+                                    <li>
+                                        <span class="sorting_text">
+                                                <%= phone_brand_name(params[:filter_by_brand]) %>
+                                        </span>
+                                        <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                                        <ul>
+                                            <% @brands.each do |brand| %>
+                                                <% if (params[:filter_by_brand]).to_i == brand.id %>
+                                                    <li class="product_sorting_btn current_filter">
+                                                <% else %>
+                                                    <li class="product_sorting_btn">
+                                                <% end %>
+                                                        <span><%= link_to brand.brand, filtered_products_path(filter_by_category: params[:filter_by_category], filter_by_brand: brand.id, filter_by_model: params[:filter_by_model], filter_by_status: params[:filter_by_status], scope: params[:scope]) %></span>
+                                                    </li>
+                                            <% end %>
+                                            <li class="product_sorting_btn">
+                                                <span><%= link_to "Toutes les marques", filtered_products_path(filter_by_category: params[:filter_by_category], filter_by_brand: "all", filter_by_model: params[:filter_by_model], filter_by_status: params[:filter_by_status], scope: params[:scope]) %></span>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <% if params[:filter_by_brand] != "all" && params[:filter_by_brand] != nil%>
+                            <div class="sorting_container">
+                                <div class="sorting">
+                                    <ul class="item_sorting">
+                                        <li>
+                                            <span class="sorting_text">
+                                                    <%= phone_model_name(params[:filter_by_model]) %>
+                                            </span>
+                                            <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                                            <ul>
+                                                <% @models.each do |model| %>
+                                                    <% if (params[:filter_by_model]).to_i == model.id %>
+                                                        <li class="product_sorting_btn current_filter">
+                                                    <% else %>
+                                                        <li class="product_sorting_btn">
+                                                    <% end %>
+                                                            <span><%= link_to model.model, filtered_products_path(filter_by_category: params[:filter_by_category], filter_by_brand: params[:filter_by_brand], filter_by_model: model.id, filter_by_status: params[:filter_by_status], scope: params[:scope]) %></span>
+                                                        </li>
+                                                <% end %>
+                                                <li class="product_sorting_btn">
+                                                    <span><%= link_to "Tous les modèles", filtered_products_path(filter_by_category: params[:filter_by_category], filter_by_brand: params[:filter_by_brand], filter_by_model: "all", filter_by_status: params[:filter_by_status], scope: params[:scope]) %></span>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        <% end %>
+                        <div class="sorting_container">
+                            <div class="sorting">
+                                <ul class="item_sorting">
+                                    <li>
+                                        <span class="sorting_text">
+                                            <%= status_name(params[:filter_by_status]) %>
+                                        </span>
+                                        <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                                        <ul>
+                                            <% @statuses.each do |status, value_status| %>
+                                                <% if (params[:filter_by_status]) == status %>
+                                                    <li class="product_sorting_btn current_filter">
+                                                <% else %>
+                                                    <li class="product_sorting_btn">
+                                                <% end %>
+                                                <span><%= link_to I18n.t("status.#{status}"), filtered_products_path(filter_by_category: params[:filter_by_category], filter_by_brand: params[:filter_by_brand], filter_by_model: params[:filter_by_model], filter_by_status: status, scope: params[:scope]) %></span>
+                                            </li>
+                                            <% end %>
+                                            <li class="product_sorting_btn">
+                                                <span><%= link_to "Tous les statuts", filtered_products_path(filter_by_category: params[:filter_by_category], filter_by_brand: params[:filter_by_brand], filter_by_model: params[:filter_by_model], filter_by_status: "all", scope: params[:scope]) %></span>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="sorting_container">
+                            <div class="sorting">
+                                <ul class="item_sorting">
+                                    <li>
+                                        <span class="sorting_text">
+                                            <%= filter_by_display(params[:scope]) %>
+                                        </span>
+                                        <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                                        <ul>
+                                            <% if (params[:scope]).to_s == "recent" %>
                                                 <li class="product_sorting_btn current_filter">
                                             <% else %>
                                                 <li class="product_sorting_btn">
                                             <% end %>
-                                                    <span><%= link_to brand.brand, filtered_products_path(filter_by_brand: brand.id, scope: params[:scope]) %></span>
+                                                    <span><%=link_to "Date de sortie", filtered_products_path(filter_by_category: params[:filter_by_category], filter_by_brand: params[:filter_by_brand], filter_by_model: params[:filter_by_model], filter_by_status: params[:filter_by_status], scope: "recent") %></span>
                                                 </li>
-                                        <% end %>
-                                        <li class="product_sorting_btn">
-                                            <span><%= link_to "Toutes les marques", filtered_products_path(filter_by_brand: "all", scope: params[:scope]) %></span>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
+                                            <% if params[:scope] =="asc_price" %>
+                                                <li class="product_sorting_btn current_filter">
+                                            <% else %>
+                                                <li class="product_sorting_btn">
+                                            <% end %>
+                                                    <span><%=link_to "Prix croissant", filtered_products_path(filter_by_category: params[:filter_by_category], filter_by_brand: params[:filter_by_brand], filter_by_model: params[:filter_by_model], filter_by_status: params[:filter_by_status], scope: "asc_price") %></span>
+                                                </li>
+                                            <% if params[:scope] =="desc_price" %>
+                                                <li class="product_sorting_btn current_filter">
+                                            <% else %>
+                                                <li class="product_sorting_btn">
+                                            <% end %>
+                                                    <span><%=link_to "Prix décroissant", filtered_products_path(filter_by_category: params[:filter_by_category], filter_by_brand: params[:filter_by_brand], filter_by_model: params[:filter_by_model], filter_by_status: params[:filter_by_status], scope: "desc_price") %></span>
+                                                </li>
+                                                <!-- <li class="product_sorting_btn">
+                                                    <span>
+                                                        <%=link_to "Nom", filtered_products_path(filter_by_category: params[:filter_by_category], filter_brand_id: params[:filter_brand_id], scope: "name") %>
+                                                    </span>
+                                                </li> -->
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                    <div class="sorting_container">
-                        <div class="sorting">
-                            <ul class="item_sorting">
-                                <li>
-                                    <span class="sorting_text">
-                                        <%= filter_by_display(params[:scope]) %>
-                                    </span>
-                                    <i class="fa fa-chevron-down" aria-hidden="true"></i>
-                                    <ul>
-                                        <% if (params[:scope]).to_s == "recent" %>
-                                            <li class="product_sorting_btn current_filter">
-                                        <% else %>
-                                            <li class="product_sorting_btn">
-                                        <% end %>
-                                                <span><%=link_to "Date de sortie", filtered_products_path(filter_by_brand: params[:filter_by_brand], scope: "recent") %></span>
-                                            </li>
-                                        <% if params[:scope] =="asc_price" %>
-                                            <li class="product_sorting_btn current_filter">
-                                        <% else %>
-                                            <li class="product_sorting_btn">
-                                        <% end %>
-                                                <span><%=link_to "Prix croissant", filtered_products_path(filter_by_brand: params[:filter_by_brand], scope: "asc_price") %></span>
-                                            </li>
-                                        <% if params[:scope] =="desc_price" %>
-                                            <li class="product_sorting_btn current_filter">
-                                        <% else %>
-                                            <li class="product_sorting_btn">
-                                        <% end %>
-                                                <span><%=link_to "Prix décroissant", filtered_products_path(filter_by_brand: params[:filter_by_brand], scope: "desc_price") %></span>
-                                            </li>
-                                            <!-- <li class="product_sorting_btn">
-                                                <span>
-                                                    <%=link_to "Nom", filtered_products_path(filter_brand_id: params[:filter_brand_id], scope: "name") %>
-                                                </span>
-                                            </li> -->
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
                 </div>
             </div>
         </div>
@@ -125,7 +205,7 @@
                             <div class="product_extra product_hot"><a href="categories.html">Hot</a></div>
                         <% end %>
                         <div class="product_content">
-                            <div class="product_title"><a href="/product/<%=product.id%>"><%= product.product_name %></a></div>
+                            <div class="product_title"><a href="/product/<%=product.id%>"><%= product.product_name %> - <%= product.category.category_name %> <%= product.phone_brand.brand %> <%= product.phone_model.model %></a></div>
                             <div class="product_price"><%= number_to_currency(product.price, locale: :fr) %></div>
                         </div>
                     </div>

@@ -13,7 +13,7 @@
                                         <a href="/">Home</a>
                                         <ul>
                                             <li><a href="categories.html">Categories</a></li>
-                                            <li><a href="/products/all">Produits</a></li>
+                                            <li><a href="/products">Produits</a></li>
                                             <li><a href="cart.html">Cart</a></li>
                                             <li><a href="checkout.html">Check out</a></li>
                                             <li><a href="contact.html">Contact</a></li>
@@ -23,7 +23,9 @@
                                         <a href="categories.html">Categories</a>
                                         <ul>
                                             <% @categories.each do |category| %>
-                                                <li><a href="/category/<%= category.id %>"><%= category.category_name %></a></li>
+                                                <li>
+                                                    <%= link_to category.category_name, filtered_products_path(filter_by_category: category.id, filter_by_brand: params[:filter_by_brand], scope: params[:scope]) %>
+                                                </li>
                                             <% end %>
                                         </ul>
                                     </li>

@@ -449,7 +449,6 @@
 
 .product_extra, .product_extra_right {
 	position: absolute;
-	z-index: 99;
 	top: 0;
 	width: 66px;
 	height: 36px;
@@ -506,7 +505,7 @@
 .product_grid
 {
 	margin-top: 5px;
-	margin-bottom: 5px;
+	margin-bottom: 100px;
 }
 
 .product_pagination {

@@ -1427,6 +1427,7 @@ section
 
 .item_sorting {
 	display: inline-block;
+	z-index: 3;
 
 }
 
@@ -1523,13 +1524,19 @@ section
 	margin-left: 63px;
 }
 
-.first_filter {
+.sorting_container {
 margin-right: 5px;
 }
 .sorting_container.first_filter>div>ul>li>ul>li.product_sorting_btn.current_filter>span>a,
 .sorting_container.first_filter>div>ul>li>ul>li.product_sorting_btn.current_filter>span,
 #coucouici>div.all_filters>div:nth-child(2)>div>ul>li>ul>li.product_sorting_btn.current_filter>span>a,
-#coucouici>div.all_filters>div:nth-child(2)>div>ul>li>ul>li.product_sorting_btn.current_filter>span {
+#coucouici>div.all_filters>div:nth-child(2)>div>ul>li>ul>li.product_sorting_btn.current_filter>span,
+#coucouici>div.all_filters>div:nth-child(3)>div>ul>li>ul>li.product_sorting_btn.current_filter>span>a,
+#coucouici>div.all_filters>div:nth-child(3)>div>ul>li>ul>li.product_sorting_btn.current_filter>span,
+#coucouici>div.all_filters>div:nth-child(4)>div>ul>li>ul>li.product_sorting_btn.current_filter>span>a,
+#coucouici>div.all_filters>div:nth-child(4)>div>ul>li>ul>li.product_sorting_btn.current_filter>span,
+#coucouici>div.all_filters>div:nth-child(5)>div>ul>li>ul>li.product_sorting_btn.current_filter>span>a,
+#coucouici>div.all_filters>div:nth-child(5)>div>ul>li>ul>li.product_sorting_btn.current_filter>span {
 	border-bottom: solid 3px #e95a5a;
 	border-bottom-left-radius: 10%;
 	border-bottom-right-radius: 10%;

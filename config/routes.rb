@@ -16,9 +16,8 @@ Rails.application.routes.draw do
 
   resources :categories
     get   'categories/all',         to: "categories#show"
-    get   'category/:id',           to: "categories#category"
 
-
+  resources :products,  :except => [:index]
     get   'products',               to: "products#show",              as: :filtered_products
     get   'product/:id',            to: "products#product"
     patch 'product/:id',            to: "products#quantity_update"
