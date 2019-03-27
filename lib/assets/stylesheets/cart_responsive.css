@@ -299,7 +299,14 @@
 		width: 148px;
 		height: 41px;
 	}
-	.button a
+
+	.cross_button
+	{
+		width: 48px;
+		height: 48px;
+	}
+
+	.button a, .cross_button a
 	{
 		font-size: 13px;
 		line-height: 37px;

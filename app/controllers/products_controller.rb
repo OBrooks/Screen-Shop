@@ -31,6 +31,7 @@ class ProductsController < ApplicationController
 
     def product
         @product=Product.find(params[:id])
+        @line_item=LineItem.new
     end
 
     def quantity_update

@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
-  
-  get 'categories/show'
+
   root "home#index"
   
   devise_for :users
@@ -16,6 +15,7 @@ Rails.application.routes.draw do
 
   resources :categories
     get   'categories/all',         to: "categories#show"
+    # get 'categories/show'
 
   resources :products,  :except => [:index]
     get   'products',               to: "products#show",              as: :filtered_products
@@ -33,4 +33,6 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :line_items
+  resources :carts
 end

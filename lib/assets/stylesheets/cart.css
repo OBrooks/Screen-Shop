@@ -118,7 +118,7 @@
 	padding-top: 96px;
 	z-index: 2;
 }
-.cart_info_columns
+.cart_info_columns, .cart_items_row
 {
 	width: 100%;
 	border-bottom: solid 2px #e3e3e3;
@@ -133,7 +133,7 @@
 }
 .cart_info_col_product
 {
-	width: 63%;
+	width: 43%;
 }
 .cart_info_col_price
 {
@@ -147,7 +147,13 @@
 .cart_info_col_total
 {
 	width: 10%;
-	text-align: right;
+	text-align: center;
+}
+
+.cart_info_col_delete
+{
+	width: 20%;
+	text-align: right
 }
 .cart_item
 {
@@ -156,7 +162,7 @@
 }
 .cart_item_product
 {
-	width: 63%;
+	width: 43%;
 }
 .cart_item_price
 {
@@ -170,6 +176,12 @@
 .cart_item_total
 {
 	width: 10%;
+	text-align: center;
+}
+
+.cart_item_delete
+{ 
+	width: 20;
 	text-align: right;
 }
 .cart_item_image div
@@ -179,7 +191,12 @@
 }
 .cart_item_image div img
 {
-	max-width: 100%;
+    max-width: 180px;
+    max-height: 180px;
+    min-width: 180px;
+    min-height: 180px;
+    object-fit: cover;
+    object-position: 50% 50%;
 }
 .cart_item_name_container
 {
@@ -514,83 +531,5 @@ label
 }
 
 /*********************************
-7. Footer
+8. Custom
 *********************************/
-
-.footer_overlay
-{
-	width: 100%;
-	height: 129px;
-	background: transparent;
-	z-index: 1;
-}
-.footer
-{
-	position: fixed;
-	left: 0;
-	bottom: 0;
-	width: 100%;
-	z-index: 1;
-}
-.footer_background
-{
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-position: center center;
-}
-.footer_content
-{
-	width: 100%;
-	height: 129px;
-}
-.footer_logo
-{
-	width: 30%;
-}
-.footer_logo a
-{
-	font-size: 30px;
-	line-height: 0.75;
-	color: #1b1b1b;
-	font-weight: 700;
-}
-.copyright
-{
-	width: 40%;
-	text-align: center;
-	font-size: 14px;
-	font-weight: 400;
-	color: #1b1b1b;
-}
-.footer_social
-{
-	width: 30%;
-	text-align: right;
-}
-.footer_social ul li
-{
-	display: inline-block;
-}
-.footer_social ul li:not(:last-child)
-{
-	margin-right: 26px;
-}
-.footer_social ul li a i
-{
-	font-size: 17px;
-	color: #1b1b1b;
-	-webkit-transition: all 200ms ease;
-	-moz-transition: all 200ms ease;
-	-ms-transition: all 200ms ease;
-	-o-transition: all 200ms ease;
-	transition: all 200ms ease;
-}
-.footer_social ul li a i:hover
-{
-	color: #FFFFFF;
-}

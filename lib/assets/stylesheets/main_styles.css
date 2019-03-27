@@ -233,21 +233,40 @@ section
 }
 .button
 {
-	width: 178px;
-	height: 61px;
+		width: 178px;
+		height: 61px;
+		border: solid 2px #1b1b1b;
+}
+.cross_button
+{
+		width: 28px;
+		height: 28px;
+		border: solid 2px #1b1b1b;
+		border-radius: 60%;
+}
+.button,
+.cross_button
+{
 	background: none;
 	text-align: center;
-	border: solid 2px #1b1b1b;
 	overflow: hidden;
 	cursor: pointer;
 }
 .button a
 {
+	line-height: 57px;
+}
+.cross_button a {
+	top: 1px;
+}
+.button a,
+.cross_button a
+{
 	display: block;
 	position: relative;
 	font-size: 16px;
 	font-weight: 600;
-	line-height: 57px;
+
 	color: #1b1b1b;
 	background: none;
 	z-index: 1;
@@ -257,7 +276,8 @@ section
 	-o-transition: all 200ms ease;
 	transition: all 200ms ease;
 }
-.button::after
+.button::after,
+.cross_button::after
 {
 	content: '';
     position: absolute;
@@ -276,6 +296,7 @@ section
     transition: transform 0.3s, opacity 0.3s, background-color 0.3s;
 }
 .button:hover::after
+.cross_button:hover::after
 {
 	opacity: 1;
     -webkit-transform: rotate3d(0, 0, 1, 0deg);
@@ -292,6 +313,7 @@ section
 	color: #FFFFFF;
 }
 .button:hover a
+.cross_button:hover i
 {
 	color: #FFFFFF;
 }
@@ -450,7 +472,7 @@ section
 	display: inline-block;
 	margin-top: 6px;
 }
-.shopping_cart a svg
+.shopping_cart svg
 {
 	display: inline-block;
 	width: 20px;
@@ -462,13 +484,13 @@ section
 	-o-transition: all 200ms ease;
 	transition: all 200ms ease;
 }
-.shopping_cart a:hover svg,
-.shopping_cart a:hover div
+.shopping_cart:hover svg,
+.shopping_cart:hover div
 {
 	fill: #e95a5a;
 	color: #e95a5a;
 }
-.shopping_cart a div
+.shopping_cart div
 {
 	display: inline-block;
 	vertical-align: middle;
@@ -482,7 +504,7 @@ section
 	-o-transition: all 200ms ease;
 	transition: all 200ms ease;
 }
-.shopping_cart a div span
+.shopping_cart div span
 {
 	margin-left: 4px;
 }

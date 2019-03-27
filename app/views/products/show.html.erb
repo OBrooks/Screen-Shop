@@ -194,11 +194,9 @@
                     <% @products.each do |product| %>
                     <!-- Product -->
                     <div class="product products_show">
-                        <% if product.product_picture.attachment != nil %>
-                            <div class="product_image">
-                            <%= image_tag product.product_picture %>
-                            </div>
-                        <% end %>
+                        <div class="product_image">
+                            <%= attachement_or_picture(product) %>
+                        </div>
                         <% if product.status == "sales" %>
                             <div class="product_extra product_sale"><a href="categories.html">-<%= product.discount %>%</a></div>
                         <% elsif product.status == "hot" %>
