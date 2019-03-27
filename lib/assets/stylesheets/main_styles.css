@@ -295,7 +295,7 @@ section
     -webkit-transition: -webkit-transform 0.3s, opacity 0.3s, background-color 0.3s;
     transition: transform 0.3s, opacity 0.3s, background-color 0.3s;
 }
-.button:hover::after
+.button:hover::after,
 .cross_button:hover::after
 {
 	opacity: 1;
@@ -312,7 +312,7 @@ section
 {
 	color: #FFFFFF;
 }
-.button:hover a
+.button:hover a,
 .cross_button:hover i
 {
 	color: #FFFFFF;
