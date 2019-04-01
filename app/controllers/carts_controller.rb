@@ -1,6 +1,7 @@
 class CartsController < ApplicationController
 rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
   before_action :set_cart, only: [:show, :edit, :update, :destroy]
+  before_action :add_user
 
   # GET /carts
   # GET /carts.json
@@ -27,6 +28,10 @@ rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
   # POST /carts.json
   def create
     @cart = Cart.new(cart_params)
+    
+    if current_user != nil
+      @cart.update(user_id: current_user.id)
+    end
 
     respond_to do |format|
       if @cart.save
@@ -42,6 +47,7 @@ rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
   # PATCH/PUT /carts/1
   # PATCH/PUT /carts/1.json
   def update
+
     respond_to do |format|
       if @cart.update(cart_params)
         format.html { redirect_to @cart, notice: 'Cart was successfully updated.' }
@@ -83,12 +89,20 @@ rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def cart_params
-      puts "I'm here in cart_params"
       params.fetch(:cart, {})
     end
 
     def invalid_cart
       logger.error "Attempt to access to invalid cart #{params[:id]}"
       redirect_to root_path, notice: "Ce panier n'existe pas"
+    end
+
+    def add_user
+      puts "in add_user"
+      puts "Le current est #{current_user.id}"
+      puts "Le cart User est #{@cart.user_id}"
+      if current_user != nil && @cart.user_id == nil
+        @cart.update(user_id: current_user.id)
+      end
     end
 end

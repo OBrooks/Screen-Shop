@@ -16,7 +16,7 @@ class ProductsController < ApplicationController
                                 phone_model_id: params[:product][:phone_model_id], 
                                 category_id: params[:product][:category_id],
                                 product_picture: params[:product][:product_picture])
-        redirect_to products_all_path
+        redirect_to products_path
     end
 
     def show
@@ -37,7 +37,7 @@ class ProductsController < ApplicationController
     def quantity_update
         @product=Product.find(params[:id])
         @product.update(quantity: params[:product][:quantity])
-        redirect_to products_all_path
+        redirect_to products_path
     end
 
     def edit
@@ -67,7 +67,7 @@ class ProductsController < ApplicationController
     def destroy
         @product=Product.find(params[:id])
         @product.destroy
-        redirect_to products_all_path
+        redirect_to products_path
     end
 
     def brands_models_all

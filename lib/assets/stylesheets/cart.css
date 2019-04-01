@@ -533,3 +533,18 @@ label
 /*********************************
 8. Custom
 *********************************/
+
+#cart_delivery_id
+{
+	    display: block;
+	    width: 147px;
+	    height: 41px;
+	    border: solid 1px black;
+	    overflow: hidden;
+	    padding-left: 78px;
+		vertical-align: middle;
+		background-color: #f2f4f8;
+	    color: #1b1b1b;
+	    font-size: 14px;
+	    font-weight: 600;
+}

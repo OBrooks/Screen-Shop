@@ -1,46 +1,46 @@
-	        <div class="row cart_items_row">
-	          <div class="col">
-<div class="cart_item d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-start">
-  <!-- Name -->
-  <div class="cart_item_product d-flex flex-row align-items-center justify-content-start">
-    <div class="cart_item_image">
-      <div><%= attachement_or_picture(line_item.product) %></div>
-    </div>
-    <div class="cart_item_name_container">
-      <div class="cart_item_name"><a href="/product/<%=line_item.product.id%>"><%= line_item.product.product_name %> -
-          <%= line_item.product.phone_brand.brand %> - <%= line_item.product.phone_model.model %></a></div>
-    </div>
-  </div>
-  <!-- Price -->
-  <div class="cart_item_price"><%= number_to_currency(line_item.product.price) %></div>
-  <!-- Quantity -->
-  <div class="cart_item_quantity">
-                    <!-- Product Quantity -->
-                    <div class="product_quantity_container">
-                      <%= form_for(line_item, url: line_item_path(id: line_item.id), :remote => true) do |f| %>
-                      <div class="select_quantity_container_admin">
-                        Quantité <br>
-                        <%= f.number_field(:quantity, step: 1, :onchange=>"update_quantity_line_item(#{line_item.id});") %>
-                      </div>
-                      <%= f.hidden_field :cart_id, :value => @cart.id %>
-                      <div id="quantity_updated-<%=line_item.id%>">
-
-                      </div>
-                      <% end %>
-                    </div>
-  </div>
-  <div id="line_item_total_price_<%=line_item.id%>" class="cart_item_total">
-    <%= number_to_currency(line_item.total_price) %>
-  </div>
-  <div class="cart_item_delete">
-    <div class="cross_button cart_button">
-      <span>
-        <%= link_to line_item, method: :delete do %>
-          <i class="fa fa-times" aria-hidden="true"></i>
-          <% end %>
-      </span>
+<div class="row cart_items_row">
+  <div class="col">
+    <div class="cart_item d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-start">
+      <!-- Name -->
+      <div class="cart_item_product d-flex flex-row align-items-center justify-content-start">
+        <div class="cart_item_image">
+          <div><%= attachement_or_picture(line_item.product) %></div>
+        </div>
+        <div class="cart_item_name_container">
+          <div class="cart_item_name"><a href="/product/<%=line_item.product.id%>"><%= line_item.product.product_name %> -
+              <%= line_item.product.phone_brand.brand %> - <%= line_item.product.phone_model.model %></a></div>
+        </div>
       </div>
+      <!-- Price -->
+      <div class="cart_item_price"><%= number_to_currency(line_item.product.price) %></div>
+      <!-- Quantity -->
+      <div class="cart_item_quantity">
+                        <!-- Product Quantity -->
+                        <div class="product_quantity_container">
+                          <%= form_for(line_item, url: line_item_path(id: line_item.id), :remote => true) do |f| %>
+                          <div class="select_quantity_container_admin">
+                            Quantité <br>
+                            <%= f.number_field(:quantity, step: 1, :onchange=>"update_quantity_line_item(#{line_item.id});") %>
+                          </div>
+                          <%= f.hidden_field :cart_id, :value => @cart.id %>
+                          <div id="quantity_updated-<%=line_item.id%>">
+
+                          </div>
+                          <% end %>
+                        </div>
+      </div>
+      <div id="line_item_total_price_<%=line_item.id%>" class="cart_item_total">
+        <%= number_to_currency(line_item.total_price) %>
+      </div>
+      <div class="cart_item_delete">
+        <div class="cross_button cart_button">
+          <span>
+            <%= link_to line_item, method: :delete do %>
+              <i class="fa fa-times" aria-hidden="true"></i>
+              <% end %>
+          </span>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
-</div>
 </div>

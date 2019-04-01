@@ -57,8 +57,8 @@
 
 	                <!-- Coupon Code -->
 	                <div class="coupon">
-	                    <div class="section_title">Coupon code</div>
-	                    <div class="section_subtitle">Enter your coupon code</div>
+	                    <div class="section_title">Code de réduction</div>
+	                    <div class="section_subtitle">Entrez votre code de réduction</div>
 	                    <div class="coupon_form_container">
 	                        <form action="#" id="coupon_form" class="coupon_form">
 	                            <input type="text" class="coupon_input" required="required">
@@ -81,7 +81,7 @@
 	                            </li>
 	                            <li class="d-flex flex-row align-items-center justify-content-start">
 	                                <div class="cart_total_title">Livraison</div>
-	                                <div class="cart_total_value ml-auto">
+	                                <div class="cart_total_value ml-auto" id="delivery_form">
 										<%= form_for(@cart, url: {action: "update_delivery"}, :remote => true) do |f| %>
 											<%= f.hidden_field :id, :value => @cart.id %>
 											<%= f.collection_select :delivery_id, Delivery.all, :id, :name_and_price, {}, {:onchange=>"select_delivery();"} %>
