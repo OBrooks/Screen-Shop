@@ -43,6 +43,7 @@ class LineItemsController < ApplicationController
   # PATCH/PUT /line_items/1
   # PATCH/PUT /line_items/1.json
   def update
+    @cart = Cart.find(params[:line_item][:cart_id])
     respond_to do |format|
       if @line_item.update(quantity: params[:line_item][:quantity])
         format.html { redirect_to @line_item.cart, notice: "L'article a été mis à jour" }

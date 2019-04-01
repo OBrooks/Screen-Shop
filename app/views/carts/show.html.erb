@@ -55,29 +55,6 @@
 	        <div class="row row_extra">
 	            <div class="col-lg-4">
 
-	                <!-- Delivery -->
-	                <div class="delivery">
-	                    <div class="section_title">Livraison</div>
-	                    <div class="section_subtitle">Sélectionner l'option choisie</div>
-	                    <div class="delivery_options">
-	                        <label class="delivery_option clearfix">Next day delivery
-	                            <input type="radio" name="radio">
-	                            <span class="checkmark"></span>
-	                            <span class="delivery_price">$4.99</span>
-	                        </label>
-	                        <label class="delivery_option clearfix">Standard delivery
-	                            <input type="radio" name="radio">
-	                            <span class="checkmark"></span>
-	                            <span class="delivery_price">$1.99</span>
-	                        </label>
-	                        <label class="delivery_option clearfix">Personal pickup
-	                            <input type="radio" checked="checked" name="radio">
-	                            <span class="checkmark"></span>
-	                            <span class="delivery_price">Free</span>
-	                        </label>
-	                    </div>
-	                </div>
-
 	                <!-- Coupon Code -->
 	                <div class="coupon">
 	                    <div class="section_title">Coupon code</div>
@@ -99,16 +76,22 @@
 	                        <ul>
 	                            <li class="d-flex flex-row align-items-center justify-content-start">
 	                                <div class="cart_total_title">Sous-total</div>
-	                                <div class="cart_total_value ml-auto"><%= number_to_currency(@cart.total_price) %></div>
+	                                <div class="cart_total_value ml-auto" id="sub_total_price">
+	                                	<%= number_to_currency(@cart.sub_total_price) %></div>
 	                            </li>
 	                            <li class="d-flex flex-row align-items-center justify-content-start">
 	                                <div class="cart_total_title">Livraison</div>
-	                                <div class="cart_total_value ml-auto">Free</div>
+	                                <div class="cart_total_value ml-auto">
+										<%= form_for(@cart, url: {action: "update_delivery"}, :remote => true) do |f| %>
+											<%= f.hidden_field :id, :value => @cart.id %>
+											<%= f.collection_select :delivery_id, Delivery.all, :id, :name_and_price, {}, {:onchange=>"select_delivery();"} %>
+										<% end %>
+									</div>
 	                            </li>
 	                            <li class="d-flex flex-row align-items-center justify-content-start">
 	                                <div class="cart_total_title">Total</div>
-	                                <div class="cart_total_value ml-auto">
-                                        <%= number_to_currency(@cart.total_price) %>
+	                                <div class="cart_total_value ml-auto" id="total_price">
+										<%= number_to_currency(@cart.total_price) %>
 	                                </div>
 	                            </li>
 	                        </ul>

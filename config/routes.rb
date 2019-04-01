@@ -35,4 +35,5 @@ Rails.application.routes.draw do
 
   resources :line_items
   resources :carts
+    patch 'cart/delivery_update',     to: "carts#update_delivery" 
 end

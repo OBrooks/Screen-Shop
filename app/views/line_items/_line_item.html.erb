@@ -20,19 +20,17 @@
                       <%= form_for(line_item, url: line_item_path(id: line_item.id), :remote => true) do |f| %>
                       <div class="select_quantity_container_admin">
                         Quantité <br>
-                        <%= f.number_field(:quantity, step: 1) %>
+                        <%= f.number_field(:quantity, step: 1, :onchange=>"update_quantity_line_item(#{line_item.id});") %>
                       </div>
+                      <%= f.hidden_field :cart_id, :value => @cart.id %>
                       <div id="quantity_updated-<%=line_item.id%>">
 
-                      </div>
-                      <div class="newsletter_button trans_200">
-                        <%= f.submit "Mettre à jour" %>
                       </div>
                       <% end %>
                     </div>
   </div>
-  <div class="cart_item_total">
-    <%= number_to_currency(line_item.product.price) %>
+  <div id="line_item_total_price_<%=line_item.id%>" class="cart_item_total">
+    <%= number_to_currency(line_item.total_price) %>
   </div>
   <div class="cart_item_delete">
     <div class="cross_button cart_button">

@@ -11,6 +11,7 @@ rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
   # GET /carts/1
   # GET /carts/1.json
   def show
+    @deliveries = Delivery.all
   end
 
   # GET /carts/new
@@ -52,6 +53,17 @@ rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
     end
   end
 
+  def update_delivery
+    @cart = Cart.find(params[:cart][:id])
+    @cart.update(delivery_id: params[:cart][:delivery_id])
+      respond_to do |format|
+        format.html { redirect_to @cart, notice: 'La livraison a été mise à jour' }
+        format.js {}
+        format.json { render :show, status: :ok, location: @cart }
+    end
+  end
+
+
   # DELETE /carts/1
   # DELETE /carts/1.json
   def destroy
@@ -71,6 +83,7 @@ rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def cart_params
+      puts "I'm here in cart_params"
       params.fetch(:cart, {})
     end
 
