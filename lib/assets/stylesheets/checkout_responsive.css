@@ -148,10 +148,6 @@
 	{
 		display: none;
 	}
-	.cart_items_row
-	{
-		margin-top: 0;
-	}
 	.cart_item:first-child
 	{
 		padding-top: 0;
@@ -173,10 +169,6 @@
 	.cart_item_total
 	{
 		margin-top: 25px;
-	}
-	.cart_buttons_right
-	{
-		margin-top: 15px;
 	}
 	.cart_total
 	{

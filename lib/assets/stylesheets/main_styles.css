@@ -231,10 +231,16 @@ section
 {
 	padding: 0px !important;
 }
+
+.cart_button
+{
+	max-width: 300px;
+}
+
 .button
 {
 		width: 178px;
-		height: 61px;
+		max-height: 100%;
 		border: solid 2px #1b1b1b;
 }
 .cross_button

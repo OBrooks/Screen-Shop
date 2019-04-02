@@ -37,20 +37,20 @@
 	                <!-- Cart Item -->
 	                <%= render(@cart.line_items) %>
 	        <div class="row row_cart_buttons">
-	            <div class="col">
-	                <div class="cart_buttons d-flex flex-lg-row flex-column align-items-start justify-content-start">
-	                    <div class="button cart_button">
+
+	                <div class="cart_buttons row">
+	                    <div class="button cart_button col-sm-5">
                                 <%= link_to "Continuer le shopping", products_path %>
 	                    </div>
-	                    <div class="cart_buttons_right ml-lg-auto">
-	                        <div class="button cart_button">
+						<div class="col-sm-1"></div>
+	                        <div class="button cart_button col-sm-5">
                                 <span>
                                     <%= link_to "Vider le panier", @cart, method: :delete, date: {confirm: "Êtes-vous sûr ?"} %>
                                 </span>
                             </div>
-	                    </div>
+
 	                </div>
-	            </div>
+
 	        </div>
 	        <div class="row row_extra">
 	            <div class="col-lg-4">
@@ -95,8 +95,10 @@
 	                                </div>
 	                            </li>
 	                        </ul>
-	                    </div>
-	                    <div class="button checkout_button"><a href="#">Procéder au paiement</a></div>
+						</div>
+						<div class="cart_payment">
+						<div class="button cart_button checkout_button"><a href="#">Procéder au paiement</a></div>
+						</div>
 	                </div>
 	            </div>
 	        </div>
