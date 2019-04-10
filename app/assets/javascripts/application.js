@@ -28,6 +28,7 @@
 //= require easing/easing
 //= require parallax-js-master/parallax.min
 //= require custom
+//= require charges
 
 
 

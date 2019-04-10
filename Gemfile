@@ -74,3 +74,6 @@ gem 'faker'
 
 #aws
 gem "aws-sdk-s3", require: false
+
+#Payment
+gem 'stripe'

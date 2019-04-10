@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_01_150628) do
+ActiveRecord::Schema.define(version: 2019_04_10_094755) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,11 +36,21 @@ ActiveRecord::Schema.define(version: 2019_04_01_150628) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "adress_for_carts", force: :cascade do |t|
+    t.bigint "cart_id"
+    t.bigint "shipping_info_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cart_id"], name: "index_adress_for_carts_on_cart_id"
+    t.index ["shipping_info_id"], name: "index_adress_for_carts_on_shipping_info_id"
+  end
+
   create_table "carts", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "delivery_id"
     t.bigint "user_id"
+    t.integer "status", default: 0
     t.index ["delivery_id"], name: "index_carts_on_delivery_id"
     t.index ["user_id"], name: "index_carts_on_user_id"
   end
@@ -100,6 +110,23 @@ ActiveRecord::Schema.define(version: 2019_04_01_150628) do
     t.index ["phone_model_id"], name: "index_products_on_phone_model_id"
   end
 
+  create_table "shipping_infos", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "civility"
+    t.string "first_name", default: "", null: false
+    t.string "last_name", default: "", null: false
+    t.integer "street_number"
+    t.string "street_name", default: "", null: false
+    t.string "street_name2"
+    t.string "zip_code", default: "", null: false
+    t.string "city", default: "", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "phone_number"
+    t.boolean "main_adress"
+    t.index ["user_id"], name: "index_shipping_infos_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -116,13 +143,24 @@ ActiveRecord::Schema.define(version: 2019_04_01_150628) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "status", default: 0
+    t.string "stripe_id"
+    t.string "card_brand"
+    t.string "card_last4"
+    t.string "card_exp_month"
+    t.string "card_exp_year"
+    t.datetime "expires_at"
+    t.integer "gender", default: 0
+    t.integer "phone_number"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "adress_for_carts", "carts"
+  add_foreign_key "adress_for_carts", "shipping_infos"
   add_foreign_key "carts", "deliveries"
   add_foreign_key "carts", "users"
   add_foreign_key "line_items", "carts"
   add_foreign_key "line_items", "products"
+  add_foreign_key "shipping_infos", "users"
 end

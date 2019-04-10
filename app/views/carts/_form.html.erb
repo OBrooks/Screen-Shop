@@ -1,17 +1,68 @@
-<%= form_with(model: cart, local: true) do |form| %>
-  <% if cart.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(cart.errors.count, "error") %> prohibited this cart from being saved:</h2>
-
-      <ul>
-      <% cart.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+<div class="contact">
+  <div class="container">
+    <div class="row">
+      <!-- Inscription -->
+      <div class="col-lg-8 contact_col">
+        <div class="get_in_touch">
+          <div class="section_title">Billing adress</div>
+          <div class="contact_form_container">
+            <%= form_for(@shipping_info, url: {controller: "carts", action: "update_shipping_infos"}, :remote => true) do |f| %>
+            <div class="row">
+              <div class="col-xl-6">
+                <!-- Name -->
+                <label for="contact_name">Prénom</label>
+                <%= f.text_field :first_name, autocomplete: "First name", class: "contact_input" %>
+              </div>
+              <div class="col-xl-6 last_name_col">
+                <!-- Email -->
+                <label for="contact_last_name">Nom</label>
+                <%= f.text_field :last_name, autofocus: true, autocomplete: "Name", class: "contact_input" %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xl-6">
+                <!-- Name -->
+                <label for="contact_name">Numéro de rue</label>
+                <%= f.text_field :street_number, autocomplete: "Street number", class: "contact_input" %>
+              </div>
+              <div class="col-xl-6 last_name_col">
+                <!-- Email -->
+                <label for="contact_last_name">Rue</label>
+                <%= f.text_field :street_name, autofocus: true, autocomplete: "Street", class: "contact_input" %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xl-12">
+                <label for="contact_name">Informations complémentaires</label>
+                <%= f.text_field :street_name2, autocomplete: "", class: "contact_input" %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xl-6">
+                <!-- Name -->
+                <label for="contact_name">Code postal</label>
+                <%= f.text_field :zip_code, autocomplete: "Zip code", class: "contact_input" %>
+              </div>
+              <div class="col-xl-6 last_name_col">
+                <!-- Email -->
+                <label for="contact_last_name">Ville</label>
+                <%= f.text_field :city, autofocus: true, autocomplete: "City", class: "contact_input" %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <label for="contact_name">Ceci est mon adresse <%= f.check_box :main_adress, class: "contact_input" %></label>
+              </div>
+              <%= f.hidden_field :cart_id, value: @cart.id %>
+              <%= f.hidden_field :id, value: @shipping_info.id %>
+            </div>
+            <button class="newsletter_button trans_200">
+              <%= f.submit "Sousmettre" %>
+            </button>
+            <% end %>
+          </div>
+        </div>
+      </div>
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= form.submit %>
   </div>
-<% end %>
+</div>

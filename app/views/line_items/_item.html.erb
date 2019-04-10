@@ -1,0 +1,32 @@
+<% @cart.line_items.each do |line_item| %>
+    <div class="row cart_items_row">
+
+        <div class="cart_item">
+            <!-- Name -->
+
+            <div class="cart_item_image col-xl-3 col-sm-4">
+                <div><%= attachement_or_picture(line_item.product) %></div>
+            </div>
+            <div class="cart_details col-sm-8 col-xl-9">
+
+                <div class="cart_item_name_container col-xl-6 col-sm-9">
+                    <div class="cart_item_name"><a
+                            href="/product/<%=line_item.product.id%>"><%= line_item.product.product_name %> -
+                            <%= line_item.product.phone_brand.brand %> - <%= line_item.product.phone_model.model %></a>
+                    </div>
+                </div>
+                <!-- Price -->
+                <div class="cart_item_price col-xl-2 col-sm-6"><%= number_to_currency(line_item.product.price) %></div>
+                <!-- Quantity -->
+                <div class="cart_item_quantity col-xl-2 col-sm-6">
+                            <p>Quantité:  <%= line_item.quantity %></p>
+                </div>
+
+                <div class="cart_item_delete col-xl-2 col-sm-3">
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+<% end %>

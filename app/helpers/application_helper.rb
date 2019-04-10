@@ -1,6 +1,8 @@
 module ApplicationHelper
     def admin_or_webmaster
-        current_user.admin? == true || current_user.webmaster? == true
+        if current_user != nil
+            current_user.admin? == true || current_user.webmaster? == true
+        end
     end
 
     def cart_count

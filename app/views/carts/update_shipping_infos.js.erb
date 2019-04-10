@@ -1,0 +1,9 @@
+console.log("coucou")
+var x = document.getElementById("form_shipping_address_<%=@shipping_info.id%>");
+x.style.display = "none";
+var y = document.getElementById("shipping_address_<%=@shipping_info.id%>");
+y.style.display ="block";
+console.log(y)
+$("#shipping_address_<%=@shipping_info_id%>").html('<%= j render "shipping_infos/shipping_info2"%>').formData.append;
+console.log('<%= j render "shipping_infos/shipping_info2"%>'.innerHTML)
+console.log(y);

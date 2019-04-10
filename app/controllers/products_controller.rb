@@ -16,7 +16,7 @@ class ProductsController < ApplicationController
                                 phone_model_id: params[:product][:phone_model_id], 
                                 category_id: params[:product][:category_id],
                                 product_picture: params[:product][:product_picture])
-        redirect_to products_path
+        redirect_to admin_path
     end
 
     def show
@@ -62,6 +62,7 @@ class ProductsController < ApplicationController
             else
                 @product.update(discount: params[:product][:discount])
             end
+        redirect_to products_path
     end
 
     def destroy
@@ -84,8 +85,6 @@ class ProductsController < ApplicationController
                 @products = @products.where(category_id: params[:filter_by_category])
                 @brands_ids = Product.where(id: @products.ids).pluck(:phone_brand_id)
                 @brands = PhoneBrand.where(id: @brands_ids)
-                puts "dans category_params"
-                puts @products
             end
         end  
     end
@@ -103,8 +102,6 @@ class ProductsController < ApplicationController
     end
 
     def brand_params
-        puts "dans brand params"
-        puts @products
         if params[:filter_by_brand].present?
             if params[:filter_by_brand] == "all"
                 @products=Product.all
@@ -117,8 +114,6 @@ class ProductsController < ApplicationController
     end    
 
     def model_params
-        puts "dans model_params"
-        puts @products
         if params[:filter_by_model].present?
             if params[:filter_by_model] == "all"
                 brand_params
@@ -129,8 +124,6 @@ class ProductsController < ApplicationController
     end   
 
     def status_params
-        puts "dans status_params"
-        puts @products
         @statuses = Product.statuses
         puts @statuses
         if params[:filter_by_status].present?
