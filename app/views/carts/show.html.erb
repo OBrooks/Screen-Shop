@@ -83,14 +83,14 @@
 	                                <div class="cart_total_value ml-auto" id="delivery_form">
 										<%= form_for(@cart, url: {action: "update_delivery"}, :remote => true) do |f| %>
 											<%= f.hidden_field :id, :value => @cart.id %>
-											<%= f.collection_select :delivery_id, Delivery.all, :id, :name_and_price, {}, {:onchange=>"select_delivery();"} %>
+											<%= f.collection_select :delivery_id, Delivery.all, :id, :name_and_price, {:prompt => "Livraison"}, {:onchange=>"select_delivery();"} %>
 										<% end %>
 									</div>
 	                            </li>
 	                            <li class="d-flex flex-row align-items-center justify-content-start">
 	                                <div class="cart_total_title">Total</div>
 	                                <div class="cart_total_value ml-auto" id="total_price">
-										<%= number_to_currency(@cart.total_price) %>
+										<%= @cart.total_price %>
 	                                </div>
 	                            </li>
 	                        </ul>

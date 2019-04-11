@@ -61,6 +61,12 @@ rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
   end
 
   def destroy
+    line_items = LineItem.where(cart_id: @cart.id)
+    line_items.each do |line_item|
+      product = Product.find(line_item.product_id)
+      new_quantity = product.quantity.to_i + line_item.quantity.to_i
+      product.update(quantity: new_quantity)
+    end
     @cart.destroy if @cart.id == session[:cart_id]
     session[:cart_id] = nil
     respond_to do |format|

@@ -1,10 +1,10 @@
 class Cart < ApplicationRecord
 
-    has_many :line_items, dependent: :destroy
-    belongs_to :delivery, optional: true
-    belongs_to :user
+    has_many :line_items,           dependent: :destroy
+    belongs_to :delivery,           optional: true
+    belongs_to :user,               optional: true
     has_many :adress_for_carts
-    has_many :shipping_infos, through: :adress_for_carts
+    has_many :shipping_infos,       through: :adress_for_carts
 
     #Status
     enum status: { unpaid: 0, paid: 1, refunded: 2, partially_refunded: 3}
@@ -25,7 +25,9 @@ class Cart < ApplicationRecord
 
     def total_price
         if delivery != nil
-            sub_total_price + delivery.price
+            ActionController::Base.helpers.number_to_currency(sub_total_price + delivery.price)
+        else
+            "Veuillez choisir une livraison"
         end
     end   
 
