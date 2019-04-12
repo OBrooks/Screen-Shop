@@ -203,7 +203,7 @@
                             <div class="product_extra product_hot"><a href="categories.html">Hot</a></div>
                         <% end %>
                         <div class="product_content">
-                            <div class="product_title"><a href="/product/<%=product.id%>"><%= product.product_name %> - <%= product.category.category_name %> <%= product.phone_brand.brand %> <%= product.phone_model.model %></a></div>
+                            <div class="product_title"><a href="/product/<%=product.id%>"><%= product.product_name %></a></div>
                             <div class="product_price"><%= number_to_currency(product.price, locale: :fr) %></div>
                         </div>
                     </div>
