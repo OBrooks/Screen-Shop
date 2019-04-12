@@ -12,6 +12,8 @@
 5. Home
 6. Cart Info
 7. Footer
+8. Custom
+9. Resume payment cart
 
 
 ******************************/
@@ -162,9 +164,20 @@
 	flex-wrap: wrap;
 	justify-content: start;
 	align-items: center;
+	width: 100%;
+	padding-top: 3px;
+}
+
+.cart_item .big_cart
+{
 	padding-top: 33px;
 	padding-bottom: 33px;
-	width: 100%;
+}
+
+ .cart_item .little_cart
+{
+	padding-top: 7px;
+	padding-bottom: 3px;
 }
 
 .cart_details
@@ -202,20 +215,36 @@
 
 	text-align: right;
 }
-.cart_item_image div
+.cart_item_image.big_cart div
 {
 	width: 183px;
 	height: 163px;
 }
+
 .cart_item_image div img
 {
-    max-width: 180px;
-    max-height: 180px;
-    min-width: 180px;
-    min-height: 180px;
+
     object-fit: cover;
     object-position: 50% 50%;
 }
+
+.cart_item_image.big_cart div img
+{
+    max-width: 180px;
+	max-height: 180px;
+	min-width: 180px;
+	min-height: 180px;
+}
+
+.cart_item_image.little_cart div img
+
+{
+	max-width: 120px;
+	max-height: 120px;
+	min-width: 120px;
+	min-height: 120px;
+}
+
 .cart_item_name_container
 {
 	padding-left: 36px;
@@ -512,9 +541,13 @@ label
 {
 	color: #FFFFFF;
 }
+.cart_total
+{
+	margin-top: 50px;
+}
 .cart_total_container
 {
-	margin-top: 42px;
+	margin-top: 12px;
 	padding-left: 45px;
 	padding-top: 20px;
 	padding-right: 44px;
@@ -583,4 +616,50 @@ label
 .checkout_button
 {
 margin-top: 10px;
+}
+
+/*********************************
+9. Resume payment cart
+*********************************/
+.cart_resume
+{
+	width: 100%;
+	background: #FFFFFF;
+	padding-top: 96px;
+	padding-bottom: 15px;
+	z-index: 2;
+	display: flex;
+	flex-flow: row wrap;
+}
+
+.cart_resume>* {
+	flex: 1 100%;
+}
+
+.delivery_addresses
+{
+
+}
+
+.items_and_total_card
+{
+
+}
+@media all and (min-width: 600px) {
+	.aside {
+		flex: 1 0 0;
+	}
+}
+
+@media all and (min-width: 800px) {
+
+	.payment_and_delivery_card {
+		order: 1;
+	}
+
+
+	.items_and_total_card {
+		order: 2;
+	}
+
 }

@@ -25,90 +25,81 @@
 
 	<!-- Cart Info -->
 
-	<div class="cart_info">
+	<div class="cart_resume">
 	    <div class="container">
-	        <div class="row">
-	            <div class="col">
-	                <!-- Column Titles -->
-	                <div class="cart_info_columns clearfix">
-	                </div>
-	            </div>
-	        </div>
-	        <!-- Cart Item -->
-			<%= render "line_items/item" %>
-
-	            <div class="col-lg-4">
-					<div class="contact">
-						<div class="container">
-							<div class="row">
-								<div class="col-lg-8 contact_col">
-									<div class="get_in_touch">
-										<div class="section_title">Adresse de livraison</div>
-										<div>
-											<%= link_to({:controller => "carts", :action => "add_shipping_adress", :cart_id => @cart.id}, :method => "get", :id => "add_shipping_adress", remote: true) do %>
-												Ajouter une adresse de livraison
-											<% end %>
-										</div>
-										<div id="form_for_shipping_addresses">
-											<%= missing_shipping_info(current_user) %>
-										</div>
-										<div id="shipping_adresses">
-										</div>
-										<div id="different_shipping_adress_form">
-										</div>
+		<div class="row">
+			<!-- Cart Item -->
+			<aside class="aside items_and_total_card col-lg-6">
+				<div class="row cart_info_columns"></div>
+				<%= render "line_items/item" %>
+				<div class="cart_total">
+                    <div class="section_title">Total du panier</div>
+                    <div class="cart_total_container">
+                        <ul>
+                            <li class="d-flex flex-row align-items-center justify-content-start">
+                                <div class="cart_total_title">Sous-total</div>
+                                <div class="cart_total_value ml-auto" id="sub_total_price">
+									<%= number_to_currency(@cart.sub_total_price) %>
+								</div>
+	                        </li>
+	                        <li class="d-flex flex-row align-items-center justify-content-start">
+	                            <div class="cart_total_title">Livraison</div>
+	                            <div class="cart_total_value ml-auto" id="delivery_form">
+	                                <%= @cart.delivery.name %> - <%= number_to_currency(@cart.delivery.price) %>
+	                            </div>
+                            </li>
+	                        <li class="d-flex flex-row align-items-center justify-content-start">
+	                            <div class="cart_total_title">Total</div>
+	                                <div class="cart_total_value ml-auto" id="total_price">
+	                                    <%= @cart.total_price %>
+	                                </div>
+                            </li>
+                        </ul>
+                    </div>
+				</div>
+			</aside>
+			<aside class="aside payment_and_delivery_card col-lg-6">
+				<div class="delivery_addresses">
+					<div class="container">
+						<div class="row">
+							<div class="col-lg-8 contact_col">
+								<div class="get_in_touch">
+									<div class="section_title">Adresse de livraison</div>
+									<div>
+										<%= link_to({:controller => "carts", :action => "add_shipping_adress", :cart_id => @cart.id}, :method => "get", :id => "add_shipping_adress", remote: true) do %>
+											Ajouter une adresse de livraison
+										<% end %>
+									</div>
+									<div id="form_for_shipping_addresses">
+										<%= missing_shipping_info(current_user) %>
+									</div>
+									<div id="shipping_adresses">
+									</div>
+									<div id="different_shipping_adress_form">
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="row row_extra">
-					<%= form_tag({:controller => "carts", :action => "different_shipping_adress"}, :method => "get", :id => "check_if_different_shipping_adress", remote: true) do %>
-						<%= check_box_tag("different_shipping_adress", 1, false, {:onclick => "display_form();"}) %>
-						<%= hidden_field_tag("id", @cart.id) %>
-						<% if @shopping_info != nil %>
-							<%= hidden_field_tag("shopping_info", @shopping_info.id) %>
+					<div class="row">
+						<%= form_tag({:controller => "carts", :action => "different_shipping_adress"}, :method => "get", :id => "check_if_different_shipping_adress", remote: true) do %>
+							<%= check_box_tag("different_shipping_adress", 1, false, {:onclick => "display_form();"}) %>
+							<%= hidden_field_tag("id", @cart.id) %>
+							<% if @shopping_info != nil %>
+								<%= hidden_field_tag("shopping_info", @shopping_info.id) %>
+							<% end %>
 						<% end %>
-					<% end %>
-				</div>
-				<div class="col-lg-4">
-					<%= render "carts/payment" %>
-				</div>
-
-	            <div class="col-lg-6 offset-lg-2">
-	                <div class="cart_total">
-	                    <div class="section_title">Total du panier</div>
-	                    <div class="section_subtitle">Infos</div>
-	                    <div class="cart_total_container">
-	                        <ul>
-	                            <li class="d-flex flex-row align-items-center justify-content-start">
-	                                <div class="cart_total_title">Sous-total</div>
-	                                <div class="cart_total_value ml-auto" id="sub_total_price">
-	                                    <%= number_to_currency(@cart.sub_total_price) %></div>
-	                            </li>
-	                            <li class="d-flex flex-row align-items-center justify-content-start">
-	                                <div class="cart_total_title">Livraison</div>
-	                                <div class="cart_total_value ml-auto" id="delivery_form">
-	                                    <%= form_for(@cart, url: {action: "update_delivery"}, :remote => true) do |f| %>
-	                                    <%= f.hidden_field :id, :value => @cart.id %>
-	                                    <%= f.collection_select :delivery_id, Delivery.all, :id, :name_and_price, {}, {:onchange=>"select_delivery();"} %>
-	                                    <% end %>
-	                                </div>
-	                            </li>
-	                            <li class="d-flex flex-row align-items-center justify-content-start">
-	                                <div class="cart_total_title">Total</div>
-	                                <div class="cart_total_value ml-auto" id="total_price">
-	                                    <%= number_to_currency(@cart.total_price) %>
-	                                </div>
-	                            </li>
-	                        </ul>
-	                    </div>
-	                    <div class="cart_payment">
-	                        <div class="button cart_button checkout_button">
-	                            <%= link_to "Procéder au paiement", resume_path(id: @cart.id) %>
-	                        </div>
-	                    </div>
-	                </div>
-	            </div>
-	        </div>
-	    </div>
+					</div>
+				</div>		
+			<div class="">
+				<%= render "carts/payment" %>
+			</div>
+                <div class="cart_payment">
+				    <div class="button cart_button checkout_button">
+                		<%= link_to "Procéder au paiement", resume_path(id: @cart.id) %>
+                	</div>
+                </div>
+			</aside>
+			</div>
+        </div>
+    </div>
