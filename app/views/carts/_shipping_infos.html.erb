@@ -1,0 +1,37 @@
+<div class="section_adress">
+    <%= form_tag({:controller => "carts", :action => "select_shipping_adress"}, :method => "get", :id => "select_shipping_adress", remote: true) do %>
+        <% for shipping_info in @shipping_infos %>
+            <div class="row adress_info" id="shipping_address_<%=shipping_info.id%>">
+                <div class="col-2" id="check_shipping_adress_<%=shipping_info.id%>">
+                    <%= radio_button_tag :shipping_info_id, shipping_info.id, true, :onclick => "select_shipping(#{shipping_info.id});" %>
+                </div>
+                <div class="col-7">
+                    <div class="row">
+                        <%= shipping_info.civility %><%= shipping_info.first_name %> <%= shipping_info.last_name %>
+                    </div>
+                    <div class="row">
+                        <%= shipping_info.street_number %> <%= shipping_info.street_name %>
+                    </div>
+                    <div class="row">
+                        <%= shipping_info.street_name2 %>
+                    </div>
+                    <div class="row">
+                        <%= shipping_info.zip_code %> <%= shipping_info.city %>
+                    </div>
+                </div>
+                <div class="col-1">
+                    <%= link_to({:controller => "carts", :action => "display_form_edit_shipping_address", :shipping_info_id => shipping_info.id, :cart_id => @cart.id}, :method => "get", remote: true) do %>
+                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                    <% end %>
+                </div>
+                <div class="col-1">
+                                                                <%= link_to shipping_info_delete_path(id: shipping_info.id), method: :delete, data: { confirm: "Voulez-vous supprimer définitivement cette adresse ?"}, remote: true do %>
+                                                                <i class="fa fa-times " aria-hidden="true"></i>
+                                                                <% end %>
+                </div>
+            </div>
+        <% end %>
+        <%= hidden_field_tag("cart_id", @cart.id) %>
+    <% end %>
+</div>
+<div id="form_shipping_address"></div>

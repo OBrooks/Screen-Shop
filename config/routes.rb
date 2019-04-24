@@ -41,6 +41,9 @@ Rails.application.routes.draw do
     get   'edit_shipping_adress',               to: "carts#different_shipping_adress"
     patch 'cart/shipping_infos',                to: "carts#update_shipping_infos"
     get   'cart/select_adress',                 to: "carts#select_shipping_adress"
-    get   'cart/add_adress',                    to: "carts#add_shipping_adress"
     get   'display_form_edit_shipping_address', to: "carts#display_form_edit_shipping_address"
+
+  #Shipping Adress & Info
+    delete 'shipping_info/delete',              to: "shipping_info#destroy"
+    get   'shipping_info/add_adress',           to: "shipping_info#add_shipping_adress"
   end

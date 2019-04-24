@@ -1,26 +1,29 @@
 <div class="section_adress" id="shipping_address_<%=shipping_info.id%>">
-    <div class="row">
-        <%= form_tag({:controller => "carts", :action => "select_shipping_adress"}, :method => "get", :id => "select_shipping_adress#{shipping_info.id}", remote: true) do %>
-        <%= check_if_checked(@adress_for_cart, shipping_info.id, @cart.id)  %>
-        <%= hidden_field_tag("shipping_info_id", shipping_info.id) %>
-        <%= hidden_field_tag("cart_id", @cart.id) %>
-        <% end %>
-        <p>&nbsp; &nbsp;Sélectionner cette adresse de livraison</p>
-    </div>
-    <div class="row">
-        <%= shipping_info.civility %> <%= shipping_info.first_name %> <%= shipping_info.last_name %>
-    </div>
-    <div class="row">
-        <%= shipping_info.street_number %> <%= shipping_info.street_name %>
-    </div>
-    <div class="row">
-        <%= shipping_info.street_name2 %>
-    </div>
-    <div class="row">
-        <%= shipping_info.zip_code %> <%= shipping_info.city %>
+    <div class="row adress_info">
+        <div class="col-2">
+            <%= form_tag({:controller => "carts", :action => "select_shipping_adress"}, :method => "get", :id => "select_shipping_adress#{shipping_info.id}", remote: true) do %>
+            <%= check_if_checked(@adress_for_cart, shipping_info.id, @cart.id)  %>
+            <%= hidden_field_tag("shipping_info_id", shipping_info.id) %>
+            <%= hidden_field_tag("cart_id", @cart.id) %>
+            <% end %>
+        </div>
+        <div class="col-8">
+            <div class="row">
+                <%= shipping_info.civility %><%= shipping_info.first_name %> <%= shipping_info.last_name %>
+            </div>
+            <div class="row">
+                <%= shipping_info.street_number %> <%= shipping_info.street_name %>
+            </div>
+            <div class="row">
+                <%= shipping_info.street_name2 %>
+            </div>
+            <div class="row">
+                <%= shipping_info.zip_code %> <%= shipping_info.city %>
+            </div>
+        </div>
     </div>
     <%= link_to({:controller => "carts", :action => "display_form_edit_shipping_address", :shipping_info_id => shipping_info.id, :cart_id => @cart.id}, :method => "get", remote: true) do %>
-    Éditer une adresse
+    <i class="fa fa-pencil" aria-hidden="true"></i> Modifier
     <% end %>
 </div>
 <div id="form_shipping_address_<%=shipping_info.id%>"></div>

@@ -1278,7 +1278,7 @@ section
 	border: solid 2px #1b1b1b;
 	background: #FFFFFF;
 	cursor: pointer;
-	margin-top: 55px;
+	/* margin-top: 55px; */
 	overflow: hidden;
 }
 .newsletter_button span, 

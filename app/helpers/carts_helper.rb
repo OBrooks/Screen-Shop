@@ -3,7 +3,7 @@ module CartsHelper
         if user.shipping_infos == nil
             render 'carts/form'    
         else
-            render @shipping_infos
+            render 'carts/shipping_infos'
         end
     end
 
@@ -14,4 +14,12 @@ module CartsHelper
                 render "check_boxes/check_shipping_adress_false"
             end
     end
+
+    def attachement_or_picture_delivery(delivery)
+        if delivery.delivery_picture.attachment != nil
+            image_tag(delivery.delivery_picture)
+        
+        end
+    end
+
 end

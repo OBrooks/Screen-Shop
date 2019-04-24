@@ -1,15 +1,13 @@
 
-<h4 class="subtitle is-4">Payment</h4>
+<div class="section_title">Paiement</div>
 
 <div class="notification is-light has-text-centered">
-    <i class="fa fa-credit-card"></i>
-    All jobs cost <strong>$300</strong> USD for 30 days.
     <span class="block mb4"></span>
 </div>
 
 <div class="form-row">
     <label for="card-element" class="label">
-        Enter credit or debit card
+        Veuillez entrer une carte de crédit <i class="fa fa-credit-card"></i>
     </label>
 
     <div id="card-element" class="form-control">
@@ -21,13 +19,13 @@
 
 <% if current_user.stripe_id.present? %>
 <div class="last-card bg-light pa4 border-radius-3 mt4">
-    <h5 class="is-6 title pt2">Previously used card</h5>
+    <h5 class="is-6 title pt2">Carte utilisée précédemment</h5>
     <table class="table is-narrow bg-light is-fullwidth">
         <thead>
-            <th>Card Brand</th>
-            <th>Last 4 Digits</th>
-            <th>Expiration Month</th>
-            <th>Expiration Year</th>
+            <th>Type de carte</th>
+            <th>4 derniers chiffres</th>
+            <th>Mois d'expiration</th>
+            <th>Année d'expiration</th>
         </thead>
         <tr>
             <td><%= current_user.card_brand %></td>

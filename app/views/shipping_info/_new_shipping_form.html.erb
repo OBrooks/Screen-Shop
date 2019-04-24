@@ -49,15 +49,24 @@
             </div>
             <div class="row">
               <div class="col-12">
-                <label for="contact_name">Ceci est mon adresse principale <%= f.check_box :main_adress, class: "contact_input" %></label>
+                <div class="form-inline check_space">
+                  <%= f.check_box :main_adress, class: "form-control" %>
+                  <%= f.label :main_adress, "&nbsp;&nbsp;&nbsp;Ceci est mon adresse principale &nbsp;&nbsp; <i class='fa fa-home fa-2x' aria-hidden='true'></i>".html_safe, {class: "checkbox inline"} %>
+                </div>
               </div>
               <%= f.hidden_field :cart_id, value: @cart.id %>
               <%= f.hidden_field :id, value: @shipping_info.id %>
             </div>
             <button class="newsletter_button trans_200">
-              <%= f.submit "Sousmettre" %>
+              <%= f.submit "Soumettre" %>
             </button>
+            <div class="button cart_button">
+              <%= link_to shipping_info_delete_path(id: @shipping_info.id), method: :delete, remote: true do %>
+                  Annuler
+              <% end %>
+            </div>
             <% end %>
+          </div>
           </div>
         </div>
       </div>

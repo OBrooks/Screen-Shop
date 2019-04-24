@@ -1,7 +1,7 @@
 class CartsController < ApplicationController
 rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
   before_action :set_cart, only: [:show, :edit, :update, :destroy]
-  after_action :add_user, except: [:different_shipping_adress, :add_shipping_adress, :update_shipping_infos, :display_form_edit_shipping_address]
+  after_action :add_user, except: [:different_shipping_adress, :add_shipping_adress, :update_shipping_infos, :display_form_edit_shipping_address, :select_shipping_adress]
 
   def index
     @carts = Cart.all
@@ -210,17 +210,6 @@ rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
     end
   end
 
-  def add_shipping_adress
-    puts "Les params du add shipping sont #{params}"
-    puts "Le current est #{current_user.id}"
-    @user = current_user
-    @shipping_info = ShippingInfo.create!(user_id: @user.id, street_number: 1)
-    @adress_for_cart = AdressForCart.create!(cart_id: params[:cart_id], shipping_info_id: @shipping_info.id)
-    respond_to do |format|
-      format.html { redirect_to @cart}
-      format.js { }
-    end
-  end
 
   def display_form_edit_shipping_address
     @shipping_info_id = params[:shipping_info_id]

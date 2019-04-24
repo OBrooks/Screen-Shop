@@ -1,0 +1,1 @@
+Time::DATE_FORMATS[:short_ordinal]  = ->(time) { time.strftime("#{time.day.ordinalize} %B") }

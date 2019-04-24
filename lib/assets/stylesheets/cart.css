@@ -123,8 +123,12 @@
 .cart_info_columns, .cart_items_row
 {
 	width: 100%;
-	border-bottom: solid 2px #e3e3e3;
-	padding-bottom: 7px;
+	border-bottom: solid 1px #e3e3e3;
+}
+
+.cart_items_row
+{
+padding-bottom: 7px;
 }
 .cart_info_col
 {
@@ -543,7 +547,7 @@ label
 }
 .cart_total
 {
-	margin-top: 50px;
+	margin-top: 20px;
 }
 .cart_total_container
 {
@@ -576,6 +580,12 @@ label
 	color: #1b1b1b;
 	float: right;
 }
+
+.cart_total_value img 
+{
+	width: 30px;
+}
+
 .checkout_button
 {
 	width: 100%;
@@ -621,6 +631,7 @@ margin-top: 10px;
 /*********************************
 9. Resume payment cart
 *********************************/
+
 .cart_resume
 {
 	width: 100%;
@@ -629,7 +640,7 @@ margin-top: 10px;
 	padding-bottom: 15px;
 	z-index: 2;
 	display: flex;
-	flex-flow: row wrap;
+
 }
 
 .cart_resume>* {
@@ -645,13 +656,36 @@ margin-top: 10px;
 {
 
 }
-@media all and (min-width: 600px) {
+@media all and (max-width: 799px) {
 	.aside {
 		flex: 1 0 0;
 	}
+	.cart_resume {
+		flex-flow: column wrap;
+	}
+
+	.payment_and_delivery_card {
+		order: 2;
+	}
+
+	.items_and_total_card {
+		order: 1;
+	}
 }
 
-@media all and (min-width: 800px) {
+@media only screen and (max-width: 1024px)
+{
+	.aside.payment_and_delivery_card {
+		padding-top: 20px;
+	}
+}
+
+@media (min-width: 1024px) {
+
+
+	.cart_resume {
+			flex-flow: row wrap;
+	}
 
 	.payment_and_delivery_card {
 		order: 1;
@@ -662,4 +696,46 @@ margin-top: 10px;
 		order: 2;
 	}
 
+}
+
+.mail_infos,
+.delivery_addresses
+{
+    border: 1px solid #E3E3E3;
+    border-radius: .25rem;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+	padding-bottom: 10px;
+	padding-top: 5px;
+	padding-left: 20px;
+	margin-bottom: 10px;
+}
+
+.cart_link a:hover,
+.section_adress a:hover
+{
+	color: #e95a5a;
+}
+
+.section_adress
+{
+	padding-bottom: 10px;
+	padding-top: 5px;
+}
+
+.payment_and_delivery_card .get_in_touch .section_title
+{
+	margin-left: -15px;
+}
+
+.adress_info
+{
+	margin-bottom: 20px;
+}
+#select_shipping_adress
+{
+	padding-top: 20px;
+}
+.check_space{
+	margin-top: 5px;
+	margin-bottom: 5px;
 }
