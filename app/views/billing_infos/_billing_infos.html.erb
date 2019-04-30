@@ -1,0 +1,29 @@
+
+
+
+        <div class="section_title">Adresse de facturation</div>
+    <div class="row section_adress">
+        <div class="col-2"></div>
+        <div class="col-7">
+            <div class="row">
+                <%= @billing_info.civility %> <%= @billing_info.first_name %> <%= @billing_info.last_name %>
+            </div>
+            <div class="row">
+                <%= @billing_info.street_number %> <%= @billing_info.street_name %>
+            </div>
+            <div class="row">
+                <%= @billing_info.street_name2 %>
+            </div>
+            <div class="row">
+                <%= @billing_info.zip_code %> <%= @billing_info.city %>
+            </div>
+            <div class="row">
+                <%= @billing_info.phone_number %>
+            </div>
+        </div>
+        <div class="col-1">
+            <%= link_to billing_info_delete_path(id: @billing_info.id), method: :delete, data: { confirm: "Voulez-vous supprimer cette adresse ?"}, remote: true do %>
+                <i class="fa fa-times " aria-hidden="true"></i>
+            <% end %>
+        </div>
+    </div>

@@ -85,6 +85,12 @@ rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
       @shipping_infos = ShippingInfo.where(user_id: @user.id)
       @shipping_info = ShippingInfo.find_by(user_id: @user.id)
       @adress_for_cart = AdressForCart.find_by(cart_id: @cart.id)
+      if @adress_for_cart != nil
+        @billing_info = BillingInfo.find_by(id: @adress_for_cart.billing_info_id)
+      else
+        @adress_for_cart = AdressForCart.create!(cart_id: @cart.id, shipping_info_id: @shipping_info.id)
+        @billing_info == nil
+      end
       if @shipping_info == nil
         @shipping_info = ShippingInfo.create!(user_id: @user.id,
                                             first_name: @user.first_name,
@@ -104,29 +110,38 @@ rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
     end
   end
 
-  #After click on "Payer", use Stripe
+  #After click on "Procéder au paiement", use Stripe
   def resume_payment
+    puts "In resume_payment heeeeeeere"
     if user_signed_in? == false
+      puts "in user_singes_in false"
       redirect_to new_user_session_path
     else
+      puts "in user_singed_in? true"
+      puts "Les params sont #{params}"
       @cart = Cart.find(params[:id])
-      @user = User.find(@cart.user_id)
+      @user = current_user
+      puts
       puts "Stripe Token est #{params[:stripeToken]}"
+      puts
       token = params[:stripeToken]
-      cart_order = @cart
+      cart_order = @cart.id
       # cart_title = params[:title]
       card_brand = @user.card_brand
       card_exp_month = @user.card_exp_month
       card_exp_year  = @user.card_exp_year
       card_last4 = @user.card_last4
-
       charge = Stripe::Charge.create(
         :amount => 3000,
         :currency => "eur",
-        :description => cart_order,
+        :description => "Screen-Shop Order n°#{cart_order}",
         # :statement_descriptor => job_title,
         :source => token
       )
+
+            puts
+      puts "Coucou charge #{charge}"
+      puts
 
       current_user.stripe_id = charge.id
       current_user.card_brand = card_brand
@@ -139,7 +154,7 @@ rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
     respond_to do |format|
       if @cart.save
         @cart.update(status: 1)
-        format.html { redirect_to @job, notice: 'La commande a été passée avec succès !' }
+        format.html { redirect_to root_path, notice: 'La commande a été passée avec succès !' }
         format.json { render :show, status: :created, location: @cart }
       else
         format.html { render :new }
@@ -150,17 +165,6 @@ rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
     rescue Stripe::CardError => e
       flash.alert = e.message
       render action: :new
-  end
-
-  def different_shipping_adress
-    respond_to do |format|
-      format.html { redirect_to @cart}
-      format.js { }
-    end
-      @cart = Cart.find(params[:id])
-      @user = User.find(@cart.user_id)
-      @shipping_info = ShippingInfo.new
-      @shipping_info.user_id = @user.id
   end
 
   def update_shipping_infos

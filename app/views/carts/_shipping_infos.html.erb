@@ -25,9 +25,9 @@
                     <% end %>
                 </div>
                 <div class="col-1">
-                                                                <%= link_to shipping_info_delete_path(id: shipping_info.id), method: :delete, data: { confirm: "Voulez-vous supprimer définitivement cette adresse ?"}, remote: true do %>
-                                                                <i class="fa fa-times " aria-hidden="true"></i>
-                                                                <% end %>
+                    <%= link_to shipping_info_delete_path(id: shipping_info.id), method: :delete, data: { confirm: "Voulez-vous supprimer définitivement cette adresse ?"}, remote: true do %>
+                        <i class="fa fa-times " aria-hidden="true"></i>
+                    <% end %>
                 </div>
             </div>
         <% end %>

@@ -1,0 +1,64 @@
+
+    <div class="row">
+      <!-- Inscription -->
+      <div class="contact_col">
+        <div class="get_in_touch">
+          <div class="contact_form_container">
+            <%= form_for(@billing_info, url: {controller: "billing_infos", action: "create"}, remote: true) do |f| %>
+            <div class="row">
+              <div class="col-xl-6">
+                <!-- Name -->
+                <label for="contact_name">Prénom</label>
+                <%= f.text_field :first_name, autocomplete: "First name", class: "contact_input" %>
+              </div>
+              <div class="col-xl-6 last_name_col">
+                <!-- Email -->
+                <label for="contact_last_name">Nom</label>
+                <%= f.text_field :last_name, autofocus: true, autocomplete: "Name", class: "contact_input" %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xl-6">
+                <!-- Name -->
+                <label for="contact_name">Numéro de rue</label>
+                <%= f.text_field :street_number, autocomplete: "Street number", class: "contact_input" %>
+              </div>
+              <div class="col-xl-6 last_name_col">
+                <!-- Email -->
+                <label for="contact_last_name">Rue</label>
+                <%= f.text_field :street_name, autofocus: true, autocomplete: "Street", class: "contact_input" %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xl-12">
+                <label for="contact_name">Informations complémentaires</label>
+                <%= f.text_field :street_name2, autocomplete: "", class: "contact_input" %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xl-6">
+                <!-- Name -->
+                <label for="contact_name">Code postal</label>
+                <%= f.text_field :zip_code, autocomplete: "Zip code", class: "contact_input" %>
+              </div>
+              <div class="col-xl-6 last_name_col">
+                <label for="contact_last_name">Ville</label>
+                <%= f.text_field :city, autofocus: true, autocomplete: "City", class: "contact_input" %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <label for="contact_last_name">Numéro de téléphone</label>
+                <%= f.text_field :phone_number, autocomplete: "Numéro de téléphone", class: "contact_input" %>
+                <%= f.hidden_field :cart_id, value: @cart.id %>
+              </div>
+            </div>
+            <button class="newsletter_button trans_200 mt-3">
+              <%= f.submit "Sousmettre" %>
+            </button>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+

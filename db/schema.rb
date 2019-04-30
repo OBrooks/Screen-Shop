@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_10_094755) do
+ActiveRecord::Schema.define(version: 2019_04_30_084323) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,8 +41,26 @@ ActiveRecord::Schema.define(version: 2019_04_10_094755) do
     t.bigint "shipping_info_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "billing_info_id"
+    t.index ["billing_info_id"], name: "index_adress_for_carts_on_billing_info_id"
     t.index ["cart_id"], name: "index_adress_for_carts_on_cart_id"
     t.index ["shipping_info_id"], name: "index_adress_for_carts_on_shipping_info_id"
+  end
+
+  create_table "billing_infos", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "civility"
+    t.string "first_name", default: "", null: false
+    t.string "last_name", default: "", null: false
+    t.integer "street_number"
+    t.string "street_name", default: "", null: false
+    t.string "street_name2"
+    t.string "zip_code", default: "", null: false
+    t.string "city", default: "", null: false
+    t.integer "phone_number"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_billing_infos_on_user_id"
   end
 
   create_table "carts", force: :cascade do |t|
@@ -156,8 +174,10 @@ ActiveRecord::Schema.define(version: 2019_04_10_094755) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "adress_for_carts", "billing_infos"
   add_foreign_key "adress_for_carts", "carts"
   add_foreign_key "adress_for_carts", "shipping_infos"
+  add_foreign_key "billing_infos", "users"
   add_foreign_key "carts", "deliveries"
   add_foreign_key "carts", "users"
   add_foreign_key "line_items", "carts"
