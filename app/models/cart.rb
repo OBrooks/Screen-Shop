@@ -7,7 +7,7 @@ class Cart < ApplicationRecord
     has_many :shipping_infos,       through: :adress_for_carts
 
     #Status
-    enum status: { unpaid: 0, paid: 1, refunded: 2, partially_refunded: 3}
+    enum status: { unpaid: 0, paid: 1}
 
     def add_product(product)
         current_item = line_items.find_by(product_id: product.id)
@@ -31,4 +31,7 @@ class Cart < ApplicationRecord
         end
     end   
 
+    def total_price_without_currency
+        ((sub_total_price + delivery.price) * 100).to_i
+    end
 end

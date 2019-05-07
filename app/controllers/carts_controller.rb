@@ -62,6 +62,10 @@ rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
 
   def destroy
     line_items = LineItem.where(cart_id: @cart.id)
+    adress_for_cart = AdressForCart.where(cart_id: @cart.id)
+    if adress_for_cart != nil
+      adress_for_cart.destroy
+    end
     line_items.each do |line_item|
       product = Product.find(line_item.product_id)
       new_quantity = product.quantity.to_i + line_item.quantity.to_i
@@ -112,18 +116,11 @@ rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
 
   #After click on "Procéder au paiement", use Stripe
   def resume_payment
-    puts "In resume_payment heeeeeeere"
     if user_signed_in? == false
-      puts "in user_singes_in false"
       redirect_to new_user_session_path
     else
-      puts "in user_singed_in? true"
-      puts "Les params sont #{params}"
       @cart = Cart.find(params[:id])
       @user = current_user
-      puts
-      puts "Stripe Token est #{params[:stripeToken]}"
-      puts
       token = params[:stripeToken]
       cart_order = @cart.id
       # cart_title = params[:title]
@@ -131,33 +128,99 @@ rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
       card_exp_month = @user.card_exp_month
       card_exp_year  = @user.card_exp_year
       card_last4 = @user.card_last4
-      charge = Stripe::Charge.create(
-        :amount => 3000,
-        :currency => "eur",
-        :description => "Screen-Shop Order n°#{cart_order}",
-        # :statement_descriptor => job_title,
-        :source => token
-      )
 
-            puts
-      puts "Coucou charge #{charge}"
-      puts
+      if params[:save_card_infos] = 1
+        if @user.stripe_customer == nil
+          customer = Stripe::Customer.create({
+              source: token,
+              email: @user.email,
+          })
+          @user.update(stripe_customer: customer.id)
+        end
+        customer_id = @user.stripe_customer
+        if @user.card_last4 != params[:user][:card_last4] && @user.card_exp_month != params[:user][:card_exp_month] && @user.card_exp_year != params[:user][:card_exp_year] && @user.card_brand != params[:user][:card_brand]
+          puts "In user different informations"
+        charge = Stripe::Charge.create(
+          "amount": params[:cart_total_price],
+          # "billing_details": {
+          #   "address": {
+          #     "city": @user.billing_info.city,
+          #     "country": "France",
+          #     "line1": "#{@user.billing_info.street_number} #{@user.billing_info.street_name}",
+          #     "line2": @user.billing_info.street_name2
+          #     },          
+          #   "email": @user.billing_info.email,
+          #   "name": @user.billing_info.last_name,
+          #   "phone": @user.billing_info.phone_number
+          # },
+          "currency": "eur",
+          "description": "Screen-Shop Order n°#{cart_order}",
+          "customer": customer_id,
+          "source": token
+          )
+        else
+          puts "In new charge with same payment method"
+          charge = Stripe::Charge.create(
+            :amount => params[:cart_total_price],
+            :currency => "eur",
+            :description => "Screen-Shop Order n°#{cart_order}",
+            :customer => customer_id
+          )
+        end
 
-      current_user.stripe_id = charge.id
-      current_user.card_brand = card_brand
-      current_user.card_exp_month = card_exp_month
-      current_user.card_exp_year = card_exp_year
-      current_user.card_last4 = card_last4
-      current_user.save!
+        puts "Coucou charge #{charge}"
+        puts "Coucou card_brand #{charge[:source][:brand]}"
+        puts "Coucou exp_month #{charge[:source][:exp_month]}"
+        puts "Coucou exp_year #{charge[:source][:exp_year]}"
+        puts "Coucou last4 #{charge[:source][:last4]}"
+
+        current_user.stripe_id = charge.id
+        current_user.card_brand = charge[:source][:brand]
+        current_user.card_exp_month = charge[:source][:exp_month]
+        current_user.card_exp_year = charge.source.exp_year
+        current_user.card_last4 = charge.source.last4
+        current_user.card_stripe_number = charge.payment_method
+        current_user.save!
+        puts "Le stripe Id est #{current_user.stripe_id}"
+        puts "Le card exp year est #{current_user.card_exp_year}"
+        puts "Le card last 4 est #{current_user.card_last4}"
+        puts "Le Card Stripe est #{current_user.card_stripe_number}"
+        puts "Le current user est #{current_user}"
+      
+      else
+        puts "In not save card"
+          charge = Stripe::Charge.create(
+          :amount => params[:cart_total_price],
+          :currency => "eur",
+          :description => "Screen-Shop Order n°#{cart_order}",
+          :source => token
+          )
+      end
     end
-
+    puts "Ready to balancer la sauce"
+    puts "#{charge.paid}"
     respond_to do |format|
-      if @cart.save
+      if charge.paid == true
+        puts "in charge good"
         @cart.update(status: 1)
+        @adress_for_cart = AdressForCart.find_by(cart_id: @cart.id)
+        @billing_info = BillingInfo.find_by(user_id: @user.id)
+        @order = Order.create!( user_id: @user.id,
+                                shipping_info_id: @adress_for_cart.shipping_info_id,
+                                delivery_id: @cart.delivery_id,
+                                billing_info_id: @billing_info.id)
+        @line_items = LineItem.where(cart_id: @cart.id)
+        @line_items.each do |line_item|
+          line_item_order = LineItemsOrder.create!(product_id: line_item.product_id, order_id: @order.id, quantity: line_item.quantity, price: line_item.product.price, discount: line_item.product.discount)
+          line_item.destroy
+        end
+        @adress_for_cart.destroy
+        @cart.destroy
         format.html { redirect_to root_path, notice: 'La commande a été passée avec succès !' }
         format.json { render :show, status: :created, location: @cart }
       else
-        format.html { render :new }
+        puts "in charge pas good"
+        format.html { redirect_to root_path, notice: "Il y a eu un problème avec le paiement, votre commande n'a pas été passée" }
         format.json { render json: @cart.errors, status: :unprocessable_entity }
       end
     end

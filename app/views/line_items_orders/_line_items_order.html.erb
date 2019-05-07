@@ -1,0 +1,31 @@
+<div class="row cart_items_row">
+
+    <div class="cart_item">
+        <!-- Name -->
+        <div class="cart_item_image big_cart col-xl-3 col-sm-4">
+            <div><%= attachement_or_picture(line_items_order.product) %></div>
+        </div>
+        <div class="cart_details col-sm-8 col-xl-9">
+
+            <div class="cart_item_name_container col-xl-6 col-sm-9">
+                <div class="cart_item_name"><a
+                        href="/product/<%=line_items_order.product.id%>"><%= line_items_order.product.product_name %> -
+                        <%= line_items_order.product.phone_brand.brand %> - <%= line_items_order.product.phone_model.model %></a>
+                </div>
+            </div>
+            <!-- Price -->
+            <div class="cart_item_price col-xl-2 col-sm-6"><%= number_to_currency(line_items_order.price) %></div>
+            <!-- Quantity -->
+            <div class="cart_item_quantity col-xl-2 col-sm-6">
+                <!-- Product Quantity -->
+            </div>
+
+            <div class="cart_item_delete col-xl-2 col-sm-3">
+                <div class="cross_button cart_button">
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

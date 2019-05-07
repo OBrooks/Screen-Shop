@@ -103,6 +103,9 @@
 				<div class="">
 					<%= render "carts/payment" %>
 				</div>
+					<%= hidden_field_tag("cart_total_price", @cart.total_price_without_currency) %>
+					<%= check_box_tag("save_card_infos", 1, true) %>
+					<%= label_tag "Sauvegarder cette carte pour la prochaine fois" %>
                 <div class="cart_payment">
 				    <%= submit_tag "Payer" %>
 				</div>

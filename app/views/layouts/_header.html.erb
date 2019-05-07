@@ -51,7 +51,7 @@
                                                         <p>Salut <%=current_user.first_name%></p>
                                                     </div>
                                                     <div class="profile_links">
-                                                        <%= link_to "Déconnexion", destroy_user_session_path, { :class=>"", method: :delete } %>
+                                                        <%= link_to "Mes commandes", myorders_path %>
                                                     </div>
                                                     <div class="profile_links">
                                                         <%= link_to "Éditer mes infos", edit_user_registration_path, { :class=>""} %>
@@ -61,6 +61,9 @@
                                                             <%= link_to "Admin Board", admin_path, { :class=>""} %>
                                                         </div>
                                                     <% end %>
+                                                    <div class="profile_links">
+                                                        <%= link_to "Déconnexion", destroy_user_session_path, { :class=>"", method: :delete } %>
+                                                    </div>
                                                 <% end %>
                                             </div>
                                     </div>   

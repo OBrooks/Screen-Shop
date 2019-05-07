@@ -1,0 +1,53 @@
+	<!-- Home -->
+
+	<div class="home_contact">
+	    <div class="home_container_contact">
+	        <div class="home_background_contact" style="background-image:url(<%= asset_path 'images/cart.jpg' %>)"></div>
+	        <div class="home_content_container_contact">
+	            <div class="container">
+	                <div class="row">
+	                    <div class="col">
+	                        <div class="home_content_contact">
+	                            <div class="breadcrumbs_contact">
+	                                <ul>
+	                                    <li><a href="/">Home</a></li>
+	                                    <li>Panier</li>
+	                                </ul>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+
+	<!-- Cart Info -->
+
+	<div class="cart_info">
+	    <div class="container">
+	        <div class="row cart_info_columns"></div>
+            <!-- Order Item -->
+            <% @orders.each do |order| %>
+                    Commande n° <%= order.id %>
+                    <%= order.created_at %>
+                <%= render(order.line_items_orders) %>
+            <% end %>
+	        <div class="row row_cart_buttons">
+
+	            <div class="cart_buttons row">
+	                <div class="button cart_button col-sm-5">
+	                   
+	                </div>
+	                <div class="col-sm-1"></div>
+	                <div class="button cart_button col-sm-5">
+	                    <span>
+	                        
+	                    </span>
+	                </div>
+
+	            </div>
+
+	        </div>
+	    </div>
+	</div>

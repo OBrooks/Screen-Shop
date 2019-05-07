@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :carts
   has_many :line_items, through: :cart
   has_many :shipping_infos
+  has_one  :billing_info
 
   validates_presence_of :first_name, on: :create
 

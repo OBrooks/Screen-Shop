@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   
   devise_for :users
   
+  #Orders
+    get   'myorders',                             to: "orders#show"
+
   resources :brands
     get   'brands/all',                         to: "brands#show"
     

@@ -19,6 +19,7 @@ class BillingInfosController < ApplicationController
                                 zip_code: params[:billing_info][:zip_code], 
                                 city: params[:billing_info][:city],
                                 phone_number: params[:billing_info][:phone_number],
+                                email: params[:billing_info][:email],
                                 user_id: current_user.id)
         @adress_for_cart = AdressForCart.find_by(cart_id: params[:billing_info][:cart_id])
         if @adress_for_cart == nil
