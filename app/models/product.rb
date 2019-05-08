@@ -18,6 +18,12 @@ class Product < ApplicationRecord
   enum status: { default: 0, sales: 1, hot: 2}
   STATUSES = Product.statuses.map { |r,| [I18n.t("status.#{r}"), r] }.sort_by { |r| I18n.t("status.#{r}") }
 
+
+  def discount_price
+      new_price = self.price * (1 - ((self.discount.to_d)/100))
+      new_price
+  end
+
   private
   
   def not_referenced_by_any_line_item

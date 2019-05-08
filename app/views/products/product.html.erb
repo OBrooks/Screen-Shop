@@ -36,7 +36,7 @@
                         <% end %>
                     </div>
 
-                    <!-- if many products, add under here-->
+                    <!-- if many products image, add under here-->
                 </div>
             </div>
 
@@ -53,11 +53,7 @@
                     <div class="details_name">
                         <%= @product.product_name %>
                     </div>
-                    <!-- <div class="details_discount">$890</div> -->
-                    <div class="details_price">
-                        <%=number_to_currency(@product.price, locale: :fr) %>
-                    </div>
-
+                    <%= product_status(@product) %>
                     <!-- Stock status-->
                     <% if @product.quantity <1 %>
                         <div class="out_of_stock_container">

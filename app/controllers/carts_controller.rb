@@ -120,16 +120,30 @@ rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
       redirect_to new_user_session_path
     else
       @cart = Cart.find(params[:id])
+      
+      # Create billing_infos if it's nil
+      @billing_info = BillingInfo.find_by(user_id: current_user.id)
+      if @billing_info != nil
+      puts "Les billings infos sont #{@billing_info.id}"
+      else
+        puts "c'est nil le billing"
+      end
+      if @billing_info == nil
+        create_billing_idem
+      end
+      puts "Les billings infos after sont #{@billing_info.id}"
+
       @user = current_user
       token = params[:stripeToken]
       cart_order = @cart.id
-      # cart_title = params[:title]
       card_brand = @user.card_brand
       card_exp_month = @user.card_exp_month
       card_exp_year  = @user.card_exp_year
       card_last4 = @user.card_last4
 
-      if params[:save_card_infos] = 1
+      # Save card infos for later
+      if params[:save_card_infos] == 1
+        # New customer
         if @user.stripe_customer == nil
           customer = Stripe::Customer.create({
               source: token,
@@ -138,35 +152,21 @@ rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
           @user.update(stripe_customer: customer.id)
         end
         customer_id = @user.stripe_customer
+        # New card infos
         if @user.card_last4 != params[:user][:card_last4] && @user.card_exp_month != params[:user][:card_exp_month] && @user.card_exp_year != params[:user][:card_exp_year] && @user.card_brand != params[:user][:card_brand]
           puts "In user different informations"
-        charge = Stripe::Charge.create(
-          "amount": params[:cart_total_price],
-          # "billing_details": {
-          #   "address": {
-          #     "city": @user.billing_info.city,
-          #     "country": "France",
-          #     "line1": "#{@user.billing_info.street_number} #{@user.billing_info.street_name}",
-          #     "line2": @user.billing_info.street_name2
-          #     },          
-          #   "email": @user.billing_info.email,
-          #   "name": @user.billing_info.last_name,
-          #   "phone": @user.billing_info.phone_number
-          # },
-          "currency": "eur",
-          "description": "Screen-Shop Order n°#{cart_order}",
-          "customer": customer_id,
-          "source": token
-          )
+          Stripe::Customer.update(@user.stripe_customer,
+                                  :source => token)
+        puts "end of update"
         else
           puts "In new charge with same payment method"
+        end
           charge = Stripe::Charge.create(
             :amount => params[:cart_total_price],
             :currency => "eur",
             :description => "Screen-Shop Order n°#{cart_order}",
             :customer => customer_id
           )
-        end
 
         puts "Coucou charge #{charge}"
         puts "Coucou card_brand #{charge[:source][:brand]}"
@@ -188,6 +188,7 @@ rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
         puts "Le current user est #{current_user}"
       
       else
+        # Normal charge without saving the customer and his infos
         puts "In not save card"
           charge = Stripe::Charge.create(
           :amount => params[:cart_total_price],
@@ -310,5 +311,29 @@ rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
       if current_user != nil && @cart.user_id == nil
         @cart.update(user_id: current_user.id)
       end
+    end
+
+    def create_billing_idem
+      main_address = ShippingInfo.find_by(user_id: current_user.id, main_adress: true)
+      if main_address != nil
+        @shipping_info = main_address
+        puts "In main address"
+      else
+        puts "In adress for cart"
+        @adress_for_cart = AdressForCart.find_by(cart_id: @cart.id)
+        @shipping_info = ShippingInfo.find(@adress_for_cart.shipping_info_id)
+      end
+      @billing_info = BillingInfo.create!(civility: @shipping_info.civility,
+                                          first_name: @shipping_info.first_name,
+                                          last_name: @shipping_info.last_name,
+                                          street_number: @shipping_info.street_number,
+                                          street_name: @shipping_info.street_name, 
+                                          street_name2: @shipping_info.street_name2, 
+                                          zip_code: @shipping_info.zip_code, 
+                                          city: @shipping_info.city,
+                                          phone_number: @shipping_info.phone_number,
+                                          email: current_user.email,
+                                          user_id: current_user.id)
+                                          puts "Billing Id est #{@billing_info.id}"
     end
 end

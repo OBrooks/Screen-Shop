@@ -204,7 +204,7 @@
                         <% end %>
                         <div class="product_content">
                             <div class="product_title"><a href="/product/<%=product.id%>"><%= product.product_name %></a></div>
-                            <div class="product_price"><%= number_to_currency(product.price, locale: :fr) %></div>
+                            <%= product_status(product) %>
                         </div>
                     </div>
                     <% end %>

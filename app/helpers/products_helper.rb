@@ -76,4 +76,17 @@ module ProductsHelper
         end
     end
 
+    def product_status(product)
+        if product.sales? == true
+                    "<div class='details_price'>
+                        #{number_to_currency(product.discount_price, locale: :fr)}
+                    </div> &nbsp;
+                    <div class='details_discount'>#{number_to_currency(product.price, locale: :fr)}</div>
+                    ".html_safe
+        else
+                        "<div class='details_price'>
+                            #{number_to_currency(product.price, locale: :fr)}
+                        </div>".html_safe
+        end
+    end
 end
