@@ -1,7 +1,7 @@
 class CartsController < ApplicationController
 rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
   before_action :set_cart, only: [:show, :edit, :update, :destroy]
-  after_action :add_user, except: [:different_shipping_adress, :add_shipping_adress, :update_shipping_infos, :display_form_edit_shipping_address, :select_shipping_adress]
+  after_action :add_user, except: [:different_shipping_adress, :add_shipping_adress, :update_shipping_infos, :display_form_edit_shipping_address, :select_shipping_adress, :apply_coupon]
 
   def index
     @carts = Cart.all
@@ -9,6 +9,7 @@ rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
 
   def show
     @deliveries = Delivery.all
+    @discount_code = @cart.discount_code
   end
 
   def new
@@ -37,7 +38,6 @@ rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
   end
 
   def update
-
     respond_to do |format|
       if @cart.update(cart_params)
         format.html { redirect_to @cart, notice: 'Cart was successfully updated.' }
@@ -89,6 +89,8 @@ rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
       @shipping_infos = ShippingInfo.where(user_id: @user.id)
       @shipping_info = ShippingInfo.find_by(user_id: @user.id)
       @adress_for_cart = AdressForCart.find_by(cart_id: @cart.id)
+      puts "Dans les params de resume là"
+      @discount_code = @cart.discount_code
       if @adress_for_cart != nil
         @billing_info = BillingInfo.find_by(id: @adress_for_cart.billing_info_id)
       else
@@ -110,6 +112,44 @@ rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
         elsif @user.gender == "female"
           @shipping_info.update(civility: "Madame")
         end
+      end
+    end
+  end
+
+  #Verify coupon
+  def apply_coupon
+    @cart = Cart.find(params[:id])
+    @discount_codes = DiscountCode.all
+    @discount_codes.each do |code|
+      if code.code == params[:coupon_code]
+        @discount_code = code
+      end
+    end
+    @errorCoupon = []
+    respond_to do |format|
+      if @discount_code != nil && @discount_code.start_date.to_datetime <= Time.now && @discount_code.end_date.to_datetime >= Time.now
+          @cart.update(discount_code_id: @discount_code.id)
+          puts "#{@cart.discount_code_id}"
+          format.html { redirect_to cart_path }
+          format.json { render :show, status: :created, location: @cart.model }
+          format.js {render 'coupon_good'}
+      else
+        puts "in the bad else"
+        if @discount_code == nil
+          @errorCoupon.push("Le coupon est inexistant")
+        end
+        if @discount_code != nil
+          if @discount_code.start_date.to_datetime > Time.now
+            @errorCoupon.push("La date de validité du coupon n'a pas débuté")
+          end
+          if @discount_code.end_date.to_datetime < Time.now
+            @errorCoupon.push("Le coupon est expiré")
+          end
+        end
+        puts "Before html et tout le"
+        format.html { render :new }
+        format.json {}
+        format.js   {render 'coupon_error'}
       end
     end
   end
@@ -222,7 +262,7 @@ rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
       else
         puts "in charge pas good"
         format.html { redirect_to root_path, notice: "Il y a eu un problème avec le paiement, votre commande n'a pas été passée" }
-        format.json { render json: @cart.errors, status: :unprocessable_entity }
+        format.js {render inline:"location.reload();", notice: "Le code n'est pas valable"}
       end
     end
 

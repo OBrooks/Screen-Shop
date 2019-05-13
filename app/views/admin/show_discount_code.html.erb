@@ -1,0 +1,73 @@
+<!-- Home -->
+
+<div class="home_cart">
+    <div class="home_container">
+        <div class="home_background" style="background-image:url(<%= asset_path 'images/cart.jpg' %>)"></div>
+        <div class="home_content_container">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+                        <div class="home_content">
+                            <div class="breadcrumbs">
+                                <ul>
+                                    <li><a href="/">Home</a></li>
+                                    <li><a href="/admin">Admin Board</a></li>
+                                    <li>Liste des codes de réduction</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Cart Info -->
+
+<div class="admin_info">
+    <div class="container">
+        <div class="row cart_items_row">
+            <div class="col">
+                <div class="row">
+                    <div class="admin_options">
+                        <h2>Liste des codes de réduction</h2>
+                    </div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Code</th>
+                                <th>Date de début</th>
+                                <th>Date de fin</th>
+                                <th>Éditer / Supprimer</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% @discount_codes.each do |code| %>
+                            <tr>
+                                <td>
+                                    <%= code.code %>
+                                </td>
+                                <td>
+                                    <%= I18n.localize(code.start_date, format: :long) %>
+                                </td>
+                                <td>
+                                    <%= I18n.localize(code.end_date, format: :long) %>
+                                </td>
+                                <td>
+                                    <%= link_to edit_code_path(code.id) do %>
+                                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                                    <% end %>
+                                    <%= link_to delete_code_path(code.id), method: :delete do %>
+                                    <i class="fa fa-times" aria-hidden="true"></i>
+                                    <% end %>
+                                </td>
+                            </tr>
+                            <% end %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -35,6 +35,12 @@ Rails.application.routes.draw do
       patch 'multiple_update'
     end
   end
+    get 'new_discount_code',                    to: "admin#new_discount_code"
+    post 'create_discount_code',                to: "admin#create_discount_code"
+    get 'discount_codes',                       to: "admin#show_discount_code"
+    get 'edit_code/:id',                        to: "admin#edit_discount_code",                 as: "edit_code"
+    patch 'update_code/:id',                    to: "admin#update_discount_code"
+    delete 'delete_code',                       to: "admin#delete_discount_code"
 
   resources :line_items
   resources :carts
@@ -46,6 +52,7 @@ Rails.application.routes.draw do
     get   'cart/select_adress',                 to: "carts#select_shipping_adress"
     get   'display_form_edit_shipping_address', to: "carts#display_form_edit_shipping_address"
     post  'payment',                            to: "carts#resume_payment"
+    post  'cart/discount_code',                 to: "carts#apply_coupon"
 
   #Shipping Adress & Info
     delete 'shipping_info/delete',              to: "shipping_info#destroy"

@@ -1,0 +1,5 @@
+y=document.getElementById("contentErrorCoupon");
+y.innerHTML = "";
+y.append("<%= escape_javascript(@errorCoupon[0])%>");
+
+

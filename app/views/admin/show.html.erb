@@ -38,6 +38,9 @@
                     <div class="button cart_button"><a href="/brands/new">Nouvelle marque</a></div>
                     <div class="button cart_button"><a href="/categories/new">Nouvelle catégorie</a></div>
                     <div class="button cart_button"><a href="/deliveries/new">Nouvelle livraison</a></div>
+                    <div class="button cart_button mt-3">
+                        <%= link_to "Nouveau code", new_discount_code_path %>
+                    </div>
                 </div>
                 <div class="admin_options">
                     <h2>Afficher et éditer</h2>
@@ -55,6 +58,9 @@
                 <div class="cart_item d-flex flex-lg-row flex-column align-items-lg-center align-items-start justify-content-start">
                     <div class="button cart_button"><a href="/admin/products_list">Liste des produits</a></div>
                     <div class="button cart_button"><a href="/admin/users_list">Liste des utilisateurs</a></div>
+                    <div class="button cart_button">
+                        <%= link_to "Liste des codes", discount_codes_path %>
+                    </div>
                 </div>
             </div>
         </div>

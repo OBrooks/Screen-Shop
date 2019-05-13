@@ -5,6 +5,7 @@ class Cart < ApplicationRecord
     belongs_to :user,               optional: true
     has_many :adress_for_carts
     has_many :shipping_infos,       through: :adress_for_carts
+    belongs_to :discount_code,      optional: true
 
     #Status
     enum status: { unpaid: 0, paid: 1}
