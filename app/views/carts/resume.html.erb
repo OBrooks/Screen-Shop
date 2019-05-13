@@ -39,9 +39,14 @@
                             <li class="d-flex flex-row align-items-center justify-content-start">
                                 <div class="cart_total_title">Sous-total</div>
                                 <div class="cart_total_value ml-auto" id="sub_total_price">
-									<%= number_to_currency(@cart.sub_total_price) %>
+									<%= number_to_currency(@sub_total) %>
 								</div>
-	                        </li>
+							</li>
+							<div id="coupon_code_applied">
+								<% if @cart.discount_code != nil %>
+									<%= render "carts/coupon_code_applied" %>
+								<% end %>
+							</div>
 	                        <li class="d-flex flex-row align-items-center justify-content-start">
 	                            <div class="cart_total_title">Livraison</div>
 	                            <div class="cart_total_value ml-auto" id="delivery_form">
@@ -51,7 +56,7 @@
 	                        <li class="d-flex flex-row align-items-center justify-content-start">
 	                            <div class="cart_total_title">Total</div>
 	                                <div class="cart_total_value ml-auto" id="total_price">
-	                                    <%= @cart.total_price %>
+	                                    <%= number_to_currency(@total) %>
 	                                </div>
                             </li>
                         </ul>
@@ -103,7 +108,7 @@
 				<div class="">
 					<%= render "carts/payment" %>
 				</div>
-					<%= hidden_field_tag("cart_total_price", @cart.total_price_without_currency) %>
+					<%= hidden_field_tag("cart_total_price", @total_price_without_currency) %>
 					<%= check_box_tag("save_card_infos", 1, true) %>
 					<%= label_tag "Sauvegarder cette carte pour la prochaine fois" %>
                 <div class="cart_payment">

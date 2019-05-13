@@ -1,8 +1,6 @@
 y=document.getElementById("contentErrorCoupon");
 y.innerHTML = "";
-function clearContents(element) {
-element.value = '';
-}
-form_textarea = document.getElementById("coupon_code");
-clearContents(form_textarea);
+y.append("<%= escape_javascript(@errorCoupon[0])%>");
+y.className += "success";
 $("#coupon_code_applied").html('<%= j render "carts/coupon_code_applied"%>').fadeIn();
+$("#total_price").html('<%= j render "carts/total_price"%>').fadeIn;

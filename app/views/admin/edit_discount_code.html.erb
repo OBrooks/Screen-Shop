@@ -32,10 +32,17 @@
                     <div class="contact_form_container">
                         <%= form_for @discount_code, url: {action: "update_discount_code"} do |f| %>
                         <div class="row">
-                            <div class="col-xl-4">
+                            <div class="col-6">
                                 <!-- Name -->
                                 <label for="contact_name">Code</label>
                                 <%= f.text_field :code, class: "contact_input" %>
+                            </div>
+                            <div class="col-6">
+                                <!-- Name -->
+                                <label for="contact_name">Montant de la réduction</label>
+                                <div class="select_quantity_container_admin">
+                                    <%= f.number_field(:discount, step: 1, max: 100) %>
+                                </div>
                             </div>
                         </div>
                         <div class="row">
@@ -55,7 +62,7 @@
                             </div>
                         </div>
                         <button class="newsletter_button trans_200">
-                            <%= f.submit "Ajouter"%>
+                            <%= f.submit "Modifier"%>
                         </button>
                         <% end %>
                     </div>

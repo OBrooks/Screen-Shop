@@ -1,6 +1,6 @@
 <li class="d-flex flex-row align-items-center justify-content-start">				
     <div class="cart_total_title">Code de réduction</div>
     <div class="cart_total_value ml-auto">
-    <%= @discount_code.code %>
+    <%= @discount_code.code %> - <%= number_to_currency(@total_discount) %>
     </div>
 </li>

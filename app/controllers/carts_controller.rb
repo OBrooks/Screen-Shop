@@ -9,7 +9,7 @@ rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
 
   def show
     @deliveries = Delivery.all
-    @discount_code = @cart.discount_code
+    discount_code_applied
   end
 
   def new
@@ -53,6 +53,7 @@ rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
   def update_delivery
     @cart = Cart.find(params[:cart][:id])
     @cart.update(delivery_id: params[:cart][:delivery_id])
+    discount_code_applied
       respond_to do |format|
         format.html { redirect_to @cart, notice: 'La livraison a été mise à jour' }
         format.js {}
@@ -61,12 +62,12 @@ rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
   end
 
   def destroy
-    line_items = LineItem.where(cart_id: @cart.id)
-    adress_for_cart = AdressForCart.where(cart_id: @cart.id)
-    if adress_for_cart != nil
-      adress_for_cart.destroy
+    @line_items = LineItem.where(cart_id: @cart.id)
+    @adress_for_cart = AdressForCart.find_by(cart_id: @cart.id)
+    if @adress_for_cart != nil
+      @adress_for_cart.destroy
     end
-    line_items.each do |line_item|
+    @line_items.each do |line_item|
       product = Product.find(line_item.product_id)
       new_quantity = product.quantity.to_i + line_item.quantity.to_i
       product.update(quantity: new_quantity)
@@ -85,12 +86,11 @@ rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
       redirect_to new_user_session_path
     else
       @cart = Cart.find(params[:id])
+      total_price_without_currency
       @user = current_user
       @shipping_infos = ShippingInfo.where(user_id: @user.id)
       @shipping_info = ShippingInfo.find_by(user_id: @user.id)
       @adress_for_cart = AdressForCart.find_by(cart_id: @cart.id)
-      puts "Dans les params de resume là"
-      @discount_code = @cart.discount_code
       if @adress_for_cart != nil
         @billing_info = BillingInfo.find_by(id: @adress_for_cart.billing_info_id)
       else
@@ -117,6 +117,7 @@ rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
   end
 
   #Verify coupon
+    # ---> Have to apply the update to
   def apply_coupon
     @cart = Cart.find(params[:id])
     @discount_codes = DiscountCode.all
@@ -129,7 +130,8 @@ rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
     respond_to do |format|
       if @discount_code != nil && @discount_code.start_date.to_datetime <= Time.now && @discount_code.end_date.to_datetime >= Time.now
           @cart.update(discount_code_id: @discount_code.id)
-          puts "#{@cart.discount_code_id}"
+          discount_code_applied
+          @errorCoupon.push("Coupon validé !")
           format.html { redirect_to cart_path }
           format.json { render :show, status: :created, location: @cart.model }
           format.js {render 'coupon_good'}
@@ -160,7 +162,6 @@ rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
       redirect_to new_user_session_path
     else
       @cart = Cart.find(params[:id])
-      
       # Create billing_infos if it's nil
       @billing_info = BillingInfo.find_by(user_id: current_user.id)
       if @billing_info != nil
@@ -375,5 +376,29 @@ rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
                                           email: current_user.email,
                                           user_id: current_user.id)
                                           puts "Billing Id est #{@billing_info.id}"
+    end
+
+    private
+
+      #Discount Code applied
+    def discount_code_applied
+      @discount_code = @cart.discount_code
+      @sub_total = @cart.sub_total_price
+      if @cart.discount_code != nil && @cart.delivery != nil
+        @total_discount = @sub_total * ((@discount_code.discount.to_d/100))
+        @total = ActionController::Base.helpers.number_to_currency(@sub_total - @total_discount + @cart.delivery.price)
+      elsif @cart.discount_code != nil && @cart.delivery == nil
+        @total_discount = @sub_total * ((@discount_code.discount.to_d/100))
+        @total = "Veuillez choisir une livraison"
+      elsif @cart.delivery != nil && @cart.discount_code == nil
+        @total = ActionController::Base.helpers.number_to_currency(@sub_total + @cart.delivery.price)
+      else
+        @total = "Veuillez choisir une livraison"
+      end
+    end
+
+    def total_price_without_currency
+      discount_code_applied
+      @total_price_without_currency = ((@total) * 100).to_i
     end
 end

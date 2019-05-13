@@ -31,8 +31,4 @@ class Cart < ApplicationRecord
             "Veuillez choisir une livraison"
         end
     end   
-
-    def total_price_without_currency
-        ((sub_total_price + delivery.price) * 100).to_i
-    end
 end

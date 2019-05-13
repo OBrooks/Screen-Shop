@@ -26,13 +26,16 @@ class AdminController < ApplicationController
     redirect_to admin_path
     end
 
+    #################
     # Discount Codes
+    #################
     def new_discount_code
         @discount_code=DiscountCode.new
     end
 
     def create_discount_code
         @discount_code = DiscountCode.create!(  code: params[:discount_code][:code],
+                                                discount: params[:discount_code][:discount],
                                                 "start_date(3i)": params[:discount_code][:"start_date(3i)"],
                                                 "start_date(2i)": params[:discount_code][:"start_date(2i)"],
                                                 "start_date(1i)": params[:discount_code][:"start_date(1i)"],
@@ -45,21 +48,20 @@ class AdminController < ApplicationController
                                                 "end_date(5i)": params[:discount_code][:"end_date(5i)"])
         redirect_to admin_path
     end
-    
+
     def show_discount_code
         @discount_codes = DiscountCode.all
     end
 
     def edit_discount_code
-        puts "Les params sont #{params}"
         @discount_code = DiscountCode.find(params[:id])
     end
 
     def update_discount_code
-        puts "Les params sont #{params}"
         @discount_code = DiscountCode.find(params[:id])
         puts "#{@discount_code}"
         @discount_code.update!(code: params[:discount_code][:code],
+                                discount: params[:discount_code][:discount],
                                                 "start_date(3i)": params[:discount_code][:"start_date(3i)"],
                                                 "start_date(2i)": params[:discount_code][:"start_date(2i)"],
                                                 "start_date(1i)": params[:discount_code][:"start_date(1i)"],

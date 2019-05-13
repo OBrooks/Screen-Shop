@@ -54,11 +54,13 @@
 	                    <div class="section_subtitle">Entrez votre code de réduction</div>
 	                    <div class="coupon_form_container">
 							<%= form_tag({:controller => "carts", :action => "apply_coupon"}, remote: true) do %>
-								<%= text_field_tag("coupon_code") %>
+								<%= text_field_tag("coupon_code", "",class: "contact_input") %>
 								<%= hidden_field_tag("id", @cart.id) %>
-								<%= submit_tag "Appliquer" %>
+								<button class="newsletter_button trans_200">
+									<%= submit_tag "Appliquer" %>
+								</button>
 							<% end %>
-							<span id="contentErrorCoupon" class="help-block"></span>
+							<span id="contentErrorCoupon"></span>
 	                        <!-- <form action="#" id="coupon_form" class="coupon_form">
 	                            <input type="text" class="coupon_input" required="required">
 	                            <button class="button coupon_button"><span>Apply</span></button>
@@ -76,8 +78,13 @@
 	                            <li class="d-flex flex-row align-items-center justify-content-start">
 	                                <div class="cart_total_title">Sous-total</div>
 	                                <div class="cart_total_value ml-auto" id="sub_total_price">
-	                                	<%= number_to_currency(@cart.sub_total_price) %></div>
-	                            </li>
+	                                	<%= number_to_currency(@sub_total) %></div>
+								</li>
+								<div id="coupon_code_applied">
+									<% if @cart.discount_code != nil %>
+										<%= render "carts/coupon_code_applied" %>
+									<% end %>
+								</div>
 	                            <li class="d-flex flex-row align-items-center justify-content-start">
 	                                <div class="cart_total_title">Livraison</div>
 	                                <div class="cart_total_value ml-auto" id="delivery_form">
@@ -87,16 +94,10 @@
 										<% end %>
 									</div>
 								</li>
-								<div id="coupon_code_applied">
-									<% if @cart.discount_code != nil %>
-										<%= render "carts/coupon_code_applied" %>
-									<% end %>
-								</div>
-
 	                            <li class="d-flex flex-row align-items-center justify-content-start">
 	                                <div class="cart_total_title">Total</div>
 	                                <div class="cart_total_value ml-auto" id="total_price">
-										<%= @cart.total_price %>
+										<%= @total %>
 	                                </div>
 	                            </li>
 	                        </ul>

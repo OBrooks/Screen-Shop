@@ -37,6 +37,7 @@
                         <thead>
                             <tr>
                                 <th>Code</th>
+                                <th>Réduction</th>
                                 <th>Date de début</th>
                                 <th>Date de fin</th>
                                 <th>Éditer / Supprimer</th>
@@ -47,6 +48,9 @@
                             <tr>
                                 <td>
                                     <%= code.code %>
+                                </td>
+                                <td>
+                                    <%= code.discount %>
                                 </td>
                                 <td>
                                     <%= I18n.localize(code.start_date, format: :long) %>

@@ -628,6 +628,15 @@ label
 margin-top: 10px;
 }
 
+#contentErrorCoupon.success
+{
+	color: green;
+}
+#contentErrorCoupon.failed
+{
+	color: red;
+}
+
 /*********************************
 9. Resume payment cart
 *********************************/
