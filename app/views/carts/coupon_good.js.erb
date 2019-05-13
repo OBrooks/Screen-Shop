@@ -1,6 +1,7 @@
 y=document.getElementById("contentErrorCoupon");
 y.innerHTML = "";
 y.append("<%= escape_javascript(@errorCoupon[0])%>");
-y.className += "success";
+y.className -= "failed";
+y.className += " success";
 $("#coupon_code_applied").html('<%= j render "carts/coupon_code_applied"%>').fadeIn();
 $("#total_price").html('<%= j render "carts/total_price"%>').fadeIn;
