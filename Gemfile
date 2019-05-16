@@ -77,3 +77,6 @@ gem "aws-sdk-s3", require: false
 
 #Payment
 gem 'stripe'
+
+#Mailing operations
+gem 'mailjet'

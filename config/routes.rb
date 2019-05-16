@@ -5,7 +5,8 @@ Rails.application.routes.draw do
   devise_for :users
   
   #Orders
-    get   'myorders',                             to: "orders#show"
+    get   'myorders',                           to: "orders#show"
+    get   'order-detail/:id',                   to: "orders#order",                         as: "order_detail"
 
   resources :brands
     get   'brands/all',                         to: "brands#show"

@@ -72,7 +72,6 @@ module ProductsHelper
     def attachement_or_picture(product)
         if product.product_picture.attachment != nil
             image_tag(product.product_picture)
-        
         end
     end
 

@@ -1,0 +1,36 @@
+<div class="cart_info mt-5">
+    <div class="container">
+        <div>
+        <p>Détails de votre commande :</br>
+            Adresse de livraison :</br>
+            <%= info_is_nil(@order.shipping_info.civility) %></br>
+            <%= @order.shipping_info.first_name%> <%= @order.shipping_info.last_name%></br>
+            <%= @order.shipping_info.street_number%> <%= @order.shipping_info.street_name%></br>
+            <%= @order.shipping_info.zip_code%> <%= @order.shipping_info.city %>
+            </br></br>
+            Numéro de commande :
+            <%= @order.id %>
+            </br></br>
+            Date de commande :
+            <%= I18n.localize(@order.created_at, format: :nohours) %>
+            </br></br>
+            Adresse de facturation :
+            </br>
+            <%= info_is_nil(@order.billing_info.civility) %></br>
+            <%= @order.billing_info.first_name%> <%= @order.billing_info.last_name%></br>
+            <%= @order.billing_info.street_number%> <%= @order.billing_info.street_name%></br>
+            <%= @order.billing_info.zip_code%> <%= @order.billing_info.city %>
+            </br>
+            </p>
+        </div>
+        <div>
+            <% @line_items_orders.each do |item| %>
+            <div class="cart_item_image big_cart col-xl-3 col-sm-4">
+                <div><%= attachement_or_picture(item.product) %></div>
+            </div>
+            <%= item.product.product_name %>
+            <%= item.price %>
+            <% end %>
+        </div>
+    </div>
+</div>

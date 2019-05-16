@@ -30,7 +30,8 @@
             <!-- Order Item -->
             <% @orders.each do |order| %>
                     Commande n° <%= order.id %>
-                    <%= order.created_at %>
+					<%= order.created_at %>
+					<%= link_to "Détails", order_detail_path(order.id) %>
                 <%= render(order.line_items_orders) %>
             <% end %>
 	        <div class="row row_cart_buttons">

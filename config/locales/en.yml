@@ -31,3 +31,12 @@
 
 en:
   hello: "Hello world"
+  time:
+    am: am
+    formats:
+      default: "%d %B %Y %Hh %Mmin %Ss"
+      long: "%A %d %B %Y %Hh%M"
+      short: "%d %b %Hh%M"
+      normal: "%e %B"
+      nohours: "%m/%d/%Y"
+    pm: pm

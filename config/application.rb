@@ -11,6 +11,8 @@ module ScreenShop
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.2
     
+    config.action_mailer.delivery_method = :mailjet
+    config.action_mailer.default_url_options = { host: 'screen-shop.herokuapp.com' }
     config.i18n.locale = :fr
     config.i18n.default_locale = :fr
     # Settings in config/environments/* take precedence over those specified here.

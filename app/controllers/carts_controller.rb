@@ -91,12 +91,6 @@ rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
       @shipping_infos = ShippingInfo.where(user_id: @user.id)
       @shipping_info = ShippingInfo.find_by(user_id: @user.id)
       @adress_for_cart = AdressForCart.find_by(cart_id: @cart.id)
-      if @adress_for_cart != nil
-        @billing_info = BillingInfo.find_by(id: @adress_for_cart.billing_info_id)
-      else
-        @adress_for_cart = AdressForCart.create!(cart_id: @cart.id, shipping_info_id: @shipping_info.id)
-        @billing_info == nil
-      end
       if @shipping_info == nil
         @shipping_info = ShippingInfo.create!(user_id: @user.id,
                                             first_name: @user.first_name,
@@ -112,6 +106,12 @@ rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
         elsif @user.gender == "female"
           @shipping_info.update(civility: "Madame")
         end
+      end
+      if @adress_for_cart != nil
+        @billing_info = BillingInfo.find_by(id: @adress_for_cart.billing_info_id)
+      else
+        @adress_for_cart = AdressForCart.create!(cart_id: @cart.id, shipping_info_id: @shipping_info.id)
+        @billing_info == nil
       end
     end
   end
@@ -231,6 +231,7 @@ rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
       else
         # Normal charge without saving the customer and his infos
         puts "In not save card"
+        puts "Le coût est de #{params[:cart_total_price]}"
           charge = Stripe::Charge.create(
           :amount => params[:cart_total_price],
           :currency => "eur",
@@ -258,6 +259,7 @@ rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
         end
         @adress_for_cart.destroy
         @cart.destroy
+        UserMailer.order_summary(@order).deliver_later
         format.html { redirect_to root_path, notice: 'La commande a été passée avec succès !' }
         format.json { render :show, status: :created, location: @cart }
       else
@@ -399,6 +401,14 @@ rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
 
     def total_price_without_currency
       discount_code_applied
-      @total_price_without_currency = ((@total) * 100).to_i
+      puts
+      puts "Le total est #{@total}"
+      puts
+      @total_price_without_currency = currency_to_number(@total)
+      puts "Le total sans monnaie est #{@total_price_without_currency}"
+    end
+
+    def currency_to_number(currency_value)
+      (currency_value.is_a? String) ? currency_value.scan(/[.0-9]/).join.to_i : currency_value
     end
 end

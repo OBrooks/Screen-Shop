@@ -248,4 +248,5 @@ fr:
       long: "%A %d %B %Y %Hh%M"
       short: "%d %b %Hh%M"
       normal: "%e %B"
+      nohours: "%m/%d/%Y"
     pm: pm

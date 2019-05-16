@@ -1,0 +1,56 @@
+<div class="cart_info mt-5">
+    <div class="container">
+        <div>
+            <h1>Confirmation de commande</h1>
+            <h2>Cher <%= @user.first_name %>,</h2>
+            <p>Nous avons bien reçu votre commande n°<%= @order.id %> du
+                <%= I18n.localize(@order.created_at, format: :normal) %></p>
+            <p>Nous vous remercions de votre commande et de votre confiance.
+                </br>
+                Nous traitons actuellement votre commande. Vous trouverez ci-dessous le détail des articles commandés.
+                </br>
+                Vous recevrez une confirmation d'envoi par email dès que votre colis aura quitté notre entrepôt. Vous
+                pouvez consulter
+                le statut de votre commande à tout moment en vous identifiant sur notre site
+                <%= link_to "dans votre espace", order_detail_url(@order.id) %>
+                </br>
+                Nous espérons que vous serez satisfait de vos achats.
+                </br>
+                Cordialement,
+                </br>
+                Screen-Shop</p>
+        </div>
+        <div>
+            <p>Détails de votre commande :</br>
+                Adresse de livraison :</br>
+                <%= info_is_nil(@order.shipping_info.civility) %></br>
+                <%= @order.shipping_info.first_name%> <%= @order.shipping_info.last_name%></br>
+                <%= @order.shipping_info.street_number%> <%= @order.shipping_info.street_name%></br>
+                <%= @order.shipping_info.zip_code%> <%= @order.shipping_info.city %>
+                </br></br>
+                Numéro de commande :
+                <%= @order.id %>
+                </br></br>
+                Date de commande :
+                <%= I18n.localize(@order.created_at, format: :nohours) %>
+                </br></br>
+                Adresse de facturation :
+                </br>
+                <%= info_is_nil(@order.billing_info.civility) %></br>
+                <%= @order.billing_info.first_name%> <%= @order.billing_info.last_name%></br>
+                <%= @order.billing_info.street_number%> <%= @order.billing_info.street_name%></br>
+                <%= @order.billing_info.zip_code%> <%= @order.billing_info.city %>
+                </br>
+            </p>
+        </div>
+        <div>
+            <% @line_items_orders.each do |item| %>
+            <div class="cart_item_image big_cart col-xl-3 col-sm-4">
+                <div><%= attachement_or_picture(item.product) %></div>
+            </div>
+            <%= item.product.product_name %>
+            <%= item.price %>
+            <% end %>
+        </div>
+    </div>
+</div>
