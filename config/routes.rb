@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   root "home#index"
   
-  devise_for :users
+  devise_for :users, controllers: { confirmations: 'confirmations' }
   
   #Orders
     get   'myorders',                           to: "orders#show"
