@@ -1,7 +1,7 @@
 json.products do
     json.array!(@products) do |product|
         json.name product.product_name
-        json.url product_path(product)
+        json.url product_single_view_path(product)
     end
 end
 

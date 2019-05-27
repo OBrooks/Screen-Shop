@@ -23,7 +23,7 @@ Rails.application.routes.draw do
 
   resources :products,  :except => [:index]
     get   'products',                           to: "products#show",                          as: :filtered_products
-    get   'product/:id',                        to: "products#product"
+    get   'product/:id',                        to: "products#product",                       as: :product_single_view
     patch 'product/:id',                        to: "products#quantity_update"
 
     get   'admin',                              to: "admin#show"
