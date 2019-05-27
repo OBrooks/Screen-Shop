@@ -144,9 +144,10 @@
                 <div class="row">
                     <div class="col">
                         <div class="search_panel_content d-flex flex-row align-items-center justify-content-end">
-                            <form action="#">
-                                <input type="text" class="search_input" placeholder="Search" required="required">
-                            </form>
+                            <%= form_with url: search_path, local: true, method: :get, html: {class: ""} do |f| %>
+                                <%= f.text_field :q, placeholder: "Rechercher", data: {behavior: "autocomplete"}, class: "search_input" %>
+                                <%= f.button "Rechercher", class: "" %>
+                            <% end %>
                         </div>
                     </div>
                 </div>
@@ -171,9 +172,10 @@
             <div class="page_menu_content">
 
                 <div class="page_menu_search menu_mm">
-                    <form action="#">
-                        <input type="search" required="required" class="page_menu_search_input menu_mm" placeholder="Search for products...">
-                    </form>
+                    <!-- <%= form_with url: search_path, local: true, method: :get, html: {class: ""} do |f| %>
+                        <%= f.text_field :q, placeholder: "Rechercher", data: {behavior: "autocomplete"}, class: "page_menu_search_input menu_mm" %>
+                        <%= f.button "Rechercher", class: "" %>
+                    <% end %> -->
                 </div>
                 <ul class="page_menu_nav menu_mm">
                     <li class="page_menu_item has-children menu_mm">

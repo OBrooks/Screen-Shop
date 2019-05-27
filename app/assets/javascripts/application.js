@@ -29,6 +29,9 @@
 //= require parallax-js-master/parallax.min
 //= require custom
 //= require charges
+//= require jquery.easy-autocomplete
+//= require jquery.easy-autocomplete.min
+//= require search
 
 
 

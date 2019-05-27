@@ -30,10 +30,14 @@ class CategoriesController < ApplicationController
         redirect_to categories_all_path
     end
     
-    def category
+    def show
       @category=Category.find(params[:id])
       products=Product.all
       @products_by_category=@category.products
+    end
+
+    def index
+        @categories = Category.all
     end
 
 end

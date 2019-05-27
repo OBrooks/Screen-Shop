@@ -1,0 +1,30 @@
+<h1>Résultat des recherches</h1>
+<div class="row">
+    <div class="col">
+        <h1>Produits</h1>
+        <% @products.each do |product| %>
+        <p><%= link_to product.product_name, product %></p>
+        <% end %>
+    </div>
+
+    <div class="col">
+        <h1>Catégories</h1>
+        <% @categories.each do |category| %>
+        <p><%= link_to category.category_name, category %></p>
+        <% end %>
+    </div>
+
+    <div class="col">
+        <h1>Marques</h1>
+        <% @phone_brands.each do |brand| %>
+        <p><%= link_to brand.brand, brand_path(brand) %></p>
+        <% end %>
+    </div>
+
+    <div class="col">
+            <h1>Modèles</h1>
+            <% @phone_models.each do |model| %>
+            <p><%= link_to model.model, model_path(model) %></p>
+            <% end %>
+    </div>
+</div>

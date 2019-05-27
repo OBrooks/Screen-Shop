@@ -1,25 +1,25 @@
 Rails.application.routes.draw do
 
+  get 'main/search'
   root "home#index"
   
   devise_for :users, controllers: { confirmations: 'confirmations' }
   
+  #Search
+    get :search,                                controller: :main
+
   #Orders
     get   'myorders',                           to: "orders#show"
     get   'order-detail/:id',                   to: "orders#order",                         as: "order_detail"
 
   resources :brands
-    get   'brands/all',                         to: "brands#show"
     
   resources :models
-    get   'models/all',                         to: "models#show"
 
   resources :deliveries
     get   'deliveries/all',                     to: "deliveries#show"
 
   resources :categories
-    get   'categories/all',                     to: "categories#show"
-    # get 'categories/show'
 
   resources :products,  :except => [:index]
     get   'products',                           to: "products#show",                          as: :filtered_products

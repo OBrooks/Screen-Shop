@@ -11,7 +11,7 @@ class ModelsController < ApplicationController
         redirect_to models_all_path
     end
 
-    def show
+    def index
         @models=PhoneModel.all
     end
 
@@ -34,5 +34,8 @@ class ModelsController < ApplicationController
         redirect_to models_all_path
     end
 
+    def show
+        @model = PhoneModel.find(params[:id])
+    end
 
 end

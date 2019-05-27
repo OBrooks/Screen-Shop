@@ -80,3 +80,6 @@ gem 'stripe'
 
 #Mailing operations
 gem 'mailjet'
+
+#Search
+gem 'ransack', '~> 2.1.1'

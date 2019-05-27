@@ -10,7 +10,7 @@ class BrandsController < ApplicationController
         redirect_to brands_all_path
     end
 
-    def show
+    def index
         @brands=PhoneBrand.all
     end
 
@@ -31,6 +31,10 @@ class BrandsController < ApplicationController
         @brand=PhoneBrand.find(params[:id])
         @brand.destroy
         redirect_to brands_all_path
+    end
+
+    def show
+        @brand=PhoneBrand.find(params[:id])
     end
 
 end
