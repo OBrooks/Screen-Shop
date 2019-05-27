@@ -64,4 +64,9 @@ Rails.application.routes.draw do
     post  'billing_infos',                      to: "billing_infos#create"
     delete 'billing_info/delete',               to: "billing_infos#destroy"
 
+  #Errors routes
+    match '/404',                               to: 'errors#not_found',                         via: :all
+    match '/422',                               to: "errors#unacceptable",                      via: :all
+    match '/500',                               to: "errors#server_errors",                     via: :all
+
   end
