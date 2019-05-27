@@ -83,3 +83,6 @@ gem 'mailjet'
 
 #Search
 gem 'ransack', '~> 2.1.1'
+
+#Pagination
+gem 'pagy', '~> 3.2.1'

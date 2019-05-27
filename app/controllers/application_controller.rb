@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
 
     include CurrentCart
+    include Pagy::Backend
 
     before_action :sanitize_devise_params, if: :devise_controller?
     before_action :show_categories

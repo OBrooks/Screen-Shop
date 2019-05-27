@@ -20,13 +20,15 @@ class ProductsController < ApplicationController
     end
 
     def show
-        @products=Product.all
+        @products = Product.all
         scope_params
         category_params
         brand_params
         model_params
         status_params
-        #@products = @products.paginate(page: params[:page], per_page: 5)
+        @results = @products.length
+        @pagy, @products=pagy(@products, items: 5)
+                puts @pagy.inspect
     end
 
     def product

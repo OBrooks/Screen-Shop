@@ -1,4 +1,6 @@
 module ApplicationHelper
+    include Pagy::Frontend
+
     def admin_or_webmaster
         if current_user != nil
             current_user.admin? == true || current_user.webmaster? == true

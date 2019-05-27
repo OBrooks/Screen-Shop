@@ -9,6 +9,7 @@
 1. Home
 2. Product Details
 3. Products
+4. Pagination
 
 
 
@@ -508,21 +509,22 @@
 	margin-bottom: 100px;
 }
 
+/*********************************
+4. Pagination
+*********************************/
+
 .product_pagination {
 	width: 100%;
 	margin-top: 30px;
 	margin-bottom: 5px;
 }
 
-.product_pagination ul li {
+.product_pagination span {
 	display: inline-block;
 }
 
-.product_pagination ul li:not(:last-child) {
+.product_pagination .page {
 	margin-right: 3px;
-}
-
-.product_pagination ul li a {
 	font-size: 14px;
 	font-weight: 400;
 	color: #6c6a74;
@@ -533,7 +535,19 @@
 	transition: all 200ms ease;
 }
 
-.product_pagination ul li.active a,
-.product_pagination ul li:hover a {
-	color: #1b1b1b;
+.product_pagination>nav>span.page.current,
+.product_pagination a:hover {
+color: #E95A59;
+}
+
+.product_pagination>nav>span>a
+{
+		color: #1b1b1b;
+
+}
+
+b,strong {
+	font-weight: 500;
+	color: black;
+	margin: 2px;
 }

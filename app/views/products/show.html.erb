@@ -29,11 +29,7 @@
 
                 <!-- Product Basic Sorting -->
                 <div class="sorting_bar" id="coucouici">
-                    <% if @products.length > 1 %>
-                        <div class="results"><span><%= @products.length %></span> résultats</div>
-                    <% else %>
-                        <div class="results"><span><%= @products.length %></span> résultat</div>
-                    <% end %>
+                        <div class="results"><span><%== pagy_info(@pagy) %></span></div>
                     <div class="all_filters">
                         <div class="sorting_container">
                             <div class="sorting">
@@ -210,11 +206,7 @@
                     <% end %>
                 </div>
                 <div class="product_pagination">
-                    <ul>
-                        <li class="active"><a href="#">01.</a></li>
-                        <li><a href="#">02.</a></li>
-                        <li><a href="#">03.</a></li>
-                    </ul>
+                    <%== render partial: 'pagy/nav', locals: {pagy: @pagy} %>
                 </div>
             </div>
         </div>
