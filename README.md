@@ -16,11 +16,12 @@ Some arrangements and creation for the website were built.
 ## Back-End
 
 #### Admin User
+
 The admin user can add new brand, new model related to this brand, and new accessory related to this model.
 
 He can update price, quantities, name, description and many more through the admin board.
 
-Each product has a status (hot, sales, or default). When the sales status is enabled, the admin user need to add a percentage of reduction.
+Each product has a picture, uploaded through [AWS S3](https://s3.console.aws.amazon.com/s3), and a status (hot, sales, or default). When the sales status is enabled, the admin user need to add a percentage of reduction.
 
 Status and stock can be multi-updated in same time.
 
