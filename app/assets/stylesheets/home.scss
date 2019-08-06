@@ -122,3 +122,15 @@ button span:hover {
 div.user_profile a:hover{
 				color: #e95a5a;
 }
+
+.copyright a {
+	color: black;
+	font-weight: 700;
+	-webkit-transition: color 1s ease-in;
+	transition: color 1s ease-in;
+}
+
+.copyright a:hover {
+	color: white;
+	font-weight: 700;
+}
